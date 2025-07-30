@@ -1,0 +1,98 @@
+[gd_scene load_steps=9 format=3 uid="uid://bnxutd7t1861v"]
+
+[ext_resource type="Texture2D" uid="uid://bw6xltcnqcctm" path="res://assets/misc/dropshadow.png" id="1_lnvp7"]
+[ext_resource type="Script" uid="uid://bia83w547m3pn" path="res://src/player/player.gd" id="1_uemex"]
+[ext_resource type="Texture2D" uid="uid://p234drbehle4" path="res://assets/misc/spark.png" id="3_1pv0r"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lnvp7"]
+size = Vector2(61, 96)
+
+[sub_resource type="Animation" id="Animation_sb82a"]
+resource_name = "atk1"
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"values": []
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kd5mi"]
+_data = {
+&"atk1": SubResource("Animation_sb82a")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oe8pk"]
+size = Vector2(20, 20.8667)
+
+[sub_resource type="BoxMesh" id="BoxMesh_lnvp7"]
+
+[node name="Main" type="Node"]
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="Node2D"]
+position = Vector2(-114, 183)
+scale = Vector2(1.5, 1.5)
+script = ExtResource("1_uemex")
+
+[node name="Player" type="AnimatedSprite2D" parent="Node2D/CharacterBody2D"]
+
+[node name="Dropshadow" type="Sprite2D" parent="Node2D/CharacterBody2D/Player"]
+scale = Vector2(0.12609, 0.12609)
+texture = ExtResource("1_lnvp7")
+flip_h = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/CharacterBody2D"]
+position = Vector2(9.5, 9)
+shape = SubResource("RectangleShape2D_lnvp7")
+
+[node name="Boss" type="CharacterBody2D" parent="Node2D"]
+position = Vector2(195, 110)
+scale = Vector2(3, 3)
+script = ExtResource("1_uemex")
+
+[node name="Boss" type="AnimatedSprite2D" parent="Node2D/Boss"]
+metadata/_edit_lock_ = true
+
+[node name="Dropshadow" type="Sprite2D" parent="Node2D/Boss/Boss"]
+scale = Vector2(0.12609, 0.12609)
+texture = ExtResource("1_lnvp7")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/Boss"]
+position = Vector2(9.5, 9)
+shape = SubResource("RectangleShape2D_lnvp7")
+metadata/_edit_lock_ = true
+
+[node name="Spark" type="Sprite2D" parent="Node2D/Boss"]
+position = Vector2(-60.3333, -11)
+scale = Vector2(0.425, 0.425)
+texture = ExtResource("3_1pv0r")
+
+[node name="AttackString" type="AnimationPlayer" parent="Node2D/Boss"]
+libraries = {
+&"": SubResource("AnimationLibrary_kd5mi")
+}
+
+[node name="Camera2D" type="Camera2D" parent="Node2D"]
+
+[node name="Floor" type="StaticBody2D" parent="Node2D"]
+position = Vector2(57, 465)
+scale = Vector2(100, 15)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/Floor"]
+position = Vector2(0, -1.43333)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_oe8pk")
+metadata/_edit_lock_ = true
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Node2D/Floor"]
+position = Vector2(-0.125004, -1.41346)
+scale = Vector2(20.25, 20.8269)
+mesh = SubResource("BoxMesh_lnvp7")
+metadata/_edit_lock_ = true
