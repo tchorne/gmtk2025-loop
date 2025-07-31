@@ -9,3 +9,4 @@ func trigger_hit():
 			statue.lock_until_combo_ended()
 			statue.add_knockback(Vector2.UP * 500 + Vector2.RIGHT * 100)
 			statue.take_damage(1)
+			statue.split()

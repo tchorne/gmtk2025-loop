@@ -46,12 +46,11 @@ position = Vector2(-114, 183)
 scale = Vector2(1.6, 1.6)
 
 [node name="Statue" parent="World" instance=ExtResource("4_kd5mi")]
-scale = Vector2(1.6, 1.6)
 
 [node name="Room" type="Node2D" parent="World"]
 
 [node name="Floor" type="StaticBody2D" parent="World/Room"]
-position = Vector2(31, 296)
+position = Vector2(31, 304)
 scale = Vector2(100, 1.96)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="World/Room/Floor"]
@@ -122,75 +121,6 @@ metadata/_edit_lock_ = true
 visible = false
 offset_bottom = 0.0
 
-[node name="Menus" type="Node" parent="CanvasLayer"]
-
-[node name="Control" type="Control" parent="CanvasLayer/Menus"]
-visible = false
-layout_mode = 3
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Button" type="Button" parent="CanvasLayer/Menus/Control"]
-layout_mode = 0
-offset_left = 323.0
-offset_top = 211.0
-offset_right = 421.0
-offset_bottom = 242.0
-text = "Time Travel"
-
-[node name="PerkMenu" type="ColorRect" parent="CanvasLayer/Menus/Control"]
-layout_mode = 0
-offset_left = -37.0
-offset_top = -11.0
-offset_right = 183.0
-offset_bottom = 313.0
-
-[node name="Label" type="Label" parent="CanvasLayer/Menus/Control/PerkMenu"]
-layout_mode = 0
-offset_left = 10.0
-offset_top = 7.0
-offset_right = 207.0
-offset_bottom = 62.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 31
-text = "Todays Perks"
-
-[node name="ProductMenu" type="ColorRect" parent="CanvasLayer/Menus/Control"]
-layout_mode = 0
-offset_left = -252.0
-offset_top = -11.0
-offset_right = -41.0
-offset_bottom = 314.0
-
-[node name="Label2" type="Label" parent="CanvasLayer/Menus/Control/ProductMenu"]
-layout_mode = 0
-offset_left = 7.0
-offset_top = 8.00002
-offset_right = 204.0
-offset_bottom = 63.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 31
-text = "Todays Perks"
-
-[node name="Label3" type="Label" parent="CanvasLayer/Menus/Control/ProductMenu"]
-layout_mode = 0
-offset_left = 16.0
-offset_top = 41.0
-offset_right = 213.0
-offset_bottom = 86.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 26
-text = "Equipped: x/4"
-
 [node name="GameState" type="Node" parent="." groups=["GameState"]]
 script = ExtResource("6_4lhpg")
 
@@ -209,6 +139,5 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-metadata/_edit_lock_ = true
 
 [connection signal="combo_dropped" from="World/Player" to="World/Statue" method="_on_player_combo_dropped"]

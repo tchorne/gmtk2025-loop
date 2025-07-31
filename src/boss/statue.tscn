@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://vwhjpv3o5dy0"]
+[gd_scene load_steps=9 format=3 uid="uid://vwhjpv3o5dy0"]
 
 [ext_resource type="Script" uid="uid://cc5xxqrkhko2v" path="res://src/boss/statue.gd" id="1_d1pvw"]
-[ext_resource type="Texture2D" uid="uid://da8ifbetrm02p" path="res://assets/misc/statue.png" id="2_g0tul"]
+[ext_resource type="Texture2D" uid="uid://gxb0n606pd1y" path="res://assets/sprites/statue/Statue_Sheet_shifted.png" id="2_legdi"]
+[ext_resource type="Script" uid="uid://dp8rcslrax18g" path="res://src/rewind/rewind_component.gd" id="3_legdi"]
 [ext_resource type="Script" uid="uid://bn8uwha4n6ul2" path="res://src/boss/coin_emitter.gd" id="3_wyc4e"]
 [ext_resource type="Script" uid="uid://bpfg8k4pm3cwv" path="res://src/boss/rigid_body.gd" id="4_g0tul"]
 [ext_resource type="Texture2D" uid="uid://p234drbehle4" path="res://assets/misc/spark.png" id="5_wyc4e"]
@@ -17,8 +18,12 @@ bounce = 0.78
 script = ExtResource("1_d1pvw")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.215674, 0.290945)
-texture = ExtResource("2_g0tul")
+scale = Vector2(0.105, 0.105)
+texture = ExtResource("2_legdi")
+hframes = 6
+
+[node name="RewindComponent" type="Node" parent="Sprite2D"]
+script = ExtResource("3_legdi")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 8
@@ -36,16 +41,20 @@ script = ExtResource("3_wyc4e")
 [node name="Physics" type="Node" parent="."]
 
 [node name="RigidBody" type="RigidBody2D" parent="Physics"]
+visible = false
 collision_layer = 8
 physics_material_override = SubResource("PhysicsMaterial_sb82a")
+metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Physics/RigidBody"]
 position = Vector2(-0.5, -7)
 shape = SubResource("RectangleShape2D_sb82a")
+metadata/_edit_lock_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Physics/RigidBody"]
 modulate = Color(0, 1, 0.45, 1)
 texture = ExtResource("5_wyc4e")
+metadata/_edit_lock_ = true
 
 [node name="Hitflash" type="Timer" parent="."]
 wait_time = 0.05

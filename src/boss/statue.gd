@@ -1,10 +1,14 @@
 extends Node2D
 
+const STATUE = preload("res://src/boss/statue.tscn")
 const COIN = preload("res://src/boss/Coin.tscn")
+
 @onready var world: Node2D = $".."
 @onready var rigid_body: RigidBody2D = $Physics/RigidBody
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var hitflash: Timer = $Hitflash
+
+var size: int = 6
 
 var physics_mode := true
 
@@ -52,6 +56,24 @@ func create_coin():
 	coin.scale = Vector2.ONE * 0.2
 	coin.global_position = global_position
 
+func split():
+	if (size == 1): return
+	var other = STATUE.instantiate()
+	get_parent().add_child(other)
+	set_size(size-1)
+	other.set_size(size)
+	other.set_transform_(global_transform)
+
+func set_size(s: int):
+	size = s
+	sprite_2d.frame = 6-size
+	$Area2D/CollisionShape2D.scale = Vector2.ONE * (size/6.0)
+	$Physics/RigidBody/CollisionShape2D.scale = Vector2.ONE * (size/6.0)
+
+func set_transform_(other: Transform2D):
+	global_transform = other
+	rigid_body.global_transform = other
+	
 func _process(_delta: float) -> void:
 	if physics_mode:
 		global_position = rigid_body.global_position
