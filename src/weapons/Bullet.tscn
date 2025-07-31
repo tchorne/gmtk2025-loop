@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://p1old8npwj3h"]
+
+[ext_resource type="Texture2D" uid="uid://p234drbehle4" path="res://assets/misc/spark.png" id="1_6r84r"]
+[ext_resource type="Script" uid="uid://chyyha6ie8vy2" path="res://src/weapons/bullet.gd" id="1_j3c6t"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_j3c6t"]
+radius = 24.0832
+
+[node name="Bullet" type="Area2D"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_j3c6t")
+force = 568.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_6r84r")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_j3c6t")

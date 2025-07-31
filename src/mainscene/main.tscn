@@ -1,98 +1,130 @@
-[gd_scene load_steps=9 format=3 uid="uid://bnxutd7t1861v"]
+[gd_scene load_steps=12 format=3 uid="uid://bnxutd7t1861v"]
 
-[ext_resource type="Texture2D" uid="uid://bw6xltcnqcctm" path="res://assets/misc/dropshadow.png" id="1_lnvp7"]
-[ext_resource type="Script" uid="uid://bia83w547m3pn" path="res://src/player/player.gd" id="1_uemex"]
-[ext_resource type="Texture2D" uid="uid://p234drbehle4" path="res://assets/misc/spark.png" id="3_1pv0r"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_lnvp7"]
-size = Vector2(61, 96)
-
-[sub_resource type="Animation" id="Animation_sb82a"]
-resource_name = "atk1"
-tracks/0/type = "method"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(),
-"transitions": PackedFloat32Array(),
-"values": []
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_kd5mi"]
-_data = {
-&"atk1": SubResource("Animation_sb82a")
-}
+[ext_resource type="Script" uid="uid://diqe728hxkc61" path="res://src/mainscene/camera.gd" id="1_4lhpg"]
+[ext_resource type="PackedScene" uid="uid://drfnne271u6gq" path="res://src/player/player.tscn" id="2_kd5mi"]
+[ext_resource type="PackedScene" uid="uid://vwhjpv3o5dy0" path="res://src/boss/statue.tscn" id="4_kd5mi"]
+[ext_resource type="PackedScene" uid="uid://qomk8njlcovq" path="res://src/schedule/schedule_display.tscn" id="5_kd5mi"]
+[ext_resource type="Script" uid="uid://deu36qki4xlep" path="res://src/mainscene/game_state.gd" id="6_4lhpg"]
+[ext_resource type="Script" uid="uid://c6nau26x8ybr3" path="res://src/mainscene/inventory.gd" id="6_6ggxn"]
+[ext_resource type="Shader" uid="uid://c0xem7y1vbc2u" path="res://src/effects/blur.gdshader" id="7_6ggxn"]
+[ext_resource type="Script" uid="uid://b0lks86rilvxr" path="res://src/rewind/rewind.gd" id="7_iylxf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oe8pk"]
 size = Vector2(20, 20.8667)
 
 [sub_resource type="BoxMesh" id="BoxMesh_lnvp7"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_iylxf"]
+shader = ExtResource("7_6ggxn")
+shader_parameter/radius = 2.0
+shader_parameter/grain_amount = 0.05
+shader_parameter/grain_size = 1.0
+shader_parameter/animate = true
+shader_parameter/abberation = 0.003
+shader_parameter/blur = true
+shader_parameter/grain = true
+shader_parameter/chromatic_abberation = true
+
 [node name="Main" type="Node"]
 
-[node name="Node2D" type="Node2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="."]
+script = ExtResource("1_4lhpg")
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="Node2D"]
+[node name="World" type="Node2D" parent="."]
+
+[node name="Player" parent="World" instance=ExtResource("2_kd5mi")]
 position = Vector2(-114, 183)
-scale = Vector2(1.5, 1.5)
-script = ExtResource("1_uemex")
+scale = Vector2(1.6, 1.6)
 
-[node name="Player" type="AnimatedSprite2D" parent="Node2D/CharacterBody2D"]
+[node name="Statue" parent="World" instance=ExtResource("4_kd5mi")]
 
-[node name="Dropshadow" type="Sprite2D" parent="Node2D/CharacterBody2D/Player"]
-scale = Vector2(0.12609, 0.12609)
-texture = ExtResource("1_lnvp7")
-flip_h = true
+[node name="Room" type="Node2D" parent="World"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/CharacterBody2D"]
-position = Vector2(9.5, 9)
-shape = SubResource("RectangleShape2D_lnvp7")
+[node name="Floor" type="StaticBody2D" parent="World/Room"]
+position = Vector2(31, 311)
+scale = Vector2(100, 1.96)
 
-[node name="Boss" type="CharacterBody2D" parent="Node2D"]
-position = Vector2(195, 110)
-scale = Vector2(3, 3)
-script = ExtResource("1_uemex")
-
-[node name="Boss" type="AnimatedSprite2D" parent="Node2D/Boss"]
-metadata/_edit_lock_ = true
-
-[node name="Dropshadow" type="Sprite2D" parent="Node2D/Boss/Boss"]
-scale = Vector2(0.12609, 0.12609)
-texture = ExtResource("1_lnvp7")
-metadata/_edit_lock_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/Boss"]
-position = Vector2(9.5, 9)
-shape = SubResource("RectangleShape2D_lnvp7")
-metadata/_edit_lock_ = true
-
-[node name="Spark" type="Sprite2D" parent="Node2D/Boss"]
-position = Vector2(-60.3333, -11)
-scale = Vector2(0.425, 0.425)
-texture = ExtResource("3_1pv0r")
-
-[node name="AttackString" type="AnimationPlayer" parent="Node2D/Boss"]
-libraries = {
-&"": SubResource("AnimationLibrary_kd5mi")
-}
-
-[node name="Camera2D" type="Camera2D" parent="Node2D"]
-
-[node name="Floor" type="StaticBody2D" parent="Node2D"]
-position = Vector2(57, 465)
-scale = Vector2(100, 15)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/Floor"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Room/Floor"]
 position = Vector2(0, -1.43333)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_oe8pk")
 metadata/_edit_lock_ = true
 
-[node name="MeshInstance2D" type="MeshInstance2D" parent="Node2D/Floor"]
+[node name="MeshInstance2D" type="MeshInstance2D" parent="World/Room/Floor"]
 position = Vector2(-0.125004, -1.41346)
 scale = Vector2(20.25, 20.8269)
 mesh = SubResource("BoxMesh_lnvp7")
 metadata/_edit_lock_ = true
+
+[node name="Floor2" type="StaticBody2D" parent="World/Room"]
+position = Vector2(14, -317)
+scale = Vector2(100, 1.96)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Room/Floor2"]
+position = Vector2(0, -1.43333)
+shape = SubResource("RectangleShape2D_oe8pk")
+metadata/_edit_lock_ = true
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="World/Room/Floor2"]
+position = Vector2(-0.125004, -1.41346)
+scale = Vector2(20.25, 20.8269)
+mesh = SubResource("BoxMesh_lnvp7")
+metadata/_edit_lock_ = true
+
+[node name="Floor3" type="StaticBody2D" parent="World/Room"]
+position = Vector2(-561, -24)
+rotation = 3.14159
+scale = Vector2(1.96748, 40.442)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Room/Floor3"]
+position = Vector2(0, -1.43333)
+shape = SubResource("RectangleShape2D_oe8pk")
+metadata/_edit_lock_ = true
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="World/Room/Floor3"]
+position = Vector2(-0.125004, -1.41346)
+scale = Vector2(20.25, 20.8269)
+mesh = SubResource("BoxMesh_lnvp7")
+metadata/_edit_lock_ = true
+
+[node name="Floor4" type="StaticBody2D" parent="World/Room"]
+position = Vector2(545, -65)
+rotation = 3.14159
+scale = Vector2(1.96748, 40.442)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Room/Floor4"]
+position = Vector2(0, -1.43333)
+shape = SubResource("RectangleShape2D_oe8pk")
+metadata/_edit_lock_ = true
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="World/Room/Floor4"]
+position = Vector2(-0.125004, -1.41346)
+scale = Vector2(20.25, 20.8269)
+mesh = SubResource("BoxMesh_lnvp7")
+metadata/_edit_lock_ = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ScheduleDisplay" parent="CanvasLayer" instance=ExtResource("5_kd5mi")]
+visible = false
+offset_bottom = 0.0
+
+[node name="GameState" type="Node" parent="." groups=["GameState"]]
+script = ExtResource("6_4lhpg")
+
+[node name="Inventory" type="Node" parent="." groups=["Inventory"]]
+script = ExtResource("6_6ggxn")
+
+[node name="Rewind" type="Node" parent="." groups=["Rewind"]]
+script = ExtResource("7_iylxf")
+
+[node name="FullScreenShader" type="CanvasLayer" parent="."]
+
+[node name="Blur" type="ColorRect" parent="FullScreenShader"]
+material = SubResource("ShaderMaterial_iylxf")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[connection signal="combo_dropped" from="World/Player" to="World/Statue" method="_on_player_combo_dropped"]

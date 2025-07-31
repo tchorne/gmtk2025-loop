@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://covgghd21cvtt"]
+
+[ext_resource type="Texture2D" uid="uid://dwortl6fpx4ou" path="res://icon.svg" id="1_7y1mo"]
+
+[node name="TextureProgressBar" type="TextureProgressBar"]
+custom_minimum_size = Vector2(30, 0)
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.0
+value = 1.0
+fill_mode = 3
+nine_patch_stretch = true
+texture_progress = ExtResource("1_7y1mo")

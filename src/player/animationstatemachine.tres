@@ -1,0 +1,72 @@
+[gd_resource type="AnimationNodeStateMachine" load_steps=19 format=3 uid="uid://be1l4g1j70sus"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_gkba8"]
+animation = &"crouch"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_8ydov"]
+animation = &"default"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_x42xx"]
+animation = &"fall"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_l271a"]
+animation = &"land"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_cwolq"]
+animation = &"rise"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ylhto"]
+animation = &"run"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_fa3fy"]
+animation = &"skid"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_cwolq"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2smqc"]
+switch_mode = 1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_rl62b"]
+switch_mode = 1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_wlj80"]
+switch_mode = 1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6bm8s"]
+switch_mode = 1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hrerp"]
+switch_mode = 1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_oyld2"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_gkba8"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ah4as"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_th7kk"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_g7678"]
+
+[resource]
+states/End/position = Vector2(1050, 88)
+states/Start/position = Vector2(185, 88)
+states/crouch/node = SubResource("AnimationNodeAnimation_gkba8")
+states/crouch/position = Vector2(353, 49)
+states/default/node = SubResource("AnimationNodeAnimation_8ydov")
+states/default/position = Vector2(390, 147)
+states/fall/node = SubResource("AnimationNodeAnimation_x42xx")
+states/fall/position = Vector2(640, 236)
+states/land/node = SubResource("AnimationNodeAnimation_l271a")
+states/land/position = Vector2(535, 273)
+states/rise/node = SubResource("AnimationNodeAnimation_cwolq")
+states/rise/position = Vector2(624, 153)
+states/run/node = SubResource("AnimationNodeAnimation_ylhto")
+states/run/position = Vector2(579, 4)
+states/skid/node = SubResource("AnimationNodeAnimation_fa3fy")
+states/skid/position = Vector2(685, 22)
+transitions = ["Start", "default", SubResource("AnimationNodeStateMachineTransition_cwolq"), "default", "run", SubResource("AnimationNodeStateMachineTransition_2smqc"), "run", "default", SubResource("AnimationNodeStateMachineTransition_rl62b"), "default", "rise", SubResource("AnimationNodeStateMachineTransition_wlj80"), "rise", "fall", SubResource("AnimationNodeStateMachineTransition_6bm8s"), "fall", "land", SubResource("AnimationNodeStateMachineTransition_hrerp"), "land", "default", SubResource("AnimationNodeStateMachineTransition_oyld2"), "run", "skid", SubResource("AnimationNodeStateMachineTransition_gkba8"), "skid", "run", SubResource("AnimationNodeStateMachineTransition_ah4as"), "default", "crouch", SubResource("AnimationNodeStateMachineTransition_th7kk"), "crouch", "default", SubResource("AnimationNodeStateMachineTransition_g7678")]
+graph_offset = Vector2(-290, -48)

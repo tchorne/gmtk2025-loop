@@ -1,0 +1,65 @@
+[gd_scene load_steps=10 format=3 uid="uid://ds2lj0bn2ucma"]
+
+[ext_resource type="Texture2D" uid="uid://p234drbehle4" path="res://assets/misc/spark.png" id="1_0gyw1"]
+[ext_resource type="Script" uid="uid://bdslrm7pjsqcc" path="res://src/boss/coin.gd" id="1_f5os5"]
+[ext_resource type="AudioStream" uid="uid://dy2oeg85io7cd" path="res://assets/sound/coin.wav" id="3_ghgbo"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_f5os5"]
+bounce = 0.62
+
+[sub_resource type="Curve" id="Curve_0gyw1"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.10137, 1), 0.0, 0.0, 0, 0, Vector2(0.613699, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_ui3du"]
+curve = SubResource("Curve_0gyw1")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_f5os5"]
+particle_flag_disable_z = true
+angle_min = 1.07288e-05
+angle_max = 1.07288e-05
+spread = 180.0
+initial_velocity_min = 148.88
+initial_velocity_max = 292.8
+gravity = Vector3(0, 0, 0)
+scale_min = 0.2
+scale_max = 0.2
+scale_curve = SubResource("CurveTexture_ui3du")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0gyw1"]
+radius = 22.0907
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f5os5"]
+
+[node name="Coin" type="RigidBody2D"]
+collision_layer = 0
+physics_material_override = SubResource("PhysicsMaterial_f5os5")
+lock_rotation = true
+script = ExtResource("1_f5os5")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_0gyw1")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 4
+texture = ExtResource("1_0gyw1")
+lifetime = 0.2
+one_shot = true
+explosiveness = 0.9
+process_material = SubResource("ParticleProcessMaterial_f5os5")
+
+[node name="Collect" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collect"]
+shape = SubResource("CircleShape2D_0gyw1")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_ghgbo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_f5os5")
+
+[connection signal="body_entered" from="Collect" to="." method="_on_collect_body_entered"]
