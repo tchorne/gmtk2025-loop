@@ -13,8 +13,9 @@ func _on_collect_body_entered(_body: Node2D) -> void:
 	$Sprite2D.visible = false
 	
 func _process(delta: float) -> void:
+	set_physics_process(Hitstun.paused)
 	if dying:
-		time_remaining -= delta
+		time_remaining -= delta * Hitstun.deltamod()
 		if time_remaining < 0:
 			queue_free()
 

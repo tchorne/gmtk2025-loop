@@ -16,7 +16,7 @@ func _ready():
 	ghost = rewind.add_ghost(sprite)
 	
 func _process(delta: float) -> void:
-	time_to_next -= delta
+	time_to_next -= delta * Hitstun.deltamod()
 	if time_to_next < 0:
 		capture()
 		time_to_next += CAPTURE_RATE

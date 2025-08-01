@@ -18,7 +18,7 @@ func _process(delta: float) -> void:
 			rewind_time = game_state.time
 	
 	if rewinding:
-		rewind_time -= delta / 20.0
+		rewind_time -= delta * Hitstun.deltamod() / 20.0
 		time_updated.emit(rewind_time)
 		if rewind_time < 0:
 			rewind_time = 0.0

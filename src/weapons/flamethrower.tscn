@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://ium7m6skjmg8"]
+
+[ext_resource type="Texture2D" uid="uid://ckom8n1vt2lmj" path="res://assets/sprites/weapons/Flamethrower.png" id="1_p2bmm"]
+
+[node name="Flamethrower" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_p2bmm")

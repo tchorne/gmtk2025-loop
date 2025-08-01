@@ -1,11 +1,20 @@
 extends Node
 
+var paused = false
+var gamespeed = 1.0
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
+var hitstun_remaining = 0.0
 
+func extend_hitstun(amount: float):
+	hitstun_remaining = max(hitstun_remaining, amount)
+	paused = true
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	hitstun_remaining -= delta
+	if hitstun_remaining < 0:
+		paused = false
+
+func deltamod() -> float:
+	if paused: return 0
+	return gamespeed
+	

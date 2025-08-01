@@ -25,7 +25,7 @@ func begin_attack():
 	
 
 func _process(delta: float) -> void:
-	attack_cooldown -= delta
+	attack_cooldown -= delta  * Hitstun.deltamod()
 	
 	if Input.is_action_just_pressed("lightatk"):
 		last_input = "lightatk"

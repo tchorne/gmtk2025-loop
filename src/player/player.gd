@@ -33,7 +33,7 @@ func _physics_process(delta: float) -> void:
 		
 		
 	if not melee.in_attack:
-		process_movement(delta)
+		process_movement(delta * Hitstun.deltamod())
 
 	
 func process_movement(delta: float) -> void:

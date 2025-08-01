@@ -26,7 +26,6 @@ func _ready() -> void:
 			
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	var rect := $MarginContainer/VBoxContainer/Schedule.get_rect() as Rect2
 	progress_tick.position.x = lerp(rect.position.x, rect.position.x + rect.size.x, game_state.time)

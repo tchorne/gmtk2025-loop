@@ -75,6 +75,7 @@ func set_transform_(other: Transform2D):
 	rigid_body.global_transform = other
 	
 func _process(_delta: float) -> void:
+	rigid_body.set_physics_process(Hitstun.paused)
 	if physics_mode:
 		global_position = rigid_body.global_position
 		global_rotation = rigid_body.global_rotation
