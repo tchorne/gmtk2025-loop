@@ -8,15 +8,14 @@ enum {
 var my_type: int
 var dying := false
 var time_remaining := 1.0
-@onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
-@onready var gpu_particles_2d: GPUParticles2D = $GPUParticles2D
+#@onready var gpu_particles_2d: GPUParticles2D = $GPUParticles2D
 
+@export var bill_colors: Array[Color]
 
 func _on_collect_body_entered(_body: Node2D) -> void:
 	if dying: return
 	dying = true
-	audio_stream_player.play()
-	gpu_particles_2d.restart()
+	#gpu_particles_2d.restart()
 	$Coin.visible = false
 	$Bill.visible = false
 	
@@ -31,15 +30,25 @@ func _process(delta: float) -> void:
 			
 func _ready() -> void:
 	linear_velocity = Vector2.RIGHT.rotated(randf()*TAU) * 200
-	my_type = randi()%2
+	
+
+func set_value(value): ## 1, 2, 5, 10, 20, 50, 100
+	var color = [1,2,5,10,20,50,100].find(value)
+	if color <= 1:
+		my_type = TYPE_COIN
+	else:
+		my_type = TYPE_BILL
+		
 	if my_type == TYPE_BILL:
 		gravity_scale = 0.1
+		$Bill.modulate = bill_colors[color-2]
 		$Bill.visible = true
 		$Bill.frame = 1
 	else:
 		$Coin.visible = true
-
-
+		if color == 1:
+			$Coin.apply_scale(Vector2.ONE * 1.5)
+		
 func _on_timer_timeout() -> void:
 	var coin : Sprite2D = $Coin
 	

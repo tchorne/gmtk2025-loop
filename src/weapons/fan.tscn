@@ -1,9 +1,35 @@
-[gd_scene load_steps=2 format=3 uid="uid://cvj0x4yusugq8"]
+[gd_scene load_steps=6 format=3 uid="uid://cvj0x4yusugq8"]
 
 [ext_resource type="Texture2D" uid="uid://dd5xug3v02g7h" path="res://assets/sprites/weapons/Future_Fan.png" id="1_enbg6"]
+[ext_resource type="Script" uid="uid://dcon85pogmwux" path="res://src/weapons/fan.gd" id="1_x85c7"]
+[ext_resource type="Script" uid="uid://8geh3td8elh3" path="res://src/weapons/continuous_damage.gd" id="3_4l6yo"]
+[ext_resource type="Script" uid="uid://4en1o7xygofw" path="res://src/weapons/damage_inflictor.gd" id="4_v6w8r"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4l6yo"]
+size = Vector2(10000, 10000)
 
 [node name="Fan" type="Node2D"]
+script = ExtResource("1_x85c7")
 
 [node name="FutureFan" type="Sprite2D" parent="."]
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("1_enbg6")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+visible = false
+shape = SubResource("RectangleShape2D_4l6yo")
+
+[node name="ContinuousDamage" type="Node" parent="." node_paths=PackedStringArray("area")]
+script = ExtResource("3_4l6yo")
+tick_rate = 0.1
+area = NodePath("../Area2D")
+
+[node name="Inflictor" type="Node" parent="."]
+script = ExtResource("4_v6w8r")
+element = 4
+
+[connection signal="hit_statue" from="ContinuousDamage" to="Inflictor" method="_on_statue_hit"]

@@ -1,19 +1,27 @@
-[gd_scene load_steps=13 format=3 uid="uid://bnxutd7t1861v"]
+[gd_scene load_steps=17 format=3 uid="uid://bnxutd7t1861v"]
 
 [ext_resource type="Script" uid="uid://diqe728hxkc61" path="res://src/mainscene/camera.gd" id="1_4lhpg"]
 [ext_resource type="Texture2D" uid="uid://dymnc6d5uy2jb" path="res://assets/environment/background.png" id="1_vldkb"]
 [ext_resource type="PackedScene" uid="uid://drfnne271u6gq" path="res://src/player/player.tscn" id="2_kd5mi"]
-[ext_resource type="PackedScene" uid="uid://vwhjpv3o5dy0" path="res://src/boss/statue.tscn" id="4_kd5mi"]
+[ext_resource type="PackedScene" uid="uid://bbd4sk0am5064" path="res://src/menus/end_of_day.tscn" id="5_fgsqm"]
 [ext_resource type="PackedScene" uid="uid://qomk8njlcovq" path="res://src/schedule/schedule_display.tscn" id="5_kd5mi"]
 [ext_resource type="Script" uid="uid://deu36qki4xlep" path="res://src/mainscene/game_state.gd" id="6_4lhpg"]
 [ext_resource type="Script" uid="uid://c6nau26x8ybr3" path="res://src/mainscene/inventory.gd" id="6_6ggxn"]
 [ext_resource type="Shader" uid="uid://c0xem7y1vbc2u" path="res://src/effects/blur.gdshader" id="7_6ggxn"]
+[ext_resource type="AudioStream" uid="uid://qnx4f13qskhf" path="res://assets/sound/dayend.wav" id="7_fgsqm"]
 [ext_resource type="Script" uid="uid://b0lks86rilvxr" path="res://src/rewind/rewind.gd" id="7_iylxf"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_oe8pk"]
-size = Vector2(20, 20.8667)
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_vldkb"]
+normal = Vector2(0.000438182, -1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_lnvp7"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_fgsqm"]
+normal = Vector2(0, 1)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_vlq03"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_6ynox"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_iylxf"]
 shader = ExtResource("7_6ggxn")
@@ -22,9 +30,9 @@ shader_parameter/grain_amount = 0.05
 shader_parameter/grain_size = 1.0
 shader_parameter/animate = true
 shader_parameter/abberation = 0.003
-shader_parameter/blur = true
-shader_parameter/grain = true
-shader_parameter/chromatic_abberation = true
+shader_parameter/blur = false
+shader_parameter/grain = false
+shader_parameter/chromatic_abberation = false
 
 [node name="Main" type="Node"]
 
@@ -41,11 +49,9 @@ script = ExtResource("1_4lhpg")
 
 [node name="World" type="Node2D" parent="."]
 
-[node name="Player" parent="World" instance=ExtResource("2_kd5mi")]
+[node name="Player" parent="World" groups=["Player"] instance=ExtResource("2_kd5mi")]
+unique_name_in_owner = true
 position = Vector2(-114, 183)
-scale = Vector2(1.6, 1.6)
-
-[node name="Statue" parent="World" instance=ExtResource("4_kd5mi")]
 scale = Vector2(1.6, 1.6)
 
 [node name="Room" type="Node2D" parent="World"]
@@ -55,8 +61,8 @@ position = Vector2(31, 296)
 scale = Vector2(100, 1.96)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="World/Room/Floor"]
-position = Vector2(0, -1.43333)
-shape = SubResource("RectangleShape2D_oe8pk")
+position = Vector2(0, -10.348)
+shape = SubResource("WorldBoundaryShape2D_vldkb")
 metadata/_edit_lock_ = true
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="World/Room/Floor"]
@@ -71,8 +77,8 @@ position = Vector2(14, -299)
 scale = Vector2(100, 1.96)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="World/Room/Floor2"]
-position = Vector2(0, -1.43333)
-shape = SubResource("RectangleShape2D_oe8pk")
+position = Vector2(0, 11.722)
+shape = SubResource("WorldBoundaryShape2D_fgsqm")
 metadata/_edit_lock_ = true
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="World/Room/Floor2"]
@@ -88,8 +94,9 @@ rotation = 3.14159
 scale = Vector2(1.96748, 40.442)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="World/Room/Floor3"]
-position = Vector2(0, -1.43333)
-shape = SubResource("RectangleShape2D_oe8pk")
+position = Vector2(-13.485, 0)
+rotation = -1.5708
+shape = SubResource("WorldBoundaryShape2D_vlq03")
 metadata/_edit_lock_ = true
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="World/Room/Floor3"]
@@ -105,8 +112,9 @@ rotation = 3.14159
 scale = Vector2(1.96748, 40.442)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="World/Room/Floor4"]
-position = Vector2(0, -1.43333)
-shape = SubResource("RectangleShape2D_oe8pk")
+position = Vector2(8.18, -1.433)
+rotation = 1.5708
+shape = SubResource("WorldBoundaryShape2D_6ynox")
 metadata/_edit_lock_ = true
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="World/Room/Floor4"]
@@ -116,83 +124,26 @@ scale = Vector2(20.25, 20.8269)
 mesh = SubResource("BoxMesh_lnvp7")
 metadata/_edit_lock_ = true
 
+[node name="StatueSpawn" type="Marker2D" parent="World"]
+unique_name_in_owner = true
+position = Vector2(184, 84)
+scale = Vector2(1.6, 1.6)
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="ScheduleDisplay" parent="CanvasLayer" instance=ExtResource("5_kd5mi")]
-visible = false
 offset_bottom = 0.0
 
 [node name="Menus" type="Node" parent="CanvasLayer"]
 
-[node name="Control" type="Control" parent="CanvasLayer/Menus"]
-visible = false
-layout_mode = 3
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Button" type="Button" parent="CanvasLayer/Menus/Control"]
-layout_mode = 0
-offset_left = 323.0
-offset_top = 211.0
-offset_right = 421.0
-offset_bottom = 242.0
-text = "Time Travel"
-
-[node name="PerkMenu" type="ColorRect" parent="CanvasLayer/Menus/Control"]
-layout_mode = 0
-offset_left = -37.0
-offset_top = -11.0
-offset_right = 183.0
-offset_bottom = 313.0
-
-[node name="Label" type="Label" parent="CanvasLayer/Menus/Control/PerkMenu"]
-layout_mode = 0
-offset_left = 10.0
-offset_top = 7.0
-offset_right = 207.0
-offset_bottom = 62.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 31
-text = "Todays Perks"
-
-[node name="ProductMenu" type="ColorRect" parent="CanvasLayer/Menus/Control"]
-layout_mode = 0
-offset_left = -252.0
-offset_top = -11.0
-offset_right = -41.0
-offset_bottom = 314.0
-
-[node name="Label2" type="Label" parent="CanvasLayer/Menus/Control/ProductMenu"]
-layout_mode = 0
-offset_left = 7.0
-offset_top = 8.00002
-offset_right = 204.0
-offset_bottom = 63.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 31
-text = "Todays Perks"
-
-[node name="Label3" type="Label" parent="CanvasLayer/Menus/Control/ProductMenu"]
-layout_mode = 0
-offset_left = 16.0
-offset_top = 41.0
-offset_right = 213.0
-offset_bottom = 86.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 26
-text = "Equipped: x/4"
+[node name="EndOfDay" parent="CanvasLayer/Menus" instance=ExtResource("5_fgsqm")]
 
 [node name="GameState" type="Node" parent="." groups=["GameState"]]
 script = ExtResource("6_4lhpg")
+
+[node name="Dayend" type="AudioStreamPlayer" parent="GameState"]
+stream = ExtResource("7_fgsqm")
+bus = &"Sound"
 
 [node name="Inventory" type="Node" parent="." groups=["Inventory"]]
 script = ExtResource("6_6ggxn")
@@ -209,6 +160,5 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 metadata/_edit_lock_ = true
-
-[connection signal="combo_dropped" from="World/Player" to="World/Statue" method="_on_player_combo_dropped"]

@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://qomk8njlcovq"]
+[gd_scene load_steps=5 format=3 uid="uid://qomk8njlcovq"]
 
 [ext_resource type="Script" uid="uid://dcek4iwxipv36" path="res://src/schedule/schedule_display.gd" id="1_qeuff"]
+[ext_resource type="Texture2D" uid="uid://cpy2tc7vp0w4b" path="res://assets/ui/bg.png" id="2_8m4ca"]
+[ext_resource type="Texture2D" uid="uid://dhqgx56eai1jp" path="res://assets/ui/Outline.png" id="3_7jhxk"]
+[ext_resource type="Texture2D" uid="uid://4c14ukfvc26u" path="res://assets/ui/hatching.png" id="4_87whd"]
 
 [node name="ScheduleDisplay" type="Control"]
 layout_mode = 3
@@ -9,6 +12,35 @@ anchor_right = 1.0
 offset_bottom = 50.0
 grow_horizontal = 2
 script = ExtResource("1_qeuff")
+
+[node name="DayProgress" type="TextureProgressBar" parent="."]
+unique_name_in_owner = true
+self_modulate = Color(0.439049, 0.439049, 0.439049, 1)
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -347.0
+offset_top = 10.0
+offset_right = 6017.0
+offset_bottom = 827.0
+grow_horizontal = 2
+scale = Vector2(0.1, 0.1)
+max_value = 1.0
+step = 0.0
+value = 1.0
+texture_over = ExtResource("3_7jhxk")
+texture_progress = ExtResource("4_87whd")
+
+[node name="Under" type="TextureRect" parent="DayProgress"]
+show_behind_parent = true
+layout_mode = 0
+offset_left = -410.0
+offset_top = -90.0
+offset_right = 5951.0
+offset_bottom = 715.0
+texture = ExtResource("2_8m4ca")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -22,63 +54,3 @@ theme_override_constants/margin_right = 30
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
-
-[node name="Schedule" type="ColorRect" parent="MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 30)
-layout_mode = 2
-
-[node name="DayTime" type="ColorRect" parent="MarginContainer/VBoxContainer/Schedule"]
-custom_minimum_size = Vector2(5, 0)
-layout_mode = 1
-anchors_preset = 9
-anchor_bottom = 1.0
-grow_vertical = 2
-color = Color(0, 0, 0, 1)
-
-[node name="Schedule2" type="ColorRect" parent="MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 30)
-layout_mode = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Schedule2"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Schedule3" type="ColorRect" parent="MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 30)
-layout_mode = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Schedule3"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Schedule4" type="ColorRect" parent="MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 30)
-layout_mode = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Schedule4"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Schedule5" type="ColorRect" parent="MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 30)
-layout_mode = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Schedule5"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2

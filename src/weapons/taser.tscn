@@ -1,0 +1,61 @@
+[gd_scene load_steps=7 format=3 uid="uid://bxnkldbsipyys"]
+
+[ext_resource type="Script" uid="uid://cbq8ttj78vcvo" path="res://src/weapons/chair.gd" id="1_dm07a"]
+[ext_resource type="Texture2D" uid="uid://cl6lyew6pofuf" path="res://assets/sprites/weapons/Taser.png" id="1_m2wwv"]
+[ext_resource type="Texture2D" uid="uid://lmkahm61hu4e" path="res://assets/effects/1_Fire.png" id="3_2jy14"]
+[ext_resource type="Script" uid="uid://cvqd8y3pmxill" path="res://src/weapons/instant_damage.gd" id="3_kctar"]
+[ext_resource type="Script" uid="uid://4en1o7xygofw" path="res://src/weapons/damage_inflictor.gd" id="4_2jy14"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dovwa"]
+size = Vector2(48, 53)
+
+[node name="taser" type="Node2D"]
+script = ExtResource("1_dm07a")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(7, -1)
+scale = Vector2(0.07, 0.07)
+texture = ExtResource("1_m2wwv")
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(45, -1)
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -1.5)
+shape = SubResource("RectangleShape2D_dovwa")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="Area2D"]
+position = Vector2(8, -9)
+emitting = false
+amount = 6
+texture = ExtResource("3_2jy14")
+emission_shape = 3
+emission_rect_extents = Vector2(30, 30)
+gravity = Vector2(0, 0)
+scale_amount_min = 0.06
+scale_amount_max = 0.06
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.4
+one_shot = true
+
+[node name="Timer2" type="Timer" parent="."]
+one_shot = true
+
+[node name="InstantDamage" type="Node" parent="." node_paths=PackedStringArray("my_area")]
+script = ExtResource("3_kctar")
+my_area = NodePath("../Area2D")
+
+[node name="Inflicter" type="Node" parent="."]
+script = ExtResource("4_2jy14")
+damage = 40.0
+structure_damage = 50.0
+element = 3
+knockback_strength = 300.0
+hitstun = 0.1
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="Timer2" to="." method="_on_timer_2_timeout"]
+[connection signal="hit_statue" from="InstantDamage" to="Inflicter" method="_on_statue_hit"]

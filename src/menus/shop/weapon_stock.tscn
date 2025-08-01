@@ -1,0 +1,73 @@
+[gd_scene load_steps=5 format=3 uid="uid://qyn6liw0mnc7"]
+
+[ext_resource type="Script" uid="uid://u2ef3wbucknr" path="res://src/menus/shop/weapon_stock.gd" id="1_8mnww"]
+[ext_resource type="Texture2D" uid="uid://dipdng1cgkbv7" path="res://assets/sprites/weapons/Minigun.png" id="1_xut4s"]
+
+[sub_resource type="Gradient" id="Gradient_8mnww"]
+interpolation_color_space = 1
+offsets = PackedFloat32Array(0.265509, 1)
+colors = PackedColorArray(1, 0, 0, 1, 0, 1, 0.0833333, 1)
+
+[sub_resource type="Gradient" id="Gradient_xut4s"]
+interpolation_color_space = 1
+colors = PackedColorArray(1, 0, 0, 1, 0.0166667, 1, 0, 1)
+
+[node name="WeaponStock" type="HBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 75.0
+grow_horizontal = 2
+script = ExtResource("1_8mnww")
+price_gradient = SubResource("Gradient_8mnww")
+
+[node name="Control" type="Control" parent="."]
+custom_minimum_size = Vector2(200, 75)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_xut4s")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Button" type="Button" parent="Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -31.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "BUY"
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+
+[node name="Line2D" type="Line2D" parent="ColorRect"]
+points = PackedVector2Array(0, 0, 0, 0, 48, 44, 127, 58, 180, 14, 309, 39, 387, 57, 495, 31, 529, 14, 619, 46, 697, 57, 737, 20, 775, 48, 816, 61, 851, 24, 883, 50)
+width = 3.48
+gradient = SubResource("Gradient_xut4s")
+
+[node name="HoveredTime" type="ColorRect" parent="ColorRect"]
+custom_minimum_size = Vector2(2, 0)
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.000113828, 0.000113828, 0.000113828, 1)
+
+[connection signal="gui_input" from="ColorRect" to="." method="_on_color_rect_gui_input"]
+[connection signal="mouse_exited" from="ColorRect" to="." method="_on_color_rect_mouse_exited"]

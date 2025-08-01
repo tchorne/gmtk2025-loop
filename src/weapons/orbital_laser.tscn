@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://bwklpwfryeo1k"]
+
+[ext_resource type="Texture2D" uid="uid://cn8yp67o681r2" path="res://assets/sprites/weapons/Orbital_1.png" id="1_qevm1"]
+[ext_resource type="Script" uid="uid://biteqb0nbj3li" path="res://src/weapons/orbital_laser.gd" id="1_xap36"]
+[ext_resource type="Texture2D" uid="uid://lmkahm61hu4e" path="res://assets/effects/1_Fire.png" id="3_20kpa"]
+
+[node name="OrbitalLaser" type="Node2D"]
+script = ExtResource("1_xap36")
+
+[node name="Orbital1" type="Sprite2D" parent="."]
+position = Vector2(-0.999999, -0.999998)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("1_qevm1")
+
+[node name="Lazer" type="Node" parent="."]
+
+[node name="Node2D" type="Node2D" parent="Lazer"]
+visible = false
+
+[node name="Sprite2D" type="Sprite2D" parent="Lazer"]
+visible = false
+scale = Vector2(0.12, 1)
+texture = ExtResource("3_20kpa")

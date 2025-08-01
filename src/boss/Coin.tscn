@@ -1,32 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://ds2lj0bn2ucma"]
+[gd_scene load_steps=7 format=3 uid="uid://ds2lj0bn2ucma"]
 
-[ext_resource type="Texture2D" uid="uid://p234drbehle4" path="res://assets/misc/spark.png" id="1_0gyw1"]
 [ext_resource type="Script" uid="uid://bdslrm7pjsqcc" path="res://src/boss/coin.gd" id="1_f5os5"]
 [ext_resource type="Texture2D" uid="uid://bhmiku1dd7ydd" path="res://assets/sprites/statue/Coin.png" id="2_sak8e"]
-[ext_resource type="AudioStream" uid="uid://dy2oeg85io7cd" path="res://assets/sound/coin.wav" id="3_ghgbo"]
-[ext_resource type="Texture2D" uid="uid://b1r7m2les140p" path="res://assets/sprites/statue/Bill.png" id="3_v4ki3"]
+[ext_resource type="Texture2D" uid="uid://c8ufj20f15f1y" path="res://assets/sprites/statue/Billblank.png" id="3_ghgbo"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_f5os5"]
 bounce = 0.62
-
-[sub_resource type="Curve" id="Curve_0gyw1"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.10137, 1), 0.0, 0.0, 0, 0, Vector2(0.613699, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 4
-
-[sub_resource type="CurveTexture" id="CurveTexture_ui3du"]
-curve = SubResource("Curve_0gyw1")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_f5os5"]
-particle_flag_disable_z = true
-angle_min = 1.07288e-05
-angle_max = 1.07288e-05
-spread = 180.0
-initial_velocity_min = 148.88
-initial_velocity_max = 292.8
-gravity = Vector3(0, 0, 0)
-scale_min = 0.2
-scale_max = 0.2
-scale_curve = SubResource("CurveTexture_ui3du")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0gyw1"]
 radius = 22.0907
@@ -38,6 +17,7 @@ collision_layer = 0
 physics_material_override = SubResource("PhysicsMaterial_f5os5")
 lock_rotation = true
 script = ExtResource("1_f5os5")
+bill_colors = Array[Color]([Color(0.265405, 0.722399, 0.966985, 1), Color(0.696144, 0.601468, 0.989523, 1), Color(0.343914, 0.783176, 0.417602, 1), Color(0.989844, 0.520304, 0.434918, 1), Color(2.21, 1.105, 0, 1)])
 
 [node name="Coin" type="Sprite2D" parent="."]
 visible = false
@@ -52,29 +32,19 @@ autostart = true
 [node name="Bill" type="Sprite2D" parent="."]
 visible = false
 scale = Vector2(0.1, 0.1)
-texture = ExtResource("3_v4ki3")
+texture = ExtResource("3_ghgbo")
 hframes = 2
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
-emitting = false
-amount = 4
-texture = ExtResource("1_0gyw1")
-lifetime = 0.2
-one_shot = true
-explosiveness = 0.9
-process_material = SubResource("ParticleProcessMaterial_f5os5")
-
 [node name="Collect" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Collect"]
 shape = SubResource("CircleShape2D_0gyw1")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("3_ghgbo")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("RectangleShape2D_f5os5")
 
 [connection signal="timeout" from="Coin/Timer" to="." method="_on_timer_timeout"]

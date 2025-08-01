@@ -1,0 +1,10 @@
+[gd_scene load_steps=4 format=3 uid="uid://dpvdj3ob8r43o"]
+
+[ext_resource type="Script" uid="uid://dqd871wdwfli5" path="res://src/mainscene/cursor.gd" id="1_add7t"]
+[ext_resource type="Texture2D" uid="uid://lh68hgn0co7n" path="res://assets/misc/cursor1.png" id="2_klqpt"]
+[ext_resource type="Texture2D" uid="uid://b6rdbak8p8ldp" path="res://assets/misc/cursor2.png" id="3_18dq1"]
+
+[node name="Cursor" type="Node"]
+script = ExtResource("1_add7t")
+cursor_1 = ExtResource("2_klqpt")
+cursor_2 = ExtResource("3_18dq1")

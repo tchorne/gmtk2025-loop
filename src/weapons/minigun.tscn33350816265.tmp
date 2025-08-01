@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://ducedf5gg4f03"]
+
+[ext_resource type="Texture2D" uid="uid://dipdng1cgkbv7" path="res://assets/sprites/weapons/Minigun.png" id="1_3mv2y"]
+[ext_resource type="Script" uid="uid://b275b45dalcms" path="res://src/weapons/minigun.gd" id="1_rcp05"]
+[ext_resource type="Script" uid="uid://chwu1boxpyu2b" path="res://src/weapons/projectile_emitter.gd" id="2_s4fkl"]
+[ext_resource type="PackedScene" uid="uid://p1old8npwj3h" path="res://src/weapons/Bullet.tscn" id="4_oxyxh"]
+[ext_resource type="AudioStream" uid="uid://cov2ntbt8yq1e" path="res://assets/sound/gun.wav" id="5_w1kro"]
+
+[node name="Minigun" type="Node2D"]
+script = ExtResource("1_rcp05")
+launch_speed = 1000.0
+
+[node name="Pivot" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Pivot"]
+position = Vector2(29, -1)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("1_3mv2y")
+
+[node name="ProjectileEmitter" type="Node" parent="." node_paths=PackedStringArray("parent", "spawn_point")]
+script = ExtResource("2_s4fkl")
+rate = 10.0
+projectile = ExtResource("4_oxyxh")
+parent = NodePath("../Projectiles")
+spawn_point = NodePath("../SpawnPoint")
+randomness = 0.1
+
+[node name="Projectiles" type="Node" parent="."]
+
+[node name="SpawnPoint" type="Marker2D" parent="."]
+position = Vector2(81, -3)
+
+[node name="Gun" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_w1kro")
+autoplay = true
+
+[connection signal="fired" from="ProjectileEmitter" to="." method="_on_projectile_emitter_fired"]

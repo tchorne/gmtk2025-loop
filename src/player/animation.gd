@@ -14,6 +14,7 @@ const DEFAULT_SCALE = Vector2(0.1, 0.1)
 @onready var animation_player: AnimationPlayer = $"../AnimationPlayer"
 @onready var sprite: Sprite2D = $"../SpriteScale/Sprite"
 @onready var sprite_scale: Node2D = $"../SpriteScale"
+@onready var weapon_pivot: Node2D = $"../Weapons/Pivot"
 
 @onready var animation_tree: AnimationTree = $"../AnimationTree"
 @onready var player: CharacterBody2D = $".."
@@ -23,7 +24,7 @@ var current_state: AnimState = AnimState.DEFAULT
 
 @export_range(0.5, 2.0, 0.05) var squish_vertical: float = 1.0
 
-
+var facing_right := true
 var squish_vertical_2: float = 1.0
 
 
@@ -47,7 +48,11 @@ func _process(_delta: float) -> void:
 			switch_to(AnimState.JUMP_UP)
 		else:
 			switch_to(AnimState.JUMP_DOWN)
-	sprite.flip_h = not player.velocity.x > 0
+	if player.velocity.x > 0.01: facing_right = true
+	if player.velocity.x < -0.01: facing_right = false
+	sprite.flip_h = not facing_right
+	weapon_pivot.scale.x = 1.0 if facing_right else -1.0
+	player.facing_right = facing_right
 	
 	sprite_scale.scale.y = DEFAULT_SCALE.y / squish_vertical / squish_vertical_2
 	sprite_scale.scale.x = DEFAULT_SCALE.x * squish_vertical * squish_vertical_2

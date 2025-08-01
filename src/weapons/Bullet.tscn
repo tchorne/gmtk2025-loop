@@ -1,19 +1,47 @@
-[gd_scene load_steps=4 format=3 uid="uid://p1old8npwj3h"]
+[gd_scene load_steps=7 format=3 uid="uid://p1old8npwj3h"]
 
 [ext_resource type="Texture2D" uid="uid://p234drbehle4" path="res://assets/misc/spark.png" id="1_6r84r"]
 [ext_resource type="Script" uid="uid://chyyha6ie8vy2" path="res://src/weapons/bullet.gd" id="1_j3c6t"]
+[ext_resource type="Script" uid="uid://cr403j6xtkohx" path="res://src/weapons/projectile_area.gd" id="3_s6s2l"]
+[ext_resource type="Script" uid="uid://4en1o7xygofw" path="res://src/weapons/damage_inflictor.gd" id="4_fkhtb"]
+[ext_resource type="PackedScene" uid="uid://c10f2t5hpw6ju" path="res://src/mainscene/bounce_detector.tscn" id="5_1xhdh"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_j3c6t"]
-radius = 24.0832
+radius = 2.0
 
-[node name="Bullet" type="Area2D"]
-collision_layer = 4
-collision_mask = 0
+[node name="Bullet" type="RigidBody2D"]
+collision_layer = 0
+mass = 0.01
+gravity_scale = 0.0
 script = ExtResource("1_j3c6t")
-force = 568.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.1, 0.1)
 texture = ExtResource("1_6r84r")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("3_s6s2l")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_j3c6t")
+
+[node name="Inflicter" type="Node" parent="."]
+script = ExtResource("4_fkhtb")
+damage = 10.0
+structure_damage = 10.0
+element = 5
+element_amount = 0.5
+knockback_away_from_player = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_j3c6t")
+
+[node name="BounceDetector" parent="." node_paths=PackedStringArray("rb") instance=ExtResource("5_1xhdh")]
+rb = NodePath("..")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="hit_statue" from="Area2D" to="." method="on_hit"]
+[connection signal="hit_statue" from="Area2D" to="Inflicter" method="_on_statue_hit"]
+[connection signal="bounced" from="BounceDetector" to="." method="_on_bounce_detector_bounced"]

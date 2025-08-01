@@ -1,6 +1,8 @@
 extends Node
 class_name Inventory
 
+@export var all_weapons: Array[WeaponData]
+
 var rentals: Array[Rental]
 var unlocked_weapons: Array[String]
 

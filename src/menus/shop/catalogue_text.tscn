@@ -1,0 +1,112 @@
+[gd_scene load_steps=6 format=3 uid="uid://cyovba8hgw48h"]
+
+[ext_resource type="Theme" uid="uid://b2ph8ikxoqmwf" path="res://src/default.theme" id="1_2nbda"]
+[ext_resource type="Script" uid="uid://cgfb3m1oojj85" path="res://src/menus/shop/catalogue_text.gd" id="1_ey5vb"]
+[ext_resource type="Texture2D" uid="uid://dkh0xkmkqaod4" path="res://assets/ui/check1.png" id="3_435ed"]
+[ext_resource type="Texture2D" uid="uid://c1wlaswvvrjjx" path="res://assets/ui/check2.png" id="4_5lfak"]
+[ext_resource type="Script" uid="uid://b4rvrls3sk5fa" path="res://src/menus/shop/checkbox.gd" id="4_u7dd4"]
+
+[node name="CatalogueText" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 49.0
+offset_top = 11.0
+offset_right = 89.0
+offset_bottom = 51.0
+rotation = -0.105236
+script = ExtResource("1_ey5vb")
+
+[node name="Name" type="Label" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+rotation = 0.0181653
+theme = ExtResource("1_2nbda")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "LOCKED"
+
+[node name="Price" type="Label" parent="."]
+layout_mode = 0
+offset_left = 0.777529
+offset_top = 21.1989
+offset_right = 79.7775
+offset_bottom = 44.1989
+rotation = 0.0181653
+theme = ExtResource("1_2nbda")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "$11037"
+
+[node name="Slot1" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = -7.3883
+offset_top = 22.3475
+offset_right = 10.6117
+offset_bottom = 40.3475
+toggle_mode = true
+texture_normal = ExtResource("3_435ed")
+ignore_texture_size = true
+stretch_mode = 0
+script = ExtResource("4_u7dd4")
+
+[node name="TextureRect" type="TextureRect" parent="Slot1"]
+modulate = Color(0.648, 1, 0.36, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.293
+offset_top = -2.56324
+offset_right = 4.293
+offset_bottom = -2.56324
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_5lfak")
+expand_mode = 1
+
+[node name="Price2" type="Label" parent="Slot1"]
+layout_mode = 0
+offset_left = 19.3151
+offset_top = -1.98208
+offset_right = 98.315
+offset_bottom = 21.0179
+rotation = 0.0181653
+theme = ExtResource("1_2nbda")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Slot 1"
+
+[node name="Slot2" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 64.9487
+offset_top = 22.9493
+offset_right = 82.9487
+offset_bottom = 40.9493
+texture_normal = ExtResource("3_435ed")
+ignore_texture_size = true
+stretch_mode = 0
+script = ExtResource("4_u7dd4")
+
+[node name="TextureRect" type="TextureRect" parent="Slot2"]
+modulate = Color(0.648, 1, 0.36, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.293
+offset_top = -2.56324
+offset_right = 4.293
+offset_bottom = -2.56324
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_5lfak")
+expand_mode = 1
+
+[node name="Price2" type="Label" parent="Slot2"]
+layout_mode = 0
+offset_left = 19.3151
+offset_top = -1.98208
+offset_right = 98.315
+offset_bottom = 21.0179
+rotation = 0.0181653
+theme = ExtResource("1_2nbda")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Slot 2"

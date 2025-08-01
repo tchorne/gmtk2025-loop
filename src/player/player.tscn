@@ -1,15 +1,32 @@
-[gd_scene load_steps=26 format=3 uid="uid://drfnne271u6gq"]
+[gd_scene load_steps=44 format=3 uid="uid://drfnne271u6gq"]
 
 [ext_resource type="Script" uid="uid://bia83w547m3pn" path="res://src/player/player.gd" id="1_mf2ua"]
 [ext_resource type="Texture2D" uid="uid://bw6xltcnqcctm" path="res://assets/misc/dropshadow.png" id="2_244u8"]
 [ext_resource type="Texture2D" uid="uid://cvty8dvudga5b" path="res://assets/sprites/player/player_run.png" id="2_jiejy"]
+[ext_resource type="Script" uid="uid://bpwbpmxwcr4um" path="res://src/player/weapons.gd" id="2_wlj80"]
 [ext_resource type="Script" uid="uid://mbnevxon4evl" path="res://src/player/animation.gd" id="2_x42xx"]
+[ext_resource type="Texture2D" uid="uid://kdn606kgvgyg" path="res://assets/sprites/player/player_arm.png" id="2_ylhto"]
 [ext_resource type="Texture2D" uid="uid://p234drbehle4" path="res://assets/misc/spark.png" id="3_5f2sf"]
 [ext_resource type="AnimationNodeStateMachine" uid="uid://be1l4g1j70sus" path="res://src/player/animationstatemachine.tres" id="3_l271a"]
+[ext_resource type="PackedScene" uid="uid://ium7m6skjmg8" path="res://src/weapons/flamethrower.tscn" id="4_6bm8s"]
 [ext_resource type="Script" uid="uid://t3faic736ur7" path="res://src/player/melee.gd" id="4_244u8"]
 [ext_resource type="SpriteFrames" uid="uid://c0fwi7aefxvgp" path="res://src/player/spriteframes.tres" id="4_l271a"]
 [ext_resource type="Script" uid="uid://mn78wiaw5mw" path="res://src/weapons/melee_hitbox.gd" id="5_5f2sf"]
 [ext_resource type="Script" uid="uid://dp8rcslrax18g" path="res://src/rewind/rewind_component.gd" id="5_8ydov"]
+[ext_resource type="PackedScene" uid="uid://djleegmfj2esn" path="res://src/weapons/hook.tscn" id="5_hrerp"]
+[ext_resource type="PackedScene" uid="uid://c85edkc7jav7y" path="res://src/weapons/chair.tscn" id="6_oyld2"]
+[ext_resource type="PackedScene" uid="uid://cvj0x4yusugq8" path="res://src/weapons/fan.tscn" id="7_6bm8s"]
+[ext_resource type="PackedScene" uid="uid://bxnkldbsipyys" path="res://src/weapons/taser.tscn" id="8_hrerp"]
+[ext_resource type="PackedScene" uid="uid://ducedf5gg4f03" path="res://src/weapons/minigun.tscn" id="9_oyld2"]
+[ext_resource type="PackedScene" uid="uid://bwklpwfryeo1k" path="res://src/weapons/orbital_laser.tscn" id="10_k60ra"]
+[ext_resource type="Texture2D" uid="uid://d35vwk0wbmn6o" path="res://assets/sprites/player/Stunned.png" id="15_vwi60"]
+[ext_resource type="Texture2D" uid="uid://cjg3241bctv2u" path="res://assets/sprites/player/Smashed.png" id="16_o04tx"]
+[ext_resource type="Script" uid="uid://cq4kmt4tq8xga" path="res://src/player/sounds.gd" id="19_5efpn"]
+[ext_resource type="AudioStream" uid="uid://cn7xldrj8j2qs" path="res://assets/sound/jump.wav" id="20_4uy46"]
+[ext_resource type="AudioStream" uid="uid://crtbpckvmjreb" path="res://assets/sound/land.wav" id="21_k60ra"]
+[ext_resource type="AudioStream" uid="uid://cwck0n1t4we8g" path="res://assets/sound/skid2.wav" id="22_5efpn"]
+[ext_resource type="AudioStream" uid="uid://c83r5b4b73a0o" path="res://assets/sound/run.wav" id="23_vwi60"]
+[ext_resource type="AudioStream" uid="uid://d20pevrvaykrp" path="res://assets/sound/whomp.wav" id="24_4uy46"]
 
 [sub_resource type="Animation" id="Animation_6bm8s"]
 length = 0.001
@@ -36,6 +53,18 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [1.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sounds:run_volume")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
 }
 
 [sub_resource type="Animation" id="Animation_8ydov"]
@@ -124,6 +153,7 @@ tracks/0/keys = {
 resource_name = "run"
 length = 0.4
 loop_mode = 1
+step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -131,10 +161,22 @@ tracks/0/path = NodePath("SpriteScale/Sprite:frame_coords")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [Vector2i(1, 0), Vector2i(2, 0), Vector2i(3, 0), Vector2i(4, 0)]
+"values": [Vector2i(1, 0), Vector2i(2, 0), Vector2i(3, 0), Vector2i(4, 0), Vector2i(1, 0), Vector2i(2, 0), Vector2i(3, 0), Vector2i(4, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sounds:run_volume")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
 }
 
 [sub_resource type="Animation" id="Animation_l271a"]
@@ -235,9 +277,54 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_244u8"]
 size = Vector2(52, 50)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5efpn"]
+size = Vector2(20, 42)
+
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
 script = ExtResource("1_mf2ua")
+
+[node name="Weapons" type="Node2D" parent="."]
+script = ExtResource("2_wlj80")
+
+[node name="Pivot" type="Node2D" parent="Weapons"]
+position = Vector2(0, 22)
+scale = Vector2(-1, 1)
+
+[node name="Arm" type="Sprite2D" parent="Weapons/Pivot"]
+position = Vector2(11, -2)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_ylhto")
+
+[node name="Flamethrower" parent="Weapons/Pivot" instance=ExtResource("4_6bm8s")]
+visible = false
+position = Vector2(-37, -12)
+
+[node name="Hook" parent="Weapons/Pivot" instance=ExtResource("5_hrerp")]
+visible = false
+position = Vector2(27, -8)
+
+[node name="Chair" parent="Weapons/Pivot" instance=ExtResource("6_oyld2")]
+visible = false
+position = Vector2(42, -11)
+rotation = -4.13734
+
+[node name="Fan" parent="Weapons/Pivot" instance=ExtResource("7_6bm8s")]
+visible = false
+position = Vector2(17, -33)
+
+[node name="Taser" parent="Weapons/Pivot" instance=ExtResource("8_hrerp")]
+visible = false
+position = Vector2(23, -6)
+
+[node name="Minigun" parent="Weapons/Pivot" instance=ExtResource("9_oyld2")]
+visible = false
+position = Vector2(14, -4)
+
+[node name="OrbitalLaser" parent="Weapons/Pivot" instance=ExtResource("10_k60ra")]
+visible = false
+
+[node name="OfficeSupplies" type="Node2D" parent="Weapons/Pivot"]
 
 [node name="Animation" type="Node" parent="."]
 script = ExtResource("2_x42xx")
@@ -263,6 +350,22 @@ flip_h = true
 hframes = 9
 
 [node name="RewindComponent" type="Node" parent="SpriteScale/Sprite"]
+script = ExtResource("5_8ydov")
+
+[node name="Sprite2D" type="Sprite2D" parent="SpriteScale"]
+visible = false
+position = Vector2(30, -470)
+texture = ExtResource("15_vwi60")
+
+[node name="RewindComponent2" type="Node" parent="SpriteScale/Sprite2D"]
+script = ExtResource("5_8ydov")
+
+[node name="Sprite2D2" type="Sprite2D" parent="SpriteScale"]
+visible = false
+position = Vector2(30, -470)
+texture = ExtResource("16_o04tx")
+
+[node name="RewindComponent2" type="Node" parent="SpriteScale/Sprite2D2"]
 script = ExtResource("5_8ydov")
 
 [node name="Player" type="AnimatedSprite2D" parent="."]
@@ -328,5 +431,40 @@ script = ExtResource("5_5f2sf")
 position = Vector2(0, -2)
 shape = SubResource("RectangleShape2D_244u8")
 
+[node name="Sounds" type="Node" parent="."]
+script = ExtResource("19_5efpn")
+run_volume = 0.0
+
+[node name="Jump" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("20_4uy46")
+volume_db = -14.791
+bus = &"Sound"
+
+[node name="Land" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("21_k60ra")
+bus = &"Sound"
+
+[node name="Skid" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("22_5efpn")
+volume_db = -11.093
+bus = &"Sound"
+
+[node name="Run" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("23_vwi60")
+autoplay = true
+bus = &"Sound"
+
+[node name="Whomp" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("24_4uy46")
+
+[node name="StatueHitter" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StatueHitter"]
+position = Vector2(3, 19)
+shape = SubResource("RectangleShape2D_5efpn")
+
 [connection signal="attack_ended" from="Melee" to="." method="_on_melee_attack_ended"]
 [connection signal="animation_finished" from="Melee/MeleeAnims" to="Melee" method="_on_melee_anims_animation_finished"]
+[connection signal="area_entered" from="StatueHitter" to="." method="_on_statue_hitter_area_entered"]

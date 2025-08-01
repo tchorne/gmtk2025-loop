@@ -1,7 +1,5 @@
 extends Area2D
 
-const Statue = preload("res://src/boss/statue.gd")
-
 func trigger_hit():
 	for area in get_overlapping_areas():
 		if area.has_method("get_statue"):

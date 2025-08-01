@@ -2,28 +2,39 @@ extends Node
 class_name Rewind
 
 signal time_updated(time: float)
+signal rewind_finished()
+
+const REWIND_DURATION = 3.0
 
 var ghosts: Array[Ghost]
 
 @onready var game_state = GameState.get_state(self)
 
-var rewind_time := 0.0
+var rewind_time := 0.0 
+var rewind_t := 0.0 ## goes from 0 to REWIND_DURATION
 var rewinding := false
+var start_rewind_time := 0.0
+
+
 
 
 func _process(delta: float) -> void:
 	if not rewinding:
 		if Input.is_action_just_pressed("DEBUG_rewind"):
-			rewinding = true
-			rewind_time = game_state.time
+			begin_rewind()
 	
 	if rewinding:
-		rewind_time -= delta * Hitstun.deltamod() / 20.0
+		rewind_t += delta * Hitstun.deltamod()
+		rewind_time = lerp(start_rewind_time, 0.0, ease(rewind_t / REWIND_DURATION, Tween.EASE_IN_OUT))
 		time_updated.emit(rewind_time)
-		if rewind_time < 0:
+		if rewind_t >= REWIND_DURATION:
 			rewind_time = 0.0
 			rewinding = false
-			
+			rewind_finished.emit()
+
+func begin_rewind():
+	rewinding = true
+	start_rewind_time = game_state.time
 	
 func add_ghost(base: Sprite2D) -> Ghost:
 	var ghost = Ghost.new()
