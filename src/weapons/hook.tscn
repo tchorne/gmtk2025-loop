@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://djleegmfj2esn"]
+
+[ext_resource type="Texture2D" uid="uid://c5exotpanms8q" path="res://assets/sprites/weapons/Hook_2.png" id="1_w6jym"]
+[ext_resource type="Texture2D" uid="uid://dgly3edm60vcp" path="res://assets/sprites/weapons/Hook_1.png" id="2_4rqqk"]
+[ext_resource type="Script" uid="uid://chnvhcl0ubj41" path="res://src/weapons/hook_line.gd" id="3_4rqqk"]
+
+[node name="Hook" type="Node2D"]
+
+[node name="Hook2" type="Sprite2D" parent="."]
+position = Vector2(149, 46)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("1_w6jym")
+
+[node name="Marker2D" type="Marker2D" parent="Hook2"]
+position = Vector2(-230, 40)
+
+[node name="Hook1" type="Sprite2D" parent="."]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_4rqqk")
+
+[node name="Marker2D" type="Marker2D" parent="Hook1"]
+position = Vector2(220, -70)
+
+[node name="Line2D" type="Line2D" parent="."]
+scale = Vector2(1, 1)
+points = PackedVector2Array(0, 0, 14.9, 4.6, 29.8, 9.2, 44.7, 13.8, 59.6, 18.4, 74.5, 23, 89.4, 27.6, 104.3, 32.2, 119.2, 36.8, 134.1, 41.4, 149, 46)
+script = ExtResource("3_4rqqk")

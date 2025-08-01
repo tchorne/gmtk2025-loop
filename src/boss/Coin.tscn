@@ -1,8 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://ds2lj0bn2ucma"]
+[gd_scene load_steps=12 format=3 uid="uid://ds2lj0bn2ucma"]
 
 [ext_resource type="Texture2D" uid="uid://p234drbehle4" path="res://assets/misc/spark.png" id="1_0gyw1"]
 [ext_resource type="Script" uid="uid://bdslrm7pjsqcc" path="res://src/boss/coin.gd" id="1_f5os5"]
+[ext_resource type="Texture2D" uid="uid://bhmiku1dd7ydd" path="res://assets/sprites/statue/Coin.png" id="2_sak8e"]
 [ext_resource type="AudioStream" uid="uid://dy2oeg85io7cd" path="res://assets/sound/coin.wav" id="3_ghgbo"]
+[ext_resource type="Texture2D" uid="uid://b1r7m2les140p" path="res://assets/sprites/statue/Bill.png" id="3_v4ki3"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_f5os5"]
 bounce = 0.62
@@ -37,8 +39,21 @@ physics_material_override = SubResource("PhysicsMaterial_f5os5")
 lock_rotation = true
 script = ExtResource("1_f5os5")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_0gyw1")
+[node name="Coin" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_sak8e")
+hframes = 3
+
+[node name="Timer" type="Timer" parent="Coin"]
+wait_time = 0.1
+autostart = true
+
+[node name="Bill" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("3_v4ki3")
+hframes = 2
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 emitting = false
@@ -62,4 +77,5 @@ stream = ExtResource("3_ghgbo")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_f5os5")
 
+[connection signal="timeout" from="Coin/Timer" to="." method="_on_timer_timeout"]
 [connection signal="body_entered" from="Collect" to="." method="_on_collect_body_entered"]

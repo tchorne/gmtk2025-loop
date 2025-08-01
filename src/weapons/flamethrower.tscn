@@ -1,8 +1,66 @@
-[gd_scene load_steps=2 format=3 uid="uid://ium7m6skjmg8"]
+[gd_scene load_steps=9 format=3 uid="uid://ium7m6skjmg8"]
 
+[ext_resource type="Texture2D" uid="uid://b1ug1rrhkbkyv" path="res://assets/effects/Fire.png" id="1_25v1l"]
 [ext_resource type="Texture2D" uid="uid://ckom8n1vt2lmj" path="res://assets/sprites/weapons/Flamethrower.png" id="1_p2bmm"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_25v1l"]
+particles_animation = true
+particles_anim_h_frames = 5
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_25v1l"]
+_limits = [0.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0.0383562, 0), 0.0, 0.0, 0, 0, Vector2(0.389041, 1), 0.0, 0.0, 0, 0, Vector2(0.60274, 2), 0.0, 0.0, 0, 0, Vector2(0.99999, 2), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_hoap4"]
+curve = SubResource("Curve_25v1l")
+
+[sub_resource type="Curve" id="Curve_p2bmm"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.241096, 1), 0.0, 0.0, 0, 0, Vector2(0.873973, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_25v1l"]
+curve = SubResource("Curve_p2bmm")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_p2bmm"]
+particle_flag_disable_z = true
+angle_min = 264.5
+angle_max = 264.5
+spread = 13.02
+initial_velocity_min = 454.1
+initial_velocity_max = 560.8
+gravity = Vector3(0, -15, 0)
+scale_min = 0.2
+scale_max = 0.2
+scale_curve = SubResource("CurveTexture_25v1l")
+color = Color(0.647487, 0.183513, 0.0832513, 0.541176)
+emission_curve = SubResource("CurveTexture_hoap4")
+hue_variation_min = -2.23517e-08
+hue_variation_max = 0.03
+anim_speed_min = 0.9
+anim_speed_max = 1.2
 
 [node name="Flamethrower" type="Node2D"]
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Pivot" type="Node2D" parent="."]
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="Pivot"]
+material = SubResource("CanvasItemMaterial_25v1l")
+position = Vector2(85, -5)
+amount = 20
+texture = ExtResource("1_25v1l")
+process_material = SubResource("ParticleProcessMaterial_p2bmm")
+
+[node name="Sprite2D" type="Sprite2D" parent="Pivot"]
+position = Vector2(36, 17)
+scale = Vector2(0.1, 0.1)
 texture = ExtResource("1_p2bmm")
+
+[node name="Area2D" type="Area2D" parent="Pivot"]
+visible = false
+position = Vector2(88, -31)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Pivot/Area2D"]
+polygon = PackedVector2Array(2, -1, 502, -118, 493, 169, 12, 73)

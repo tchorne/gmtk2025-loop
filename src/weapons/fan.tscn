@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://cvj0x4yusugq8"]
+
+[ext_resource type="Texture2D" uid="uid://dd5xug3v02g7h" path="res://assets/sprites/weapons/Future_Fan.png" id="1_enbg6"]
+
+[node name="Fan" type="Node2D"]
+
+[node name="FutureFan" type="Sprite2D" parent="."]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("1_enbg6")
