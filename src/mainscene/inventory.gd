@@ -91,6 +91,7 @@ static func get_inventory(node: Node) -> Inventory:
 	return node.get_tree().get_first_node_in_group("Inventory") as Inventory
 
 class Rental:
+	signal deleted
 	var start_time: float
 	var end_time: float
 	var weapon: String

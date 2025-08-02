@@ -19,8 +19,8 @@ func _ready():
 	#begin_game()
 	
 	get_tree().process_frame.connect(func():
-		money = 25
-		#money = 10000
+		#money = 25
+		money = 10000
 		end_game()
 	, CONNECT_ONE_SHOT
 	)
@@ -53,7 +53,7 @@ func begin_game():
 	%Money/Backdrop/quota.text = "$" + str(int(quota))
 	%Player.process_mode = Node.PROCESS_MODE_INHERIT
 	add_money(0)
-	
+	%InventoryDisplay.visible = true
 	
 func end_game():
 	if not firsttime:
@@ -74,18 +74,24 @@ func end_game():
 	$"../CanvasLayer/Menus/EndOfDay".visible = true
 	$"../CanvasLayer/Menus/EndOfDay/Shop".setup()
 	%Money.visible = false
-	firsttime = false
+	%InventoryDisplay.visible = false
 	
 func reset_game():
 	
 	for statue in get_tree().get_nodes_in_group("Statue"):
 		statue.queue_free()
-	var rewind := Rewind.get_rewind(self)
-	rewind.begin_rewind()
-	rewind.rewind_finished.connect(begin_game, CONNECT_ONE_SHOT)
-	%Player.visible = false
 	$"../World".process_mode = Node.PROCESS_MODE_INHERIT
 	$"../CanvasLayer/Menus/EndOfDay".visible = false
+	if not firsttime:
+		var rewind := Rewind.get_rewind(self)
+		rewind.begin_rewind()
+		rewind.rewind_finished.connect(begin_game, CONNECT_ONE_SHOT)
+		%Player.visible = false
+	else:
+		firsttime = false
+		begin_game()
+	
+	
 
 func add_money(new):
 	money += new

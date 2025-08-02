@@ -25,10 +25,15 @@ Perks="*res://src/perks/perks.gd"
 Hitstun="*res://src/mainscene/Hitstun.gd"
 Element="*res://src/boss/element.gd"
 Cursor="*res://src/mainscene/Cursor.tscn"
+GGS="*res://addons/ggs/plugin/singleton/ggs.tscn"
 
 [display]
 
 window/stretch/mode="canvas_items"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/ggs/plugin.cfg")
 
 [global_group]
 
@@ -38,6 +43,7 @@ GameState=""
 Rewind=""
 Projectile=""
 Money=""
+Hook=""
 
 [input]
 

@@ -105,6 +105,10 @@ func split():
 	other.recombine_timer.start(SPLIT_TIME)
 
 func recombine_with(other: Statue):
+	if get_tree().get_first_node_in_group("Hook").latched == other:
+		get_tree().get_first_node_in_group("Hook").latched = null
+		get_tree().get_first_node_in_group("Hook").taser.extended = false
+		
 	other.queue_free()
 	other.recombine = false
 	set_size(size+1)

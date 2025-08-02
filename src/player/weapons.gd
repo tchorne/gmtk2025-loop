@@ -5,7 +5,6 @@ extends Node2D
 @onready var inventory := Inventory.get_inventory(self)
 
 @onready var flamethrower: Node2D = $Pivot/Flamethrower
-@onready var hook: Node2D = $Pivot/Hook
 @onready var chair: Node2D = $Pivot/Chair
 @onready var fan: Node2D = $Pivot/Fan
 @onready var taser: Node2D = $Pivot/Taser
@@ -95,6 +94,7 @@ func is_length_greater(a, b):
 	return a.length() > b.length()
 
 func handle_debug_equips():
+	return
 	if Input.is_key_label_pressed(KEY_1):
 		slot_1 = -1
 	if Input.is_key_label_pressed(KEY_2):

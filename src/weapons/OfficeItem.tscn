@@ -41,7 +41,6 @@ damage = 10.0
 structure_damage = 10.0
 element = 5
 element_amount = 0.5
-knockback_away_from_player = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_j3c6t")

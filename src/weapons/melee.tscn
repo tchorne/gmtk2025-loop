@@ -1,34 +1,85 @@
-[gd_scene load_steps=4 format=3 uid="uid://bj5iaetnqpf7h"]
+[gd_scene load_steps=11 format=3 uid="uid://bj5iaetnqpf7h"]
 
 [ext_resource type="PackedScene" uid="uid://c85edkc7jav7y" path="res://src/weapons/chair.tscn" id="1_qucns"]
 [ext_resource type="Texture2D" uid="uid://ceu2mijiblwj3" path="res://assets/ui/Square_Short.png" id="2_6nl3n"]
 [ext_resource type="AudioStream" uid="uid://bm8qgn1g0ef6j" path="res://assets/sound/hit1.wav" id="2_rv764"]
+[ext_resource type="Texture2D" uid="uid://ct45aaea0tdhg" path="res://assets/sprites/weapons/swingsheet.png" id="4_6nl3n"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ju6g8"]
+atlas = ExtResource("4_6nl3n")
+region = Rect2(0, 0, 635, 360)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cnm00"]
+atlas = ExtResource("4_6nl3n")
+region = Rect2(635, 0, 635, 360)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ti53w"]
+atlas = ExtResource("4_6nl3n")
+region = Rect2(1270, 0, 635, 360)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ci5kr"]
+atlas = ExtResource("4_6nl3n")
+region = Rect2(1905, 0, 635, 360)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_q0qg6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ju6g8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cnm00")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ti53w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ci5kr")
+}],
+"loop": false,
+"name": &"swing",
+"speed": 15.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6nl3n"]
+size = Vector2(64, 33)
 
 [node name="Melee" instance=ExtResource("1_qucns")]
 cooldown = 0.4
 
-[node name="Sprite2D" parent="." index="0"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="0"]
+position = Vector2(39, -2)
+scale = Vector2(0.0861111, 0.0861111)
+sprite_frames = SubResource("SpriteFrames_q0qg6")
+animation = &"swing"
+frame = 3
+frame_progress = 1.0
+
+[node name="Sprite2D" parent="." index="1"]
+visible = false
 position = Vector2(60, 1)
 scale = Vector2(0.0351563, 0.0986322)
 texture = ExtResource("2_6nl3n")
 
-[node name="Area2D" parent="." index="1"]
-position = Vector2(57, 3)
+[node name="Area2D" parent="." index="2"]
+position = Vector2(57, 0)
 
 [node name="CollisionShape2D" parent="Area2D" index="0"]
+position = Vector2(-21, -0.5)
+shape = SubResource("RectangleShape2D_6nl3n")
 metadata/_edit_lock_ = true
 
-[node name="Timer" parent="." index="2"]
+[node name="Timer" parent="." index="3"]
 wait_time = 0.2
 
-[node name="Timer2" parent="." index="3"]
+[node name="Timer2" parent="." index="4"]
 wait_time = 0.4
 
-[node name="Inflicter" parent="." index="5"]
+[node name="Inflicter" parent="." index="6"]
 damage = 4.0
 structure_damage = 5.0
 element_amount = 0.0
 knockback_strength = 75.0
 
-[node name="Chair" parent="." index="6"]
+[node name="Chair" parent="." index="7"]
 stream = ExtResource("2_rv764")

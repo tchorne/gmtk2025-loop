@@ -24,3 +24,20 @@ func set_weapon(weapon: WeaponData):
 		name_label.text = weapon.get_display_name()
 		slot_1.visible = true
 		slot_2.visible = true
+
+
+func _on_texture_button_pressed() -> void:
+	print("AAAA")
+	var b = data.equipped_slot_1
+	if b:
+		data.equipped_slot_1 = false
+		data.equipped_slot_2 = true
+	else:
+		data.equipped_slot_1 = true
+		data.equipped_slot_2 = false
+		
+	slot_1.set_pressed_no_signal(data.equipped_slot_1)
+	slot_1.get_node("TextureRect").visible = data.equipped_slot_1
+	slot_2.set_pressed_no_signal(data.equipped_slot_2)
+	slot_2.get_node("TextureRect").visible = data.equipped_slot_2
+	

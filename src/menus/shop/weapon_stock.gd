@@ -9,12 +9,14 @@ signal rental_hovered(rental: Inventory.Rental)
 const RENTAL_BLOCK = preload("res://src/menus/shop/rental_block.tscn")
 const TIME_CHUNKS = 50
 
-@onready var color_rect: ColorRect = $ColorRect
+@onready var color_rect: TextureRect = $ColorRect
 @onready var line_2d: Line2D = $ColorRect/Line2D
 @onready var texture_rect: TextureRect = $Control/TextureRect
 
 @export var price_gradient : Gradient
 
+static var num := 0
+var mynum = 0
 var previous_hover := -1
 var volatility := 1
 
@@ -27,6 +29,10 @@ func load_weapon(data: WeaponData):
 	visible = data.unlocked
 
 func _ready():
+	num += 1
+	mynum = num
+	$Control/TextureRect2.flip_h = num%2 == 0
+	$ColorRect/ColorRect.flip_h = num%2 == 0
 	generate_history()
 
 func generate_history():
@@ -97,7 +103,7 @@ func _on_color_rect_mouse_exited() -> void:
 	Cursor.clickable_unhovered()
 
 func add_rental(r: Inventory.Rental):
-	var rect: ColorRect = RENTAL_BLOCK.instantiate()
+	var rect: TextureRect = RENTAL_BLOCK.instantiate()
 	$ColorRect.add_child(rect)
 	$ColorRect.move_child(rect, 0)
 	
@@ -107,6 +113,7 @@ func add_rental(r: Inventory.Rental):
 	var rect_size = Vector2(line_pos_2 - line_pos_1, color_rect.get_global_rect().size.y )
 	rect.position = Vector2(line_pos_1, 0)
 	rect.size = rect_size
+	rect.get_child(0).flip_h = mynum%2==0
 	
 	var block := RentalBlock.new()
 	block.display = rect
@@ -132,6 +139,6 @@ func handle_rental_block_input(event: InputEvent, block: RentalBlock):
 		sell_rental(block.rental)
 
 class RentalBlock:
-	var display: ColorRect
+	var display: TextureRect
 	var rental: Inventory.Rental
 	

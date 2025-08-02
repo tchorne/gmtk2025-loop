@@ -4,7 +4,7 @@ extends Node
 @export var structure_damage: float
 @export var element := Element.Element.NONE
 @export var element_amount := 1.0
-@export var knockback_away_from_player := true
+@export var knockback_towards_mouse := true
 @export var knockback_strength := 0.0
 @export var knockback := Vector2.ZERO
 @export var hitstun := 0.0
@@ -23,9 +23,9 @@ func _on_statue_hit(statue: Statue):
 	if hitstun > 0.0:
 		Hitstun.extend_hitstun(hitstun)
 		
-	if knockback_away_from_player and knockback_strength > 0.01:
-		var player : CharacterBody2D = get_tree().get_first_node_in_group("Player")
-		var vec = (statue.global_position - player.global_position).normalized()
+	if knockback_towards_mouse and knockback_strength > 0.01:
+		var mouse_pos := get_viewport().get_camera_2d().get_global_mouse_position()
+		var vec = -(statue.global_position - mouse_pos).normalized()
 		statue.add_knockback(vec*knockback_strength)
 	if knockback.length() > 0.01:
 		statue.add_knockback(knockback)

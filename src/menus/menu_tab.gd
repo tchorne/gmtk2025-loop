@@ -53,3 +53,9 @@ func hover():
 	tween.set_ease(Tween.EASE_OUT)
 	tween.set_trans(Tween.TRANS_QUAD)
 	tween.tween_property(control, "position:y", hover_height, 0.2)
+
+
+func _on_catalogue_gui_input(event: InputEvent) -> void:
+	pass
+	#if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.is_pressed():
+		#deselect()

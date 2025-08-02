@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://cdxs77k8sp6qo"]
 
-[ext_resource type="Texture2D" uid="uid://bq2lbmlybu2ae" path="res://assets/ui/Square_Noutline.png" id="1_hpo5a"]
+[ext_resource type="Texture2D" uid="uid://c255w0fi08dhy" path="res://assets/ui/buy.png" id="2_3ii8i"]
 [ext_resource type="Script" uid="uid://baijyxiyw7t2m" path="res://src/menus/description.gd" id="2_7ywdu"]
 [ext_resource type="Theme" uid="uid://b2ph8ikxoqmwf" path="res://src/default.theme" id="3_3ii8i"]
 [ext_resource type="Texture2D" uid="uid://jwcubcargkae" path="res://assets/ui/mouse_left.png" id="4_7ywdu"]
@@ -12,9 +12,22 @@ offset_top = 42.0
 offset_right = 768.0
 offset_bottom = 198.0
 mouse_filter = 2
-texture = ExtResource("1_hpo5a")
 expand_mode = 1
 script = ExtResource("2_7ywdu")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -1.0
+offset_right = -39.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_3ii8i")
+expand_mode = 1
 
 [node name="ItemName" type="Label" parent="."]
 layout_mode = 0
@@ -28,7 +41,6 @@ theme_override_font_sizes/font_size = 21
 text = "Item Name"
 
 [node name="BuyRental" type="Control" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -54,9 +66,9 @@ horizontal_alignment = 2
 
 [node name="Price" type="Label" parent="BuyRental"]
 layout_mode = 0
-offset_left = 217.0
+offset_left = 184.0
 offset_top = 48.0
-offset_right = 332.0
+offset_right = 299.0
 offset_bottom = 78.0
 theme = ExtResource("3_3ii8i")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -65,7 +77,6 @@ text = "$11037"
 horizontal_alignment = 2
 
 [node name="Buy" type="Control" parent="BuyRental"]
-visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -89,9 +100,9 @@ offset_right = 101.0
 offset_bottom = 129.0
 mouse_filter = 2
 texture = ExtResource("4_7ywdu")
+expand_mode = 1
 
 [node name="Sell" type="Control" parent="BuyRental"]
-visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -115,6 +126,7 @@ offset_right = 101.0
 offset_bottom = 129.0
 mouse_filter = 2
 texture = ExtResource("5_3ii8i")
+expand_mode = 1
 
 [node name="Catalogue" type="Control" parent="."]
 layout_mode = 1

@@ -21,7 +21,7 @@ func _physics_process(_delta: float) -> void:
 		global_position += stuck_offset.rotated(stuck_in_statue.sprite_2d.rotation)
 	else:
 		freeze = false
-	sprite_2d.global_rotation = linear_velocity.angle()
+	sprite_2d.global_rotation = linear_velocity.angle() - TAU/4
 		
 func on_hit(other: Statue):
 	if not is_instance_valid(stuck_in_statue):

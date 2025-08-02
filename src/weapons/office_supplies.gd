@@ -17,4 +17,3 @@ func _on_projectile_emitter_fired() -> void:
 
 func _process(_delta: float) -> void:
 	projectile_emitter.launch_velocity = Vector2.RIGHT.rotated(global_rotation) * launch_speed
-	

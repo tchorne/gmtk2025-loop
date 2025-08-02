@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://drfnne271u6gq"]
+[gd_scene load_steps=52 format=3 uid="uid://drfnne271u6gq"]
 
 [ext_resource type="Script" uid="uid://bia83w547m3pn" path="res://src/player/player.gd" id="1_mf2ua"]
 [ext_resource type="Texture2D" uid="uid://bw6xltcnqcctm" path="res://assets/misc/dropshadow.png" id="2_244u8"]
@@ -13,7 +13,6 @@
 [ext_resource type="SpriteFrames" uid="uid://c0fwi7aefxvgp" path="res://src/player/spriteframes.tres" id="4_l271a"]
 [ext_resource type="Script" uid="uid://mn78wiaw5mw" path="res://src/weapons/melee_hitbox.gd" id="5_5f2sf"]
 [ext_resource type="Script" uid="uid://dp8rcslrax18g" path="res://src/rewind/rewind_component.gd" id="5_8ydov"]
-[ext_resource type="PackedScene" uid="uid://djleegmfj2esn" path="res://src/weapons/hook.tscn" id="5_hrerp"]
 [ext_resource type="PackedScene" uid="uid://c85edkc7jav7y" path="res://src/weapons/chair.tscn" id="6_oyld2"]
 [ext_resource type="PackedScene" uid="uid://cvj0x4yusugq8" path="res://src/weapons/fan.tscn" id="7_6bm8s"]
 [ext_resource type="PackedScene" uid="uid://bxnkldbsipyys" path="res://src/weapons/taser.tscn" id="8_hrerp"]
@@ -107,7 +106,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [Vector2i(5, 0)]
+"values": [Vector2i(7, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_vwsmr"]
@@ -334,10 +333,6 @@ texture = ExtResource("2_ylhto")
 visible = false
 position = Vector2(-37, -12)
 
-[node name="Hook" parent="Weapons/Pivot" instance=ExtResource("5_hrerp")]
-visible = false
-position = Vector2(27, -8)
-
 [node name="Chair" parent="Weapons/Pivot" instance=ExtResource("6_oyld2")]
 visible = false
 position = Vector2(42, -11)
@@ -403,7 +398,8 @@ script = ExtResource("5_8ydov")
 position = Vector2(-160, -60)
 scale = Vector2(0.768066, 0.768066)
 sprite_frames = SubResource("SpriteFrames_e7e1q")
-frame_progress = 0.216342
+autoplay = "default"
+frame_progress = 0.688941
 
 [node name="Sprite2D2" type="Sprite2D" parent="SpriteScale"]
 visible = false
@@ -417,6 +413,7 @@ script = ExtResource("5_8ydov")
 position = Vector2(-230, -30)
 scale = Vector2(1.12622, 1.12622)
 sprite_frames = SubResource("SpriteFrames_e7e1q")
+autoplay = "default"
 frame_progress = 0.0780736
 
 [node name="Player" type="AnimatedSprite2D" parent="."]

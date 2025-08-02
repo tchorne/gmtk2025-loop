@@ -1,4 +1,76 @@
-[gd_scene format=3 uid="uid://0lbx84x84agf"]
+[gd_scene load_steps=11 format=3 uid="uid://0lbx84x84agf"]
+
+[ext_resource type="Script" uid="uid://bnmrkiq361put" path="res://src/weapons/shield.gd" id="1_iu664"]
+[ext_resource type="Script" uid="uid://8geh3td8elh3" path="res://src/weapons/continuous_damage.gd" id="2_el2yi"]
+[ext_resource type="Texture2D" uid="uid://d3t2lyn0e46n3" path="res://assets/effects/Triangle.png" id="3_0dg4f"]
+[ext_resource type="Texture2D" uid="uid://bwj6oa33wvvsb" path="res://assets/sprites/weapons/Plasma_Shield.png" id="4_v861p"]
+[ext_resource type="Script" uid="uid://c2kjkq5cafspq" path="res://src/weapons/shield_damage_inflictor.gd" id="5_v861p"]
+[ext_resource type="AudioStream" uid="uid://cpr722suyy4ji" path="res://assets/sound/shield.wav" id="6_ngbet"]
+
+[sub_resource type="Curve" id="Curve_ngbet"]
+_data = [Vector2(1e-05, 0), 0.0, 0.0, 0, 0, Vector2(0.225185, 1), 0.0, 0.0, 0, 0, Vector2(0.868148, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_ssu68"]
+curve = SubResource("Curve_ngbet")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ec47k"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 100.0
+angle_min = -720.0
+angle_max = 720.0
+angular_velocity_min = -276.69
+angular_velocity_max = 214.08
+orbit_velocity_min = -1.0
+orbit_velocity_max = 1.0
+radial_velocity_min = 2.80998
+radial_velocity_max = 2.80998
+gravity = Vector3(0, 0, 0)
+scale_min = 0.02
+scale_max = 0.08
+scale_curve = SubResource("CurveTexture_ssu68")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0dg4f"]
+radius = 85.0
 
 [node name="Shield" type="Node2D"]
-visible = false
+script = ExtResource("1_iu664")
+
+[node name="ContinuousDamage" type="Node" parent="." node_paths=PackedStringArray("area")]
+script = ExtResource("2_el2yi")
+tick_rate = 7.0
+area = NodePath("../Area2D")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+position = Vector2(0, -17)
+amount = 64
+texture = ExtResource("3_0dg4f")
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_ec47k")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(26, -2)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("4_v861p")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_0dg4f")
+
+[node name="DamageInflictor" type="Node" parent="."]
+script = ExtResource("5_v861p")
+damage = 5.0
+structure_damage = 5.0
+knockback_strength = 40.0
+
+[node name="Shield" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_ngbet")
+volume_db = -7.663
+autoplay = true
+bus = &"Sound"
+
+[connection signal="hit_statue" from="ContinuousDamage" to="DamageInflictor" method="_on_statue_hit"]

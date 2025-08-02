@@ -14,12 +14,15 @@ func _ready():
 		cpu_particles_2d = get_node("Area2D/CPUParticles2D")
 
 func set_active(a: bool):
-	if a:
+	if a and not active:
 		if cpu_particles_2d: cpu_particles_2d.emitting = true
 		active = true
 		get_parent().get_parent().cooldown = cooldown
 		timer.start(0.1)
 		go_away.start(cooldown)
+		if has_node("AnimatedSprite2D"):
+			$AnimatedSprite2D.visible = true
+			$AnimatedSprite2D.play("swing")
 	
 	if active:
 		visible = true

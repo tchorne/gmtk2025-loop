@@ -3,8 +3,11 @@ extends Node
 enum Element {
 	NONE,
 	FIRE,
-	ORBITAL_FIRE,
-	ELECTRIC,
-	MOVING,
+	ELETRIC,
+	BROKEN,
 	HEAVY,
+	WIND,
+	ANTIGRAV,
+	HOOKED,
+	LOADED
 }

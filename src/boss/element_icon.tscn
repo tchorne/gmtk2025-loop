@@ -1,4 +1,13 @@
-[gd_scene format=3 uid="uid://d2nfg26x0i6qf"]
+[gd_scene load_steps=2 format=3 uid="uid://d2nfg26x0i6qf"]
+
+[ext_resource type="Texture2D" uid="uid://dsbauqmfgpqb3" path="res://assets/effects/statussheet.png" id="1_v7l2o"]
 
 [node name="ColorRect" type="ColorRect"]
 custom_minimum_size = Vector2(32, 32)
+color = Color(1, 1, 1, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(14, 14)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("1_v7l2o")
+hframes = 6

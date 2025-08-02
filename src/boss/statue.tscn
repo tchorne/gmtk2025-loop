@@ -29,6 +29,7 @@ script = ExtResource("1_d1pvw")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 unique_name_in_owner = true
+z_index = -1
 scale = Vector2(0.105, 0.105)
 texture = ExtResource("2_legdi")
 hframes = 6
@@ -82,7 +83,6 @@ unique_name_in_owner = true
 
 [node name="ElementController" type="Control" parent="NearUI/Node2D"]
 unique_name_in_owner = true
-visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_left = 20.0

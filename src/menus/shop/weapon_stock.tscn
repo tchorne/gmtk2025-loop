@@ -1,7 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://qyn6liw0mnc7"]
+[gd_scene load_steps=7 format=3 uid="uid://qyn6liw0mnc7"]
 
 [ext_resource type="Script" uid="uid://u2ef3wbucknr" path="res://src/menus/shop/weapon_stock.gd" id="1_8mnww"]
 [ext_resource type="Texture2D" uid="uid://dipdng1cgkbv7" path="res://assets/sprites/weapons/Minigun.png" id="1_xut4s"]
+[ext_resource type="Texture2D" uid="uid://d20uecugd115u" path="res://assets/ui/Circle.png" id="2_otfjf"]
+[ext_resource type="Texture2D" uid="uid://dhqgx56eai1jp" path="res://assets/ui/Outline.png" id="4_otfjf"]
 
 [sub_resource type="Gradient" id="Gradient_8mnww"]
 interpolation_color_space = 1
@@ -24,6 +26,17 @@ price_gradient = SubResource("Gradient_8mnww")
 [node name="Control" type="Control" parent="."]
 custom_minimum_size = Vector2(141.37, 40)
 layout_mode = 2
+
+[node name="TextureRect2" type="TextureRect" parent="Control"]
+layout_mode = 0
+offset_left = 13.0
+offset_top = -11.0
+offset_right = 53.0
+offset_bottom = 29.0
+scale = Vector2(2.88334, 2.88334)
+texture = ExtResource("2_otfjf")
+expand_mode = 1
+stretch_mode = 4
 
 [node name="TextureRect" type="TextureRect" parent="Control"]
 layout_mode = 1
@@ -51,10 +64,28 @@ grow_horizontal = 2
 grow_vertical = 0
 text = "BUY"
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="TextureRect" parent="."]
+show_behind_parent = true
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
+expand_mode = 1
+
+[node name="ColorRect" type="TextureRect" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -3.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1, 1.29)
+size_flags_horizontal = 3
+mouse_filter = 2
+mouse_default_cursor_shape = 2
+texture = ExtResource("4_otfjf")
+expand_mode = 1
 
 [node name="Line2D" type="Line2D" parent="ColorRect"]
 points = PackedVector2Array(0, 0, 0, 0, 48, 44, 127, 58, 180, 14, 309, 39, 387, 57, 495, 31, 529, 14, 619, 46, 697, 57, 737, 20, 775, 48, 816, 61, 851, 24, 883, 50)

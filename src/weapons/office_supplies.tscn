@@ -8,7 +8,7 @@
 
 [node name="OfficeSupplies" type="Node2D"]
 script = ExtResource("1_mcvu7")
-launch_speed = 400.0
+launch_speed = 750.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(29, -1)

@@ -51,18 +51,22 @@ func setup(): ## Called at the end of each day
 		child.load_weapon(inventory.all_weapons[j])
 	
 func on_weapon_equipped(item: Control, weapon: WeaponData, slot: int):
-	if slot == 1:
-		weapon.equipped_slot_1 = true
-		weapon.equipped_slot_2 = false
-		item.catalogue_text.slot_2.set_pressed_no_signal(false)
-	else:
-		weapon.equipped_slot_1 = false
-		weapon.equipped_slot_2 = true
-		item.catalogue_text.slot_1.set_pressed_no_signal(false)
+	pass
+	#if slot == 1:
+		#weapon.equipped_slot_1 = true
+		#weapon.equipped_slot_2 = false
+		#item.catalogue_text.slot_2.set_pressed_no_signal(false)
+	#else:
+		#weapon.equipped_slot_1 = false
+		#weapon.equipped_slot_2 = true
+		#item.catalogue_text.slot_1.set_pressed_no_signal(false)
 		
 		
-func on_stock_price_hovered(_time: float, stock_value: float, weapon: WeaponData, _stock: WeaponStock):
+func on_stock_price_hovered(_time: float, stock_value: float, weapon: WeaponData, stock: WeaponStock):
 	description.display_buy_menu(weapon, stock_value)
+	
+	var rect = stock.get_global_rect()
+	move_description(Vector2(rect.position.x + rect.size.x + 25, rect.position.y))
 	
 func on_stock_price_clicked(time: float, stock_value: float, weapon: WeaponData, stock: WeaponStock):
 	## Check you have enough money

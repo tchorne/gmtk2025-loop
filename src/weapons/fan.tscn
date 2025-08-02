@@ -1,12 +1,34 @@
-[gd_scene load_steps=6 format=3 uid="uid://cvj0x4yusugq8"]
+[gd_scene load_steps=10 format=3 uid="uid://cvj0x4yusugq8"]
 
 [ext_resource type="Texture2D" uid="uid://dd5xug3v02g7h" path="res://assets/sprites/weapons/Future_Fan.png" id="1_enbg6"]
 [ext_resource type="Script" uid="uid://dcon85pogmwux" path="res://src/weapons/fan.gd" id="1_x85c7"]
 [ext_resource type="Script" uid="uid://8geh3td8elh3" path="res://src/weapons/continuous_damage.gd" id="3_4l6yo"]
 [ext_resource type="Script" uid="uid://4en1o7xygofw" path="res://src/weapons/damage_inflictor.gd" id="4_v6w8r"]
+[ext_resource type="Texture2D" uid="uid://ct324c222dgv1" path="res://assets/effects/Spiral.png" id="5_r8afc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4l6yo"]
 size = Vector2(10000, 10000)
+
+[sub_resource type="Curve" id="Curve_r8afc"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.244444, 1), 0.0, 0.0, 0, 0, Vector2(0.758519, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_qe682"]
+curve = SubResource("Curve_r8afc")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qe682"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(1100, 800, 1)
+spread = 10.739
+initial_velocity_min = 460.03
+initial_velocity_max = 460.03
+angular_velocity_min = 367.57
+angular_velocity_max = 634.16
+gravity = Vector3(0, 0, 0)
+scale_min = 0.1
+scale_max = 0.1
+scale_curve = SubResource("CurveTexture_qe682")
 
 [node name="Fan" type="Node2D"]
 script = ExtResource("1_x85c7")
@@ -25,11 +47,21 @@ shape = SubResource("RectangleShape2D_4l6yo")
 
 [node name="ContinuousDamage" type="Node" parent="." node_paths=PackedStringArray("area")]
 script = ExtResource("3_4l6yo")
-tick_rate = 0.1
+tick_rate = 5.0
 area = NodePath("../Area2D")
 
 [node name="Inflictor" type="Node" parent="."]
 script = ExtResource("4_v6w8r")
+damage = 5.0
 element = 4
+knockback_towards_mouse = false
+
+[node name="Node" type="Node" parent="."]
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="Node"]
+emitting = false
+amount = 64
+texture = ExtResource("5_r8afc")
+process_material = SubResource("ParticleProcessMaterial_qe682")
 
 [connection signal="hit_statue" from="ContinuousDamage" to="Inflictor" method="_on_statue_hit"]
