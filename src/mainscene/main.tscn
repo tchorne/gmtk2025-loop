@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://bnxutd7t1861v"]
+[gd_scene load_steps=35 format=3 uid="uid://bnxutd7t1861v"]
 
 [ext_resource type="Script" uid="uid://diqe728hxkc61" path="res://src/mainscene/camera.gd" id="1_4lhpg"]
 [ext_resource type="Texture2D" uid="uid://dymnc6d5uy2jb" path="res://assets/environment/background.png" id="1_vldkb"]
@@ -7,16 +7,16 @@
 [ext_resource type="PackedScene" uid="uid://qomk8njlcovq" path="res://src/schedule/schedule_display.tscn" id="5_kd5mi"]
 [ext_resource type="Script" uid="uid://deu36qki4xlep" path="res://src/mainscene/game_state.gd" id="6_4lhpg"]
 [ext_resource type="Script" uid="uid://c6nau26x8ybr3" path="res://src/mainscene/inventory.gd" id="6_6ggxn"]
-[ext_resource type="Shader" uid="uid://c0xem7y1vbc2u" path="res://src/effects/blur.gdshader" id="7_6ggxn"]
 [ext_resource type="AudioStream" uid="uid://qnx4f13qskhf" path="res://assets/sound/dayend.wav" id="7_fgsqm"]
 [ext_resource type="Script" uid="uid://b0lks86rilvxr" path="res://src/rewind/rewind.gd" id="7_iylxf"]
 [ext_resource type="Resource" uid="uid://dpepoassqu4om" path="res://src/weapons/data/chair.tres" id="9_uw6ew"]
 [ext_resource type="Resource" uid="uid://c7kh6jh6knpmp" path="res://src/weapons/data/supplies.tres" id="10_3kkuh"]
 [ext_resource type="Resource" uid="uid://btu3qecb8rmnt" path="res://src/weapons/data/futurefan.tres" id="11_rmkw1"]
-[ext_resource type="AudioStream" uid="uid://coeyiv3fowd8p" path="res://assets/music/idk its silly v3.wav" id="12_3kkuh"]
 [ext_resource type="Resource" uid="uid://pm8xrmvjwbcx" path="res://src/weapons/data/taser.tres" id="12_bq3sp"]
+[ext_resource type="AudioStream" uid="uid://wajlq0mh35pq" path="res://assets/music/cutie patoodie.wav" id="12_evxik"]
 [ext_resource type="Resource" uid="uid://cljar75wxmsyx" path="res://src/weapons/data/minigun.tres" id="13_4emin"]
 [ext_resource type="AudioStream" uid="uid://jcfqhlr4g31r" path="res://assets/sound/coin2.wav" id="13_efide"]
+[ext_resource type="AudioStream" uid="uid://dtg38hpo7dvxo" path="res://assets/music/menutheme.wav" id="13_rc02r"]
 [ext_resource type="Resource" uid="uid://b2qrc1vdpa06v" path="res://src/weapons/data/flamethrower.tres" id="14_efide"]
 [ext_resource type="AudioStream" uid="uid://dgtg58vm1wufk" path="res://assets/sound/coin3.wav" id="14_kkl8f"]
 [ext_resource type="Resource" uid="uid://c6rv6kxt4ap63" path="res://src/weapons/data/shield.tres" id="15_kkl8f"]
@@ -27,6 +27,8 @@
 [ext_resource type="Script" uid="uid://bofieksebn0jm" path="res://src/mainscene/inventory_display.gd" id="24_r1e3j"]
 [ext_resource type="Texture2D" uid="uid://jwcubcargkae" path="res://assets/ui/mouse_left.png" id="25_evxik"]
 [ext_resource type="Texture2D" uid="uid://cw5u37ye6gmfs" path="res://assets/ui/mouse_right.png" id="26_rc02r"]
+[ext_resource type="Material" uid="uid://cbcg6npabqexc" path="res://src/mainscene/shader.tres" id="28_5reba"]
+[ext_resource type="Script" uid="uid://j1qkkpofmest" path="res://src/mainscene/blur.gd" id="29_5reba"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_vldkb"]
 normal = Vector2(0.000438182, -1)
@@ -39,17 +41,6 @@ normal = Vector2(0, 1)
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_vlq03"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_6ynox"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_iylxf"]
-shader = ExtResource("7_6ggxn")
-shader_parameter/radius = 1.0
-shader_parameter/grain_amount = 0.05
-shader_parameter/grain_size = 1.0
-shader_parameter/animate = true
-shader_parameter/abberation = 0.003
-shader_parameter/blur = true
-shader_parameter/grain = false
-shader_parameter/chromatic_abberation = true
 
 [node name="Main" type="Node"]
 
@@ -65,8 +56,12 @@ script = ExtResource("6_4lhpg")
 stream = ExtResource("7_fgsqm")
 bus = &"Sound"
 
-[node name="IdkItsSillyV3" type="AudioStreamPlayer" parent="GameState"]
-stream = ExtResource("12_3kkuh")
+[node name="GameMusic" type="AudioStreamPlayer" parent="GameState"]
+stream = ExtResource("12_evxik")
+bus = &"Music"
+
+[node name="MenuMusic" type="AudioStreamPlayer" parent="GameState"]
+stream = ExtResource("13_rc02r")
 bus = &"Music"
 
 [node name="MoneySounds" type="Node" parent="GameState"]
@@ -88,9 +83,6 @@ stream = ExtResource("15_r1e3j")
 volume_db = -10.631
 max_polyphony = 3
 bus = &"Sound"
-
-[node name="Rewind" type="Node" parent="." groups=["Rewind"]]
-script = ExtResource("7_iylxf")
 
 [node name="Background" type="TextureRect" parent="."]
 offset_left = -704.0
@@ -182,17 +174,8 @@ unique_name_in_owner = true
 position = Vector2(184, 84)
 scale = Vector2(1.6, 1.6)
 
-[node name="FullScreenShader" type="CanvasLayer" parent="."]
-
-[node name="Blur" type="ColorRect" parent="FullScreenShader"]
-material = SubResource("ShaderMaterial_iylxf")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-metadata/_edit_lock_ = true
+[node name="Rewind" type="Node" parent="." groups=["Rewind"]]
+script = ExtResource("7_iylxf")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -292,6 +275,19 @@ stretch_mode = 5
 
 [node name="EndOfDay" parent="CanvasLayer/Menus" instance=ExtResource("5_fgsqm")]
 visible = false
+
+[node name="FullScreenShader" type="CanvasLayer" parent="."]
+
+[node name="Blur" type="ColorRect" parent="FullScreenShader"]
+material = ExtResource("28_5reba")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("29_5reba")
+metadata/_edit_lock_ = true
 
 [connection signal="begin_rental" from="Inventory" to="CanvasLayer/InventoryDisplay" method="_on_inventory_begin_rental"]
 [connection signal="end_rental" from="Inventory" to="CanvasLayer/InventoryDisplay" method="_on_inventory_end_rental"]

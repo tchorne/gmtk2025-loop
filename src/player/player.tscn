@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://drfnne271u6gq"]
+[gd_scene load_steps=53 format=3 uid="uid://drfnne271u6gq"]
 
 [ext_resource type="Script" uid="uid://bia83w547m3pn" path="res://src/player/player.gd" id="1_mf2ua"]
 [ext_resource type="Texture2D" uid="uid://bw6xltcnqcctm" path="res://assets/misc/dropshadow.png" id="2_244u8"]
@@ -19,6 +19,9 @@
 [ext_resource type="PackedScene" uid="uid://bxnkldbsipyys" path="res://src/weapons/taser.tscn" id="8_hrerp"]
 [ext_resource type="PackedScene" uid="uid://ducedf5gg4f03" path="res://src/weapons/minigun.tscn" id="9_oyld2"]
 [ext_resource type="PackedScene" uid="uid://bwklpwfryeo1k" path="res://src/weapons/orbital_laser.tscn" id="10_k60ra"]
+[ext_resource type="PackedScene" uid="uid://bj5iaetnqpf7h" path="res://src/weapons/melee.tscn" id="11_dpt0q"]
+[ext_resource type="PackedScene" uid="uid://0lbx84x84agf" path="res://src/weapons/shield.tscn" id="11_p6grl"]
+[ext_resource type="PackedScene" uid="uid://x0j11vre468m" path="res://src/weapons/office_supplies.tscn" id="12_e7e1q"]
 [ext_resource type="Texture2D" uid="uid://d35vwk0wbmn6o" path="res://assets/sprites/player/Stunned.png" id="15_vwi60"]
 [ext_resource type="Texture2D" uid="uid://dm1ny8b57w6u" path="res://assets/sprites/player/starssheet.png" id="16_j2873"]
 [ext_resource type="Texture2D" uid="uid://cjg3241bctv2u" path="res://assets/sprites/player/Smashed.png" id="16_o04tx"]
@@ -355,9 +358,12 @@ position = Vector2(14, -4)
 [node name="OrbitalLaser" parent="Weapons/Pivot" instance=ExtResource("10_k60ra")]
 visible = false
 
-[node name="Shield" type="Node2D" parent="Weapons/Pivot"]
+[node name="Shield" parent="Weapons/Pivot" instance=ExtResource("11_p6grl")]
 
-[node name="OfficeSupplies" type="Node2D" parent="Weapons/Pivot"]
+[node name="OfficeSupplies" parent="Weapons/Pivot" instance=ExtResource("12_e7e1q")]
+
+[node name="Melee" parent="Weapons/Pivot" instance=ExtResource("11_dpt0q")]
+visible = false
 
 [node name="Animation" type="Node" parent="."]
 script = ExtResource("2_x42xx")
@@ -397,7 +403,7 @@ script = ExtResource("5_8ydov")
 position = Vector2(-160, -60)
 scale = Vector2(0.768066, 0.768066)
 sprite_frames = SubResource("SpriteFrames_e7e1q")
-frame_progress = 0.392336
+frame_progress = 0.216342
 
 [node name="Sprite2D2" type="Sprite2D" parent="SpriteScale"]
 visible = false
@@ -411,7 +417,7 @@ script = ExtResource("5_8ydov")
 position = Vector2(-230, -30)
 scale = Vector2(1.12622, 1.12622)
 sprite_frames = SubResource("SpriteFrames_e7e1q")
-frame_progress = 0.254062
+frame_progress = 0.0780736
 
 [node name="Player" type="AnimatedSprite2D" parent="."]
 visible = false

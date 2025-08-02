@@ -2,12 +2,13 @@ class_name GameState
 extends Node
 
 const STATUE = preload("res://src/boss/statue.tscn")
-const DAY_LENGTH = 29.78
+const DAY_LENGTH = 40.5
 
 var time := 0.0
 var money := 0.0
 var quota := 1000.0
 var playing := false
+var firsttime := true
 
 @onready var player_position: Vector2 = $"../World/Player".global_position
 @onready var statue_spawn: Marker2D = %StatueSpawn
@@ -15,9 +16,11 @@ var playing := false
 @onready var inventory := Inventory.get_inventory(self)
 
 func _ready():
-	begin_game()
+	#begin_game()
+	
 	get_tree().process_frame.connect(func():
-		inventory.total_money = 10000
+		money = 25
+		#money = 10000
 		end_game()
 	, CONNECT_ONE_SHOT
 	)
@@ -35,7 +38,8 @@ static func get_state(node: Node) -> GameState:
 	return node.get_tree().get_first_node_in_group("GameState") as GameState
 
 func begin_game():
-	$IdkItsSillyV3.play()
+	$MenuMusic.stop()
+	$GameMusic.play()
 	playing = true
 	$Dayend.play()
 	time = 0.0
@@ -47,20 +51,33 @@ func begin_game():
 	statue.set_transform_(statue_spawn.global_transform) 
 	%Money.visible = true
 	%Money/Backdrop/quota.text = "$" + str(int(quota))
+	%Player.process_mode = Node.PROCESS_MODE_INHERIT
 	add_money(0)
 	
 	
 func end_game():
+	if not firsttime:
+		$GameMusic.stop()
+		$Dayend.play()
+	$MenuMusic.play()
+	for projectile in get_tree().get_nodes_in_group("Projectile"):
+		projectile.queue_free()
+	for coin in get_tree().get_nodes_in_group("Money"):
+		coin.queue_free()
+		
 	playing = false
-	inventory.total_money = money
+	inventory.total_money = int(money)
+	inventory.rentals.clear()
 	inventory.unlock_weapons(money)
 	$"../World".process_mode = Node.PROCESS_MODE_DISABLED
+	%Player.process_mode = Node.PROCESS_MODE_DISABLED
 	$"../CanvasLayer/Menus/EndOfDay".visible = true
 	$"../CanvasLayer/Menus/EndOfDay/Shop".setup()
-	$Dayend.play()
 	%Money.visible = false
+	firsttime = false
 	
 func reset_game():
+	
 	for statue in get_tree().get_nodes_in_group("Statue"):
 		statue.queue_free()
 	var rewind := Rewind.get_rewind(self)

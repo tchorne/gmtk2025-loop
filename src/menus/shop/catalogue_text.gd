@@ -9,6 +9,11 @@ var data: WeaponData
 
 func set_weapon(weapon: WeaponData):
 	data = weapon
+	
+	slot_1.set_pressed_no_signal(weapon.equipped_slot_1)
+	slot_1.get_node("TextureRect").visible = weapon.equipped_slot_1
+	slot_2.set_pressed_no_signal(weapon.equipped_slot_2)
+	slot_2.get_node("TextureRect").visible = weapon.equipped_slot_2
 	if not weapon.unlocked:
 		name_label.text = "???"
 		

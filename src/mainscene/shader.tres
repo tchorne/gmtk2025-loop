@@ -1,0 +1,14 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://cbcg6npabqexc"]
+
+[ext_resource type="Shader" uid="uid://c0xem7y1vbc2u" path="res://src/effects/blur.gdshader" id="1_fgw7w"]
+
+[resource]
+shader = ExtResource("1_fgw7w")
+shader_parameter/radius = 1.0
+shader_parameter/grain_amount = 0.05
+shader_parameter/grain_size = 1.0
+shader_parameter/animate = true
+shader_parameter/abberation = 0.001
+shader_parameter/blur = true
+shader_parameter/grain = false
+shader_parameter/chromatic_abberation = true

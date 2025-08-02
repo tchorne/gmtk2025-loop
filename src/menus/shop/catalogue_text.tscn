@@ -25,6 +25,7 @@ offset_bottom = 16.9282
 rotation = 0.0181653
 theme = ExtResource("1_2nbda")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 11
 text = "LOCKED"
 
 [node name="Price" type="Label" parent="."]
@@ -52,7 +53,7 @@ stretch_mode = 0
 script = ExtResource("4_u7dd4")
 
 [node name="TextureRect" type="TextureRect" parent="Slot1"]
-modulate = Color(0.648, 1, 0.36, 1)
+modulate = Color(0, 0, 0, 1)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -63,6 +64,7 @@ offset_right = 4.293
 offset_bottom = -2.56324
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 texture = ExtResource("4_5lfak")
 expand_mode = 1
 
@@ -89,7 +91,7 @@ stretch_mode = 0
 script = ExtResource("4_u7dd4")
 
 [node name="TextureRect" type="TextureRect" parent="Slot2"]
-modulate = Color(0.648, 1, 0.36, 1)
+modulate = Color(0, 0, 0, 1)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -100,6 +102,7 @@ offset_right = 4.293
 offset_bottom = -2.56324
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 texture = ExtResource("4_5lfak")
 expand_mode = 1
 

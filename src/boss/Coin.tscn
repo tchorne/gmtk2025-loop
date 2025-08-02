@@ -12,7 +12,7 @@ radius = 22.0907
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f5os5"]
 
-[node name="Coin" type="RigidBody2D"]
+[node name="Coin" type="RigidBody2D" groups=["Money"]]
 collision_layer = 0
 physics_material_override = SubResource("PhysicsMaterial_f5os5")
 lock_rotation = true

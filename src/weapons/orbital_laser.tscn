@@ -1,11 +1,32 @@
-[gd_scene load_steps=4 format=3 uid="uid://bwklpwfryeo1k"]
+[gd_scene load_steps=11 format=3 uid="uid://bwklpwfryeo1k"]
 
 [ext_resource type="Texture2D" uid="uid://cn8yp67o681r2" path="res://assets/sprites/weapons/Orbital_1.png" id="1_qevm1"]
 [ext_resource type="Script" uid="uid://biteqb0nbj3li" path="res://src/weapons/orbital_laser.gd" id="1_xap36"]
 [ext_resource type="Texture2D" uid="uid://lmkahm61hu4e" path="res://assets/effects/1_Fire.png" id="3_20kpa"]
+[ext_resource type="Texture2D" uid="uid://smb5cgnjjwf8" path="res://assets/effects/Circle_1.png" id="4_mqqd6"]
+[ext_resource type="Script" uid="uid://8geh3td8elh3" path="res://src/weapons/continuous_damage.gd" id="5_87gak"]
+[ext_resource type="Script" uid="uid://4en1o7xygofw" path="res://src/weapons/damage_inflictor.gd" id="6_54agd"]
+[ext_resource type="AudioStream" uid="uid://br40iop6nr8ti" path="res://assets/sound/explosion.wav" id="7_54agd"]
+
+[sub_resource type="Curve" id="Curve_mqqd6"]
+_limits = [0.0, 5.0, 0.0, 10.0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1.21212, 0.688277), 0.0, 0.0, 0, 0, Vector2(2.93706, 0.924955), 0.00467253, 0.00990582, 0, 0, Vector2(3.2634, 4.91341), 0.0, 0.0, 0, 0, Vector2(5.52448, 4.88455), 0.0, 0.0, 0, 0, Vector2(5.94406, 0), 0.0, 0.0, 0, 0]
+point_count = 6
+
+[sub_resource type="Curve" id="Curve_b4007"]
+_limits = [0.0, 5.0, 0.0, 10.0]
+_data = [Vector2(0.429257, 0), 0.0, 0.0, 0, 0, Vector2(4.05276, 0), 0.0, 0.0, 0, 0, Vector2(5.46763, 0.28899), 0.0, 0.0, 0, 0, Vector2(5.7554, 2.52523), 1.59859, 1.59859, 0, 0, Vector2(6.59472, 4.04587), 0.0, 0.0, 0, 0, Vector2(9.3765, 4.1055), 0.0, 0.0, 0, 0, Vector2(10, 0), 0.0, 0.0, 0, 0]
+point_count = 7
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b4007"]
+size = Vector2(267, 1700)
 
 [node name="OrbitalLaser" type="Node2D"]
 script = ExtResource("1_xap36")
+calldown_begin = Color(1, 1, 1, 0)
+calldown_end = Color(1, 1, 1, 1)
+calldown_color = SubResource("Curve_mqqd6")
+beam_color = SubResource("Curve_b4007")
 
 [node name="Orbital1" type="Sprite2D" parent="."]
 position = Vector2(-0.999999, -0.999998)
@@ -14,10 +35,85 @@ texture = ExtResource("1_qevm1")
 
 [node name="Lazer" type="Node" parent="."]
 
-[node name="Node2D" type="Node2D" parent="Lazer"]
+[node name="Base" type="Node2D" parent="Lazer"]
 visible = false
 
-[node name="Sprite2D" type="Sprite2D" parent="Lazer"]
-visible = false
-scale = Vector2(0.12, 1)
+[node name="Beam" type="Node2D" parent="Lazer/Base"]
+modulate = Color(1, 1, 1, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Lazer/Base/Beam"]
+position = Vector2(82, -408)
+scale = Vector2(0.465, 1)
 texture = ExtResource("3_20kpa")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Lazer/Base/Beam"]
+position = Vector2(-48, -419)
+scale = Vector2(0.465, 1)
+texture = ExtResource("3_20kpa")
+flip_h = true
+
+[node name="Sprite2D3" type="Sprite2D" parent="Lazer/Base/Beam"]
+position = Vector2(50.455, -517)
+scale = Vector2(0.465, 1)
+texture = ExtResource("3_20kpa")
+
+[node name="Sprite2D4" type="Sprite2D" parent="Lazer/Base/Beam"]
+position = Vector2(-16.545, -666)
+scale = Vector2(0.465, 1)
+texture = ExtResource("3_20kpa")
+
+[node name="Sprite2D5" type="Sprite2D" parent="Lazer/Base/Beam"]
+position = Vector2(78.455, -904)
+scale = Vector2(0.465, 1)
+texture = ExtResource("3_20kpa")
+
+[node name="Sprite2D6" type="Sprite2D" parent="Lazer/Base/Beam"]
+position = Vector2(23.455, -1116)
+scale = Vector2(0.465, 1)
+texture = ExtResource("3_20kpa")
+
+[node name="Sprite2D7" type="Sprite2D" parent="Lazer/Base/Beam"]
+position = Vector2(-30, -1059)
+scale = Vector2(0.465, 1)
+texture = ExtResource("3_20kpa")
+flip_h = true
+
+[node name="Area2D" type="Area2D" parent="Lazer/Base/Beam"]
+position = Vector2(25.455, -359)
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Lazer/Base/Beam/Area2D"]
+position = Vector2(-3.45502, -480)
+shape = SubResource("RectangleShape2D_b4007")
+
+[node name="Flare" type="Node2D" parent="Lazer/Base"]
+
+[node name="Sprite2D" type="Sprite2D" parent="Lazer/Base/Flare"]
+position = Vector2(5, 6)
+rotation = -1.75626
+scale = Vector2(0.39591, 1.7955)
+texture = ExtResource("4_mqqd6")
+
+[node name="ContinuousDamage" type="Node" parent="." node_paths=PackedStringArray("area")]
+script = ExtResource("5_87gak")
+tick_rate = 5.0
+area = NodePath("../Lazer/Base/Beam/Area2D")
+
+[node name="Inflicter" type="Node" parent="." node_paths=PackedStringArray("play_sound")]
+script = ExtResource("6_54agd")
+damage = 50.0
+structure_damage = 10.0
+element = 2
+element_amount = 2.0
+knockback_away_from_player = false
+hitstun = 0.05
+play_sound = NodePath("../Explosion")
+
+[node name="Explosion" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_54agd")
+volume_db = 3.558
+max_polyphony = 3
+bus = &"Sound"
+
+[connection signal="hit_statue" from="ContinuousDamage" to="Inflicter" method="_on_statue_hit"]

@@ -27,6 +27,7 @@ func update_rentals(time: float) -> void:
 			end_rental.emit(1 if get_weapon_by_string(rental.weapon).equipped_slot_1 else 2)
 			current_rentals.remove_at(i)
 			i -= 1
+			break
 			
 	for rental in rentals:
 		if rental in current_rentals: continue

@@ -36,6 +36,8 @@ Player=""
 Inventory=""
 GameState=""
 Rewind=""
+Projectile=""
+Money=""
 
 [input]
 

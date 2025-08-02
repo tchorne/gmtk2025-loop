@@ -41,21 +41,27 @@ func setup(): ## Called at the end of each day
 	var i = 0
 	for stock in weapon_stocks.get_children():
 		stock.generate_history()
-		stock.visible = inventory.all_weapons[i].unlocked
+		stock.load_weapon(inventory.all_weapons[i])
 		i += 1
+	
+	for j in 8:
+		var weapon := inventory.all_weapons[j] as WeaponData
+		inventory.all_weapons[j].weapon_index = j
+		var child = catalogue.get_node(str(j+1))
+		child.load_weapon(inventory.all_weapons[j])
 	
 func on_weapon_equipped(item: Control, weapon: WeaponData, slot: int):
 	if slot == 1:
 		weapon.equipped_slot_1 = true
 		weapon.equipped_slot_2 = false
-		item.slot_2.set_pressed_no_signal(false)
+		item.catalogue_text.slot_2.set_pressed_no_signal(false)
 	else:
 		weapon.equipped_slot_1 = false
 		weapon.equipped_slot_2 = true
-		item.slot_1.set_pressed_no_signal(false)
+		item.catalogue_text.slot_1.set_pressed_no_signal(false)
 		
 		
-func on_stock_price_hovered(time: float, stock_value: float, weapon: WeaponData, stock: WeaponStock):
+func on_stock_price_hovered(_time: float, stock_value: float, weapon: WeaponData, _stock: WeaponStock):
 	description.display_buy_menu(weapon, stock_value)
 	
 func on_stock_price_clicked(time: float, stock_value: float, weapon: WeaponData, stock: WeaponStock):
@@ -88,11 +94,11 @@ func on_tab_selected(tab):
 		if tab2 == tab: continue
 		tab2.deselect()
 
-func move_description(global_position: Vector2):
+func move_description(g_position: Vector2):
 	var tween = create_tween()
 	tween.set_ease(Tween.EASE_OUT)
 	tween.set_trans(Tween.TRANS_CUBIC)
-	tween.tween_property(description, "position", global_position, 0.3)
+	tween.tween_property(description, "position", g_position, 0.3)
 
 func on_catalogue_weapon_hovered(control: Control, weapon: WeaponData):
 	description.display_category(weapon)

@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://x0j11vre468m"]
+
+[ext_resource type="Script" uid="uid://cxp4krkth31dn" path="res://src/weapons/office_supplies.gd" id="1_mcvu7"]
+[ext_resource type="Texture2D" uid="uid://bik5l8psmfgho" path="res://assets/sprites/weapons/Office_1.png" id="2_8kgy8"]
+[ext_resource type="Script" uid="uid://chwu1boxpyu2b" path="res://src/weapons/projectile_emitter.gd" id="3_jj3g1"]
+[ext_resource type="PackedScene" uid="uid://bes1ed2rirolq" path="res://src/weapons/OfficeItem.tscn" id="4_mcvu7"]
+[ext_resource type="AudioStream" uid="uid://ckeoe130en1uv" path="res://assets/sound/hit3.wav" id="5_38vig"]
+
+[node name="OfficeSupplies" type="Node2D"]
+script = ExtResource("1_mcvu7")
+launch_speed = 400.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(29, -1)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_8kgy8")
+
+[node name="ProjectileEmitter" type="Node" parent="." node_paths=PackedStringArray("parent", "spawn_point")]
+script = ExtResource("3_jj3g1")
+rate = 2.3
+projectile = ExtResource("4_mcvu7")
+parent = NodePath("../Projectiles")
+spawn_point = NodePath("../SpawnPoint")
+randomness = 0.1
+
+[node name="Projectiles" type="Node" parent="."]
+
+[node name="SpawnPoint" type="Marker2D" parent="."]
+position = Vector2(29, -4)
+
+[node name="Throw" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_38vig")
+volume_db = -4.16
+pitch_scale = 0.89
+max_polyphony = 2
+bus = &"Sound"
+
+[connection signal="fired" from="ProjectileEmitter" to="." method="_on_projectile_emitter_fired"]

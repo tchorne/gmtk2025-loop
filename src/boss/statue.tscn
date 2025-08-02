@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://vwhjpv3o5dy0"]
+[gd_scene load_steps=14 format=3 uid="uid://vwhjpv3o5dy0"]
 
 [ext_resource type="Script" uid="uid://cc5xxqrkhko2v" path="res://src/boss/statue.gd" id="1_d1pvw"]
 [ext_resource type="Texture2D" uid="uid://gxb0n606pd1y" path="res://assets/sprites/statue/Statue_Sheet_shifted.png" id="2_legdi"]
@@ -10,13 +10,16 @@
 [ext_resource type="PackedScene" uid="uid://c10f2t5hpw6ju" path="res://src/mainscene/bounce_detector.tscn" id="8_intb7"]
 [ext_resource type="Script" uid="uid://bey57rabrqe1m" path="res://src/boss/recombine.gd" id="9_i11fs"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_sb82a"]
-size = Vector2(186, 300)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i11fs"]
+size = Vector2(75, 176)
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_sb82a"]
 resource_local_to_scene = true
 friction = 0.65
 bounce = 0.43
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sb82a"]
+size = Vector2(186, 300)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_i11fs"]
 radius = 43.566
@@ -34,15 +37,14 @@ hframes = 6
 script = ExtResource("3_legdi")
 
 [node name="Area2D" type="Area2D" parent="."]
-visible = false
 collision_layer = 8
 collision_mask = 4
 script = ExtResource("4_g0tul")
 metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(-0.5, -7)
-shape = SubResource("RectangleShape2D_sb82a")
+position = Vector2(1.5, 6)
+shape = SubResource("RectangleShape2D_i11fs")
 
 [node name="CoinEmitter" type="Node2D" parent="."]
 script = ExtResource("3_wyc4e")

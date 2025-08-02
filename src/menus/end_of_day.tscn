@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://bbd4sk0am5064"]
+[gd_scene load_steps=22 format=3 uid="uid://bbd4sk0am5064"]
 
 [ext_resource type="Script" uid="uid://dhbgbr0lp1cut" path="res://src/menus/end_of_day.gd" id="1_m2md4"]
 [ext_resource type="Script" uid="uid://bh367vkanefmt" path="res://src/menus/shop.gd" id="2_4tw40"]
@@ -7,7 +7,6 @@
 [ext_resource type="Texture2D" uid="uid://deaonib184qjo" path="res://assets/ui/travelbutton2.png" id="4_b75xw"]
 [ext_resource type="Texture2D" uid="uid://cdr6djlwsb10l" path="res://assets/ui/catalogue.png" id="6_2fggr"]
 [ext_resource type="Texture2D" uid="uid://cg2ocfngenf8f" path="res://assets/ui/perksv2.png" id="6_4tw40"]
-[ext_resource type="Texture2D" uid="uid://bq2lbmlybu2ae" path="res://assets/ui/Square_Noutline.png" id="7_2fggr"]
 [ext_resource type="Script" uid="uid://v033dfbpj3db" path="res://src/menus/menu_tab.gd" id="7_288h7"]
 [ext_resource type="Texture2D" uid="uid://d0hy0eiqausbc" path="res://assets/sprites/weapons/Chair.png" id="7_mpu5u"]
 [ext_resource type="Script" uid="uid://crdp447y8js83" path="res://src/menus/catalogue_item.gd" id="7_xibyt"]
@@ -408,11 +407,11 @@ select_height = 213.0
 
 [node name="Rentals" type="TextureRect" parent="Shop"]
 layout_mode = 0
-offset_left = 275.0
-offset_top = 553.0
-offset_right = 949.0
-offset_bottom = 1081.0
-texture = ExtResource("7_2fggr")
+offset_left = 69.0
+offset_top = 34.0
+offset_right = 743.0
+offset_bottom = 562.0
+mouse_filter = 2
 expand_mode = 1
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Shop/Rentals"]
@@ -420,36 +419,22 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 55.0
-offset_top = 135.0
-offset_right = -89.0
-offset_bottom = -60.0
+offset_left = -20.0
+offset_top = 115.0
+offset_right = -164.0
+offset_bottom = -48.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 horizontal_scroll_mode = 0
-vertical_scroll_mode = 2
+vertical_scroll_mode = 0
 
 [node name="WeaponStocks" type="VBoxContainer" parent="Shop/Rentals/ScrollContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-
-[node name="MenuTab" type="Node" parent="Shop/Rentals" groups=["MenuTab"]]
-script = ExtResource("7_288h7")
-base_height = 553.0
-hover_height = 543.0
-select_height = 12.0
-
-[node name="Label" type="Label" parent="Shop/Rentals"]
-layout_mode = 0
-offset_left = 197.0
-offset_top = 45.0
-offset_right = 416.0
-offset_bottom = 96.0
-theme = ExtResource("9_fwjid")
-theme_override_font_sizes/font_size = 41
-text = "RENTALS"
+mouse_filter = 2
 
 [node name="Description" parent="Shop" instance=ExtResource("18_ajs7j")]
 unique_name_in_owner = true

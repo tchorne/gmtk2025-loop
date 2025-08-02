@@ -31,6 +31,9 @@ func _process(delta: float) -> void:
 			rewind_time = 0.0
 			rewinding = false
 			rewind_finished.emit()
+			for ghost in ghosts:
+				ghost.sprite.visible = false
+				ghost.history.clear()
 
 func begin_rewind():
 	rewinding = true

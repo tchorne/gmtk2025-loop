@@ -24,6 +24,7 @@ var rental_blocks: Array[RentalBlock]
 
 func load_weapon(data: WeaponData):
 	texture_rect.texture = data.image
+	visible = data.unlocked
 
 func _ready():
 	generate_history()
@@ -62,7 +63,7 @@ func apply_to_line():
 	line_2d.points = points2
 
 func _process(_delta: float) -> void:
-	#apply_to_line()
+	apply_to_line()
 	pass
 
 

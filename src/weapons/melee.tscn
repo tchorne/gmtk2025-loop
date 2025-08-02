@@ -1,0 +1,34 @@
+[gd_scene load_steps=4 format=3 uid="uid://bj5iaetnqpf7h"]
+
+[ext_resource type="PackedScene" uid="uid://c85edkc7jav7y" path="res://src/weapons/chair.tscn" id="1_qucns"]
+[ext_resource type="Texture2D" uid="uid://ceu2mijiblwj3" path="res://assets/ui/Square_Short.png" id="2_6nl3n"]
+[ext_resource type="AudioStream" uid="uid://bm8qgn1g0ef6j" path="res://assets/sound/hit1.wav" id="2_rv764"]
+
+[node name="Melee" instance=ExtResource("1_qucns")]
+cooldown = 0.4
+
+[node name="Sprite2D" parent="." index="0"]
+position = Vector2(60, 1)
+scale = Vector2(0.0351563, 0.0986322)
+texture = ExtResource("2_6nl3n")
+
+[node name="Area2D" parent="." index="1"]
+position = Vector2(57, 3)
+
+[node name="CollisionShape2D" parent="Area2D" index="0"]
+metadata/_edit_lock_ = true
+
+[node name="Timer" parent="." index="2"]
+wait_time = 0.2
+
+[node name="Timer2" parent="." index="3"]
+wait_time = 0.4
+
+[node name="Inflicter" parent="." index="5"]
+damage = 4.0
+structure_damage = 5.0
+element_amount = 0.0
+knockback_strength = 75.0
+
+[node name="Chair" parent="." index="6"]
+stream = ExtResource("2_rv764")

@@ -1,0 +1,55 @@
+[gd_scene load_steps=12 format=3 uid="uid://bes1ed2rirolq"]
+
+[ext_resource type="Script" uid="uid://dkdqsjetllytk" path="res://src/weapons/office_item.gd" id="1_or1eu"]
+[ext_resource type="Texture2D" uid="uid://bik5l8psmfgho" path="res://assets/sprites/weapons/Office_1.png" id="2_8d4rh"]
+[ext_resource type="Texture2D" uid="uid://20rc6x46hmqm" path="res://assets/sprites/weapons/bullet.png" id="2_i06s0"]
+[ext_resource type="Texture2D" uid="uid://dfxajksntkwdq" path="res://assets/sprites/weapons/Office_2.png" id="3_mwoab"]
+[ext_resource type="Script" uid="uid://cr403j6xtkohx" path="res://src/weapons/projectile_area.gd" id="3_rcxkn"]
+[ext_resource type="Texture2D" uid="uid://cqus7cudho5xd" path="res://assets/sprites/weapons/Office_3.png" id="4_2ibe4"]
+[ext_resource type="Script" uid="uid://4en1o7xygofw" path="res://src/weapons/damage_inflictor.gd" id="4_nol4h"]
+[ext_resource type="PackedScene" uid="uid://c10f2t5hpw6ju" path="res://src/mainscene/bounce_detector.tscn" id="5_8d4rh"]
+[ext_resource type="Texture2D" uid="uid://caxvjng5w8yfk" path="res://assets/sprites/weapons/Office_4.png" id="5_30mye"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_8d4rh"]
+bounce = 0.4
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_j3c6t"]
+radius = 5.0
+
+[node name="OfficeItem" type="RigidBody2D" groups=["Projectile"]]
+collision_layer = 0
+mass = 0.2
+physics_material_override = SubResource("PhysicsMaterial_8d4rh")
+script = ExtResource("1_or1eu")
+sprites = Array[CompressedTexture2D]([ExtResource("2_8d4rh"), ExtResource("3_mwoab"), ExtResource("4_2ibe4"), ExtResource("5_30mye")])
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_i06s0")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("3_rcxkn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_j3c6t")
+
+[node name="Inflicter" type="Node" parent="."]
+script = ExtResource("4_nol4h")
+damage = 10.0
+structure_damage = 10.0
+element = 5
+element_amount = 0.5
+knockback_away_from_player = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_j3c6t")
+
+[node name="BounceDetector" parent="." node_paths=PackedStringArray("rb") instance=ExtResource("5_8d4rh")]
+rb = NodePath("..")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="hit_statue" from="Area2D" to="." method="on_hit"]
+[connection signal="hit_statue" from="Area2D" to="Inflicter" method="_on_statue_hit"]
+[connection signal="bounced" from="BounceDetector" to="." method="_on_bounce_detector_bounced"]

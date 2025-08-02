@@ -71,5 +71,14 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0.000113828, 0.000113828, 0.000113828, 1)
 
+[node name="ColorRect" type="ColorRect" parent="ColorRect/HoveredTime"]
+show_behind_parent = true
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+color = Color(0.23, 0.23, 0.23, 0.592157)
+
 [connection signal="gui_input" from="ColorRect" to="." method="_on_color_rect_gui_input"]
 [connection signal="mouse_exited" from="ColorRect" to="." method="_on_color_rect_mouse_exited"]

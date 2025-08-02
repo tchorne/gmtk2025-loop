@@ -11,6 +11,8 @@ var time_remaining := 1.0
 var value := 0
 #@onready var gpu_particles_2d: GPUParticles2D = $GPUParticles2D
 
+var lifetime := 10.0
+
 @export var bill_colors: Array[Color]
 @onready var game_state := GameState.get_state(self)
 
@@ -23,7 +25,11 @@ func _on_collect_body_entered(_body: Node2D) -> void:
 	game_state.add_money(value)
 	
 func _process(delta: float) -> void:
-	set_physics_process(Hitstun.paused)
+	lifetime -= delta * Hitstun.deltamod()
+	if lifetime < 2.0:
+		visible = int(lifetime * 10)%2 == 0
+	if lifetime < 0:
+		queue_free()
 	if dying:
 		time_remaining -= delta * Hitstun.deltamod()
 		if time_remaining < 0:
