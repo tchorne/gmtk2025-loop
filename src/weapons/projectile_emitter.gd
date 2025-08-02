@@ -28,6 +28,6 @@ func fire():
 	var vel = launch_velocity.rotated(randf_range(-randomness, randomness))
 	p.rotation = vel.angle()
 	p.linear_velocity = vel
-	
+	fired.emit()
 	
 	

@@ -2,6 +2,7 @@ extends Node2D
 
 @onready var player: CharacterBody2D = $".."
 @onready var pivot: Node2D = $Pivot
+@onready var inventory := Inventory.get_inventory(self)
 
 @onready var flamethrower: Node2D = $Pivot/Flamethrower
 @onready var hook: Node2D = $Pivot/Hook
@@ -9,6 +10,9 @@ extends Node2D
 @onready var fan: Node2D = $Pivot/Fan
 @onready var taser: Node2D = $Pivot/Taser
 @onready var minigun: Node2D = $Pivot/Minigun
+@onready var office_supplies: Node2D = $Pivot/OfficeSupplies
+@onready var orbital_laser: Node2D = $Pivot/OrbitalLaser
+@onready var shield: Node2D = $Pivot/Shield
 
 var weapons : Array[Node2D] = []
 
@@ -19,12 +23,13 @@ var cooldown := 0.0
 
 func _ready():
 	weapons = [
-		chair, fan, hook, flamethrower, taser, minigun
+		chair, office_supplies, fan, taser, minigun, flamethrower, shield, orbital_laser
 	]
 
 func _process(delta: float) -> void:
 	handle_debug_equips()
-	var statue_vector := get_nearest_statue_vector()
+	var statue_vector := get_mouse_vector()
+	
 	if statue_vector == Vector2.ZERO:
 		pivot.rotation = 0
 	else:
@@ -57,11 +62,11 @@ func get_nearest_statue_vector() -> Vector2:
 	vectors = vectors.filter(func(vector): return vector.x >= 0 == player.facing_right)
 	if vectors.is_empty():
 		return Vector2.ZERO
-	var nearest = vectors.reduce(func(max, vec): return max if is_length_greater(vec, max) else vec) as Vector2
+	var nearest = vectors.reduce(func(m, vec): return m if is_length_greater(vec, m) else vec) as Vector2
 	return nearest.normalized()
 
 func get_mouse_vector() -> Vector2:
-	var out := get_viewport().get_camera_2d().get_global_mouse_position() - global_position.normalized()
+	var out := (get_viewport().get_camera_2d().get_global_mouse_position() - global_position).normalized()
 	if out.x >= 0 != player.facing_right:
 		return Vector2.ZERO
 	return out

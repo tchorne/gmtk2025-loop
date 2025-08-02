@@ -10,7 +10,7 @@ func set_active(a: bool):
 	projectile_emitter.active = a
 	$Gun.stream_paused = not a
 	
-func set_nearest_statue_vector(vector: Vector2):
+func set_nearest_statue_vector(_vector: Vector2):
 	#projectile_emitter.launch_velocity = vector * launch_speed
 	projectile_emitter.launch_velocity = Vector2.RIGHT.rotated(global_rotation) * launch_speed
 

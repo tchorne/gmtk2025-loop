@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://drfnne271u6gq"]
+[gd_scene load_steps=50 format=3 uid="uid://drfnne271u6gq"]
 
 [ext_resource type="Script" uid="uid://bia83w547m3pn" path="res://src/player/player.gd" id="1_mf2ua"]
 [ext_resource type="Texture2D" uid="uid://bw6xltcnqcctm" path="res://assets/misc/dropshadow.png" id="2_244u8"]
@@ -20,6 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://ducedf5gg4f03" path="res://src/weapons/minigun.tscn" id="9_oyld2"]
 [ext_resource type="PackedScene" uid="uid://bwklpwfryeo1k" path="res://src/weapons/orbital_laser.tscn" id="10_k60ra"]
 [ext_resource type="Texture2D" uid="uid://d35vwk0wbmn6o" path="res://assets/sprites/player/Stunned.png" id="15_vwi60"]
+[ext_resource type="Texture2D" uid="uid://dm1ny8b57w6u" path="res://assets/sprites/player/starssheet.png" id="16_j2873"]
 [ext_resource type="Texture2D" uid="uid://cjg3241bctv2u" path="res://assets/sprites/player/Smashed.png" id="16_o04tx"]
 [ext_resource type="Script" uid="uid://cq4kmt4tq8xga" path="res://src/player/sounds.gd" id="19_5efpn"]
 [ext_resource type="AudioStream" uid="uid://cn7xldrj8j2qs" path="res://assets/sound/jump.wav" id="20_4uy46"]
@@ -27,6 +28,7 @@
 [ext_resource type="AudioStream" uid="uid://cwck0n1t4we8g" path="res://assets/sound/skid2.wav" id="22_5efpn"]
 [ext_resource type="AudioStream" uid="uid://c83r5b4b73a0o" path="res://assets/sound/run.wav" id="23_vwi60"]
 [ext_resource type="AudioStream" uid="uid://d20pevrvaykrp" path="res://assets/sound/whomp.wav" id="24_4uy46"]
+[ext_resource type="AudioStream" uid="uid://bf1u1dnv5kfd7" path="res://assets/sound/ding.wav" id="28_o04tx"]
 
 [sub_resource type="Animation" id="Animation_6bm8s"]
 length = 0.001
@@ -207,6 +209,35 @@ _data = {
 &"skid": SubResource("Animation_l271a")
 }
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_dpt0q"]
+atlas = ExtResource("16_j2873")
+region = Rect2(0, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wcxbk"]
+atlas = ExtResource("16_j2873")
+region = Rect2(512, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p6grl"]
+atlas = ExtResource("16_j2873")
+region = Rect2(1024, 0, 512, 512)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_e7e1q"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dpt0q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wcxbk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p6grl")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lnvp7"]
 size = Vector2(41, 86)
 
@@ -324,6 +355,8 @@ position = Vector2(14, -4)
 [node name="OrbitalLaser" parent="Weapons/Pivot" instance=ExtResource("10_k60ra")]
 visible = false
 
+[node name="Shield" type="Node2D" parent="Weapons/Pivot"]
+
 [node name="OfficeSupplies" type="Node2D" parent="Weapons/Pivot"]
 
 [node name="Animation" type="Node" parent="."]
@@ -360,13 +393,25 @@ texture = ExtResource("15_vwi60")
 [node name="RewindComponent2" type="Node" parent="SpriteScale/Sprite2D"]
 script = ExtResource("5_8ydov")
 
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="SpriteScale/Sprite2D"]
+position = Vector2(-160, -60)
+scale = Vector2(0.768066, 0.768066)
+sprite_frames = SubResource("SpriteFrames_e7e1q")
+frame_progress = 0.392336
+
 [node name="Sprite2D2" type="Sprite2D" parent="SpriteScale"]
 visible = false
-position = Vector2(30, -470)
+position = Vector2(40, -340)
 texture = ExtResource("16_o04tx")
 
 [node name="RewindComponent2" type="Node" parent="SpriteScale/Sprite2D2"]
 script = ExtResource("5_8ydov")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="SpriteScale/Sprite2D2"]
+position = Vector2(-230, -30)
+scale = Vector2(1.12622, 1.12622)
+sprite_frames = SubResource("SpriteFrames_e7e1q")
+frame_progress = 0.254062
 
 [node name="Player" type="AnimatedSprite2D" parent="."]
 visible = false
@@ -456,6 +501,10 @@ bus = &"Sound"
 
 [node name="Whomp" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource("24_4uy46")
+
+[node name="Ding" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("28_o04tx")
+bus = &"Sound"
 
 [node name="StatueHitter" type="Area2D" parent="."]
 collision_layer = 0

@@ -1,13 +1,17 @@
-[gd_scene load_steps=17 format=3 uid="uid://bbd4sk0am5064"]
+[gd_scene load_steps=23 format=3 uid="uid://bbd4sk0am5064"]
 
-[ext_resource type="PackedScene" uid="uid://qyn6liw0mnc7" path="res://src/menus/shop/weapon_stock.tscn" id="1_l3hxl"]
+[ext_resource type="Script" uid="uid://dhbgbr0lp1cut" path="res://src/menus/end_of_day.gd" id="1_m2md4"]
+[ext_resource type="Script" uid="uid://bh367vkanefmt" path="res://src/menus/shop.gd" id="2_4tw40"]
 [ext_resource type="Texture2D" uid="uid://bbshqld0cdwd8" path="res://assets/ui/Timetravelbase.png" id="2_hv16e"]
 [ext_resource type="Texture2D" uid="uid://lxx3a28bg5ey" path="res://assets/ui/travelbutton1.png" id="3_h2tn6"]
 [ext_resource type="Texture2D" uid="uid://deaonib184qjo" path="res://assets/ui/travelbutton2.png" id="4_b75xw"]
-[ext_resource type="Texture2D" uid="uid://rt7pjkrewn0r" path="res://assets/ui/perks.png" id="5_b75xw"]
 [ext_resource type="Texture2D" uid="uid://cdr6djlwsb10l" path="res://assets/ui/catalogue.png" id="6_2fggr"]
+[ext_resource type="Texture2D" uid="uid://cg2ocfngenf8f" path="res://assets/ui/perksv2.png" id="6_4tw40"]
 [ext_resource type="Texture2D" uid="uid://bq2lbmlybu2ae" path="res://assets/ui/Square_Noutline.png" id="7_2fggr"]
+[ext_resource type="Script" uid="uid://v033dfbpj3db" path="res://src/menus/menu_tab.gd" id="7_288h7"]
 [ext_resource type="Texture2D" uid="uid://d0hy0eiqausbc" path="res://assets/sprites/weapons/Chair.png" id="7_mpu5u"]
+[ext_resource type="Script" uid="uid://crdp447y8js83" path="res://src/menus/catalogue_item.gd" id="7_xibyt"]
+[ext_resource type="PackedScene" uid="uid://cyovba8hgw48h" path="res://src/menus/shop/catalogue_text.tscn" id="8_phsc5"]
 [ext_resource type="Texture2D" uid="uid://cqus7cudho5xd" path="res://assets/sprites/weapons/Office_3.png" id="8_r7iw5"]
 [ext_resource type="Theme" uid="uid://b2ph8ikxoqmwf" path="res://src/default.theme" id="9_fwjid"]
 [ext_resource type="Texture2D" uid="uid://dd5xug3v02g7h" path="res://assets/sprites/weapons/Future_Fan.png" id="9_phsc5"]
@@ -16,6 +20,8 @@
 [ext_resource type="Texture2D" uid="uid://ckom8n1vt2lmj" path="res://assets/sprites/weapons/Flamethrower.png" id="12_ajs7j"]
 [ext_resource type="Texture2D" uid="uid://bwj6oa33wvvsb" path="res://assets/sprites/weapons/Plasma_Shield.png" id="13_m2md4"]
 [ext_resource type="Texture2D" uid="uid://cn8yp67o681r2" path="res://assets/sprites/weapons/Orbital_1.png" id="14_288h7"]
+[ext_resource type="PackedScene" uid="uid://cdxs77k8sp6qo" path="res://src/menus/shop/description.tscn" id="18_ajs7j"]
+[ext_resource type="Texture2D" uid="uid://ceu2mijiblwj3" path="res://assets/ui/Square_Short.png" id="20_m2md4"]
 
 [node name="EndOfDay" type="Control"]
 layout_mode = 3
@@ -25,33 +31,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+script = ExtResource("1_m2md4")
 metadata/_edit_lock_ = true
-
-[node name="Stocks" type="Control" parent="."]
-visible = false
-layout_mode = 1
-anchors_preset = 14
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = 150.0
-offset_right = -102.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="WeaponStocks" type="VBoxContainer" parent="Stocks"]
-layout_mode = 1
-anchors_preset = 14
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_top = -25.0
-offset_bottom = 25.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="WeaponStock" parent="Stocks/WeaponStocks" instance=ExtResource("1_l3hxl")]
-layout_mode = 2
 
 [node name="Shop" type="Control" parent="."]
 layout_mode = 1
@@ -60,9 +41,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("2_4tw40")
 metadata/_edit_lock_ = true
 
-[node name="ColorRect" type="ColorRect" parent="Shop"]
+[node name="Dimming1" type="ColorRect" parent="Shop"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -114,25 +96,29 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -382.0
-offset_top = -258.0
-offset_right = -27.0
-offset_bottom = 120.0
+offset_left = -361.0
+offset_top = -90.0
+offset_right = -6.0
+offset_bottom = 288.0
 grow_horizontal = 0
 grow_vertical = 0
-texture = ExtResource("5_b75xw")
+texture = ExtResource("6_4tw40")
 expand_mode = 1
-metadata/_edit_lock_ = true
+
+[node name="MenuTab" type="Node" parent="Shop/Perks" groups=["MenuTab"]]
+script = ExtResource("7_288h7")
+base_height = 560.0
+hover_height = 550.0
+select_height = 305.0
 
 [node name="Catalogue" type="TextureRect" parent="Shop"]
 layout_mode = 0
-offset_left = 162.0
-offset_top = 221.0
-offset_right = 703.0
-offset_bottom = 762.0
+offset_left = 16.0
+offset_top = 528.0
+offset_right = 557.0
+offset_bottom = 1069.0
 texture = ExtResource("6_2fggr")
 expand_mode = 1
-metadata/_edit_lock_ = true
 
 [node name="1" type="Control" parent="Shop/Catalogue"]
 anchors_preset = 0
@@ -140,7 +126,14 @@ offset_left = 44.0
 offset_top = 93.0
 offset_right = 231.0
 offset_bottom = 154.0
+script = ExtResource("7_xibyt")
 metadata/_edit_lock_ = true
+
+[node name="CatalogueText" parent="Shop/Catalogue/1" instance=ExtResource("8_phsc5")]
+offset_left = 60.0
+offset_top = 4.0
+offset_right = 100.0
+offset_bottom = 44.0
 
 [node name="Item" type="ColorRect" parent="Shop/Catalogue/1"]
 clip_children = 1
@@ -167,7 +160,10 @@ offset_left = 63.0
 offset_top = 153.0
 offset_right = 231.0
 offset_bottom = 208.0
+script = ExtResource("7_xibyt")
 metadata/_edit_lock_ = true
+
+[node name="CatalogueText" parent="Shop/Catalogue/2" instance=ExtResource("8_phsc5")]
 
 [node name="Item" type="ColorRect" parent="Shop/Catalogue/2"]
 clip_children = 1
@@ -195,7 +191,14 @@ offset_left = 59.0
 offset_top = 217.0
 offset_right = 244.0
 offset_bottom = 273.0
+script = ExtResource("7_xibyt")
 metadata/_edit_lock_ = true
+
+[node name="CatalogueText" parent="Shop/Catalogue/3" instance=ExtResource("8_phsc5")]
+offset_left = 61.0
+offset_top = 5.00002
+offset_right = 101.0
+offset_bottom = 45.0
 
 [node name="Item" type="ColorRect" parent="Shop/Catalogue/3"]
 clip_children = 1
@@ -224,7 +227,14 @@ offset_left = 76.0
 offset_top = 276.0
 offset_right = 251.0
 offset_bottom = 348.0
+script = ExtResource("7_xibyt")
 metadata/_edit_lock_ = true
+
+[node name="CatalogueText" parent="Shop/Catalogue/4" instance=ExtResource("8_phsc5")]
+offset_left = 55.0
+offset_top = 9.00002
+offset_right = 95.0
+offset_bottom = 49.0
 
 [node name="Item" type="ColorRect" parent="Shop/Catalogue/4"]
 clip_children = 1
@@ -253,7 +263,14 @@ offset_left = 254.0
 offset_top = 66.0
 offset_right = 425.0
 offset_bottom = 141.0
+script = ExtResource("7_xibyt")
 metadata/_edit_lock_ = true
+
+[node name="CatalogueText" parent="Shop/Catalogue/5" instance=ExtResource("8_phsc5")]
+offset_left = 53.0
+offset_top = 21.0
+offset_right = 93.0
+offset_bottom = 61.0
 
 [node name="Item" type="ColorRect" parent="Shop/Catalogue/5"]
 self_modulate = Color(0, 0, 0, 0)
@@ -282,7 +299,14 @@ offset_left = 263.0
 offset_top = 141.0
 offset_right = 440.0
 offset_bottom = 209.0
+script = ExtResource("7_xibyt")
 metadata/_edit_lock_ = true
+
+[node name="CatalogueText" parent="Shop/Catalogue/6" instance=ExtResource("8_phsc5")]
+offset_left = 48.0
+offset_top = 12.0
+offset_right = 88.0
+offset_bottom = 52.0
 
 [node name="Item" type="ColorRect" parent="Shop/Catalogue/6"]
 clip_children = 1
@@ -311,7 +335,14 @@ offset_left = 267.0
 offset_top = 201.0
 offset_right = 448.0
 offset_bottom = 268.0
+script = ExtResource("7_xibyt")
 metadata/_edit_lock_ = true
+
+[node name="CatalogueText" parent="Shop/Catalogue/7" instance=ExtResource("8_phsc5")]
+offset_left = 50.0
+offset_top = 16.0
+offset_right = 90.0
+offset_bottom = 56.0
 
 [node name="Item" type="ColorRect" parent="Shop/Catalogue/7"]
 clip_children = 1
@@ -340,7 +371,14 @@ offset_left = 279.0
 offset_top = 265.0
 offset_right = 481.0
 offset_bottom = 337.0
+script = ExtResource("7_xibyt")
 metadata/_edit_lock_ = true
+
+[node name="CatalogueText" parent="Shop/Catalogue/8" instance=ExtResource("8_phsc5")]
+offset_left = 47.0
+offset_top = 19.0
+offset_right = 87.0
+offset_bottom = 59.0
 
 [node name="Item" type="ColorRect" parent="Shop/Catalogue/8"]
 clip_children = 1
@@ -362,45 +400,101 @@ texture = ExtResource("14_288h7")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Description" type="TextureRect" parent="Shop"]
+[node name="MenuTab" type="Node" parent="Shop/Catalogue" groups=["MenuTab"]]
+script = ExtResource("7_288h7")
+base_height = 528.0
+hover_height = 518.0
+select_height = 213.0
+
+[node name="Rentals" type="TextureRect" parent="Shop"]
 layout_mode = 0
-offset_left = 387.0
-offset_top = 42.0
-offset_right = 768.0
-offset_bottom = 198.0
+offset_left = 275.0
+offset_top = 553.0
+offset_right = 949.0
+offset_bottom = 1081.0
 texture = ExtResource("7_2fggr")
 expand_mode = 1
 
-[node name="Label3" type="Label" parent="Shop/Description"]
-layout_mode = 0
-offset_left = 36.0
-offset_top = 22.0
-offset_right = 151.0
-offset_bottom = 52.0
-theme = ExtResource("9_fwjid")
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 21
-text = "Item Name"
+[node name="ScrollContainer" type="ScrollContainer" parent="Shop/Rentals"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 55.0
+offset_top = 135.0
+offset_right = -89.0
+offset_bottom = -60.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
 
-[node name="Label" type="Label" parent="Shop/Description"]
-layout_mode = 0
-offset_left = 195.0
-offset_top = 21.0
-offset_right = 310.0
-offset_bottom = 51.0
-theme = ExtResource("9_fwjid")
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 21
-text = "$11037"
-horizontal_alignment = 2
+[node name="WeaponStocks" type="VBoxContainer" parent="Shop/Rentals/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
-[node name="Label2" type="Label" parent="Shop/Description"]
+[node name="MenuTab" type="Node" parent="Shop/Rentals" groups=["MenuTab"]]
+script = ExtResource("7_288h7")
+base_height = 553.0
+hover_height = 543.0
+select_height = 12.0
+
+[node name="Label" type="Label" parent="Shop/Rentals"]
 layout_mode = 0
-offset_left = 38.0
-offset_top = 52.0
-offset_right = 322.0
-offset_bottom = 132.0
+offset_left = 197.0
+offset_top = 45.0
+offset_right = 416.0
+offset_bottom = 96.0
 theme = ExtResource("9_fwjid")
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "Lorem Ipsum episgf sif xpokxcvpko popoposf sdfl;xvc;l sdf;osdf ;okddv;oksdf sdf s"
-autowrap_mode = 3
+theme_override_font_sizes/font_size = 41
+text = "RENTALS"
+
+[node name="Description" parent="Shop" instance=ExtResource("18_ajs7j")]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 400.0
+offset_top = 693.0
+offset_right = 781.0
+offset_bottom = 849.0
+
+[node name="Money" type="Control" parent="Shop"]
+anchors_preset = 0
+offset_left = 32.0
+offset_top = 25.0
+offset_right = 238.0
+offset_bottom = 125.0
+
+[node name="Backdrop" type="TextureRect" parent="Shop/Money"]
+layout_mode = 0
+offset_left = -8.0
+offset_top = 13.0
+offset_right = 235.0
+offset_bottom = 117.0
+texture = ExtResource("20_m2md4")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="spendable" type="Label" parent="Shop/Money/Backdrop"]
+layout_mode = 0
+offset_left = 23.0
+offset_top = 41.0
+offset_right = 206.0
+offset_bottom = 80.0
+theme = ExtResource("9_fwjid")
+theme_override_font_sizes/font_size = 31
+text = "$232456"
+horizontal_alignment = 1
+
+[node name="total" type="Label" parent="Shop/Money/Backdrop"]
+layout_mode = 0
+offset_left = 29.0
+offset_top = 20.0
+offset_right = 175.0
+offset_bottom = 43.0
+theme = ExtResource("9_fwjid")
+text = "$99999"
+
+[connection signal="gui_input" from="Shop/Dimming1" to="Shop" method="_on_dimming_1_gui_input"]
+[connection signal="pressed" from="Shop/TimeTravel" to="." method="_on_time_travel_pressed"]

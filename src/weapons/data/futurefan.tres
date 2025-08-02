@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="WeaponData" load_steps=3 format=3 uid="uid://btu3qecb8rmnt"]
+
+[ext_resource type="Script" uid="uid://bpnmcpbje3flx" path="res://src/weapons/weapon_data.gd" id="1_iad3d"]
+[ext_resource type="Texture2D" uid="uid://dd5xug3v02g7h" path="res://assets/sprites/weapons/Future_Fan.png" id="1_oxqfo"]
+
+[resource]
+script = ExtResource("1_iad3d")
+base_price = 50.0
+unlock_price = 200.0
+name = "Fan"
+display_name = "Fan of the Future"
+description = ""
+equipped_slot_1 = false
+equipped_slot_2 = false
+unlocked = false
+unknown = false
+image = ExtResource("1_oxqfo")
+metadata/_custom_type_script = "uid://bpnmcpbje3flx"

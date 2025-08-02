@@ -7,6 +7,7 @@ extends Node
 @onready var land: AudioStreamPlayer = $Land
 @onready var jump: AudioStreamPlayer = $Jump
 @onready var whomp: AudioStreamPlayer = $Whomp
+@onready var ding: AudioStreamPlayer = $Ding
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	run.volume_db = linear_to_db(run_volume)

@@ -14,7 +14,7 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	for point in POINTS:
 		points[point] = to_local(lerp(hook_1.global_position, hook_2.global_position, point/float(POINTS)))
 	points[POINTS] = to_local(hook_2.global_position)

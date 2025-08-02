@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="WeaponData" load_steps=3 format=3 uid="uid://cljar75wxmsyx"]
+
+[ext_resource type="Script" uid="uid://bpnmcpbje3flx" path="res://src/weapons/weapon_data.gd" id="1_gw0en"]
+[ext_resource type="Texture2D" uid="uid://dipdng1cgkbv7" path="res://assets/sprites/weapons/Minigun.png" id="1_yjal1"]
+
+[resource]
+script = ExtResource("1_gw0en")
+base_price = 150.0
+unlock_price = 500.0
+name = "Minigun"
+display_name = ""
+description = ""
+equipped_slot_1 = false
+equipped_slot_2 = false
+unlocked = false
+unknown = false
+image = ExtResource("1_yjal1")
+metadata/_custom_type_script = "uid://bpnmcpbje3flx"

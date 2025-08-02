@@ -1,13 +1,13 @@
 [gd_scene load_steps=7 format=3 uid="uid://p1old8npwj3h"]
 
-[ext_resource type="Texture2D" uid="uid://p234drbehle4" path="res://assets/misc/spark.png" id="1_6r84r"]
 [ext_resource type="Script" uid="uid://chyyha6ie8vy2" path="res://src/weapons/bullet.gd" id="1_j3c6t"]
+[ext_resource type="Texture2D" uid="uid://20rc6x46hmqm" path="res://assets/sprites/weapons/bullet.png" id="2_1xhdh"]
 [ext_resource type="Script" uid="uid://cr403j6xtkohx" path="res://src/weapons/projectile_area.gd" id="3_s6s2l"]
 [ext_resource type="Script" uid="uid://4en1o7xygofw" path="res://src/weapons/damage_inflictor.gd" id="4_fkhtb"]
 [ext_resource type="PackedScene" uid="uid://c10f2t5hpw6ju" path="res://src/mainscene/bounce_detector.tscn" id="5_1xhdh"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_j3c6t"]
-radius = 2.0
+radius = 5.0
 
 [node name="Bullet" type="RigidBody2D"]
 collision_layer = 0
@@ -17,7 +17,7 @@ script = ExtResource("1_j3c6t")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.1, 0.1)
-texture = ExtResource("1_6r84r")
+texture = ExtResource("2_1xhdh")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 4

@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="WeaponData" load_steps=3 format=3 uid="uid://pm8xrmvjwbcx"]
+
+[ext_resource type="Texture2D" uid="uid://dgly3edm60vcp" path="res://assets/sprites/weapons/Hook_1.png" id="1_1owwc"]
+[ext_resource type="Script" uid="uid://bpnmcpbje3flx" path="res://src/weapons/weapon_data.gd" id="1_tfaek"]
+
+[resource]
+script = ExtResource("1_tfaek")
+base_price = 100.0
+unlock_price = 300.0
+name = "Taser"
+display_name = "Electric Grapple Hook"
+description = ""
+equipped_slot_1 = false
+equipped_slot_2 = false
+unlocked = false
+unknown = true
+image = ExtResource("1_1owwc")
+metadata/_custom_type_script = "uid://bpnmcpbje3flx"

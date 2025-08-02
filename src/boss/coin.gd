@@ -8,9 +8,11 @@ enum {
 var my_type: int
 var dying := false
 var time_remaining := 1.0
+var value := 0
 #@onready var gpu_particles_2d: GPUParticles2D = $GPUParticles2D
 
 @export var bill_colors: Array[Color]
+@onready var game_state := GameState.get_state(self)
 
 func _on_collect_body_entered(_body: Node2D) -> void:
 	if dying: return
@@ -18,6 +20,7 @@ func _on_collect_body_entered(_body: Node2D) -> void:
 	#gpu_particles_2d.restart()
 	$Coin.visible = false
 	$Bill.visible = false
+	game_state.add_money(value)
 	
 func _process(delta: float) -> void:
 	set_physics_process(Hitstun.paused)
@@ -32,7 +35,8 @@ func _ready() -> void:
 	linear_velocity = Vector2.RIGHT.rotated(randf()*TAU) * 200
 	
 
-func set_value(value): ## 1, 2, 5, 10, 20, 50, 100
+func set_value(ivalue): ## 1, 2, 5, 10, 20, 50, 100
+	value = ivalue
 	var color = [1,2,5,10,20,50,100].find(value)
 	if color <= 1:
 		my_type = TYPE_COIN

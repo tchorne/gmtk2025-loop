@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="WeaponData" load_steps=3 format=3 uid="uid://8cknd3yir3qr"]
+
+[ext_resource type="Texture2D" uid="uid://cn8yp67o681r2" path="res://assets/sprites/weapons/Orbital_1.png" id="1_k5vb4"]
+[ext_resource type="Script" uid="uid://bpnmcpbje3flx" path="res://src/weapons/weapon_data.gd" id="1_tehoy"]
+
+[resource]
+script = ExtResource("1_tehoy")
+base_price = 1000.0
+unlock_price = 4000.0
+name = "OrbitalLaser"
+display_name = "Orbital Laser"
+description = ""
+equipped_slot_1 = false
+equipped_slot_2 = false
+unlocked = false
+unknown = false
+image = ExtResource("1_k5vb4")
+metadata/_custom_type_script = "uid://bpnmcpbje3flx"

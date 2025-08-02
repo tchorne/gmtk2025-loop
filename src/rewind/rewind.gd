@@ -35,6 +35,7 @@ func _process(delta: float) -> void:
 func begin_rewind():
 	rewinding = true
 	start_rewind_time = game_state.time
+	rewind_t = 0
 	
 func add_ghost(base: Sprite2D) -> Ghost:
 	var ghost = Ghost.new()

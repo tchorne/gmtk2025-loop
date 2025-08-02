@@ -10,7 +10,7 @@ func set_active(a):
 	
 	active = a
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if active and not prev_active:
 		$FlamethrowerStart.play()
 		$Flamethrower1.play()

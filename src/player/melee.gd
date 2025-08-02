@@ -24,17 +24,17 @@ func begin_attack():
 	melee_anims.play(current_attack)
 	
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	return
-	attack_cooldown -= delta  * Hitstun.deltamod()
-	
-	if Input.is_action_just_pressed("lightatk"):
-		last_input = "lightatk"
-		if in_attack and current_attack_string.attacks.size() > 0:
-			chained = true
-		
-		if not in_attack and attack_cooldown < 0:
-			begin_attack()
+	#attack_cooldown -= delta  * Hitstun.deltamod()
+	#
+	#if Input.is_action_just_pressed("lightatk"):
+		#last_input = "lightatk"
+		#if in_attack and current_attack_string.attacks.size() > 0:
+			#chained = true
+		#
+		#if not in_attack and attack_cooldown < 0:
+			#begin_attack()
 
 ## Called by animation
 func next_attack():

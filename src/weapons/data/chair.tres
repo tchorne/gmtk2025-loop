@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="WeaponData" load_steps=3 format=3 uid="uid://dpepoassqu4om"]
+
+[ext_resource type="Texture2D" uid="uid://d0hy0eiqausbc" path="res://assets/sprites/weapons/Chair.png" id="1_q28lf"]
+[ext_resource type="Script" uid="uid://bpnmcpbje3flx" path="res://src/weapons/weapon_data.gd" id="1_yhjfg"]
+
+[resource]
+script = ExtResource("1_yhjfg")
+base_price = 25.0
+unlock_price = 10.0
+name = "Chair"
+display_name = ""
+description = ""
+equipped_slot_1 = false
+equipped_slot_2 = false
+unlocked = false
+unknown = false
+image = ExtResource("1_q28lf")
+metadata/_custom_type_script = "uid://bpnmcpbje3flx"

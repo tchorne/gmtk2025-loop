@@ -5,10 +5,10 @@ extends RigidBody2D
 
 var dead := false
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	inflicter.knockback = linear_velocity * mass * force
 
-func on_hit(other: Statue):
+func on_hit(_other: Statue):
 	queue_free()
 
 

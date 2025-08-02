@@ -48,8 +48,10 @@ func _process(_delta: float) -> void:
 			switch_to(AnimState.JUMP_UP)
 		else:
 			switch_to(AnimState.JUMP_DOWN)
-	if player.velocity.x > 0.01: facing_right = true
-	if player.velocity.x < -0.01: facing_right = false
+	#if player.velocity.x > 0.01: facing_right = true
+	#if player.velocity.x < -0.01: facing_right = false
+	var mouse_vector = (get_viewport().get_camera_2d().get_global_mouse_position() - player.global_position).normalized()
+	facing_right = mouse_vector.x > 0 ### HERE
 	sprite.flip_h = not facing_right
 	weapon_pivot.scale.x = 1.0 if facing_right else -1.0
 	player.facing_right = facing_right

@@ -52,6 +52,8 @@ script = ExtResource("3_wyc4e")
 [node name="RigidBody" type="RigidBody2D" parent="Physics"]
 collision_layer = 8
 physics_material_override = SubResource("PhysicsMaterial_sb82a")
+can_sleep = false
+lock_rotation = true
 linear_damp = 0.5
 metadata/_edit_lock_ = true
 
@@ -78,6 +80,7 @@ unique_name_in_owner = true
 
 [node name="ElementController" type="Control" parent="NearUI/Node2D"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_left = 20.0

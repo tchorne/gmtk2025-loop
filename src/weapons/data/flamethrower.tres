@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="WeaponData" load_steps=3 format=3 uid="uid://b2qrc1vdpa06v"]
+
+[ext_resource type="Script" uid="uid://bpnmcpbje3flx" path="res://src/weapons/weapon_data.gd" id="1_pjedq"]
+[ext_resource type="Texture2D" uid="uid://ckom8n1vt2lmj" path="res://assets/sprites/weapons/Flamethrower.png" id="1_srgbw"]
+
+[resource]
+script = ExtResource("1_pjedq")
+base_price = 200.0
+unlock_price = 800.0
+name = "Flamethrower"
+display_name = ""
+description = ""
+equipped_slot_1 = false
+equipped_slot_2 = false
+unlocked = false
+unknown = false
+image = ExtResource("1_srgbw")
+metadata/_custom_type_script = "uid://bpnmcpbje3flx"

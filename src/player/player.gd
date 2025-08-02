@@ -17,6 +17,7 @@ const FRICTION = 800.0
 @onready var stunned_1: Sprite2D = $SpriteScale/Sprite2D
 @onready var stunned_2: Sprite2D = $SpriteScale/Sprite2D2
 
+
 var move_time := 0.0 ## time spent moving in the same direction
 var facing_right := true
 var neutral_input := true ## true iff neither left nor right are held
@@ -37,10 +38,18 @@ func _physics_process(delta: float) -> void:
 	if direction > 0:
 		neutral_input = false
 		
-		
-	if not melee.in_attack and not Hitstun.paused:
+	
+	if not stunned > 0 and not Hitstun.paused:
 		process_movement(delta * Hitstun.deltamod())
-
+	elif stunned > 0:
+		move_and_slide()
+		stun_duration -= delta * Hitstun.deltamod()
+		if stun_duration <= 0.0:
+			stunned = 0
+			stunned_1.visible = false
+			stunned_2.visible = false
+			player_sprite.visible = true
+		
 	
 func process_movement(delta: float) -> void:
 	# Add the gravity.
@@ -105,7 +114,15 @@ func _on_statue_hitter_area_entered(area: Area2D) -> void:
 	var statue = area.get_statue() as Statue
 	
 	if statue.rigid_body.linear_velocity.length() > 400 and statue.damaging:
-		onhit()
+		onhit(statue)
 
-func onhit():
+func onhit(statue):
+	stunned = 2 if statue.size >= 5 else 1
 	sounds.whomp.play()
+	if stunned == 2:
+		sounds.ding.play()
+	player_sprite.visible = false
+	stunned_1.visible = stunned == 1
+	stunned_2.visible = stunned == 2
+	stun_duration = stunned * 0.5
+	velocity = statue.rigid_body.linear_velocity * 0.5

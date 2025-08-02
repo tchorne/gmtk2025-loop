@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="WeaponData" load_steps=3 format=3 uid="uid://c7kh6jh6knpmp"]
+
+[ext_resource type="Script" uid="uid://bpnmcpbje3flx" path="res://src/weapons/weapon_data.gd" id="1_jx1w1"]
+[ext_resource type="Texture2D" uid="uid://cqus7cudho5xd" path="res://assets/sprites/weapons/Office_3.png" id="1_pfbd5"]
+
+[resource]
+script = ExtResource("1_jx1w1")
+base_price = 30.0
+unlock_price = 10.0
+name = "OfficeSupplies"
+display_name = "Office Supplies"
+description = "Thrown items can get stuck inside statues"
+equipped_slot_1 = false
+equipped_slot_2 = false
+unlocked = false
+unknown = false
+image = ExtResource("1_pfbd5")
+metadata/_custom_type_script = "uid://bpnmcpbje3flx"

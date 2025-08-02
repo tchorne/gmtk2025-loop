@@ -66,13 +66,12 @@ scale = Vector2(0.1, 0.1)
 texture = ExtResource("1_p2bmm")
 
 [node name="Area2D" type="Area2D" parent="Pivot"]
-visible = false
 position = Vector2(88, -31)
 collision_layer = 0
 collision_mask = 8
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Pivot/Area2D"]
-polygon = PackedVector2Array(2, -1, 502, -118, 493, 169, 12, 73)
+polygon = PackedVector2Array(-10, -10, 167, -38, 185, 72, -3, 70)
 
 [node name="ContinuousDamage" type="Node" parent="." node_paths=PackedStringArray("area")]
 script = ExtResource("3_hoap4")
