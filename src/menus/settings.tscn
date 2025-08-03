@@ -74,6 +74,7 @@ text = "X"
 horizontal_alignment = 1
 
 [node name="Blur" type="TextureButton" parent="TextureRect"]
+layout_mode = 0
 offset_left = 28.0
 offset_top = 131.0
 offset_right = 150.0
@@ -93,6 +94,7 @@ text = "Blur"
 horizontal_alignment = 1
 
 [node name="Grain" type="TextureButton" parent="TextureRect"]
+layout_mode = 0
 offset_left = 144.0
 offset_top = 132.0
 offset_right = 274.0

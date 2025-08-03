@@ -63,10 +63,10 @@ shape = SubResource("CircleShape2D_0dg4f")
 
 [node name="DamageInflictor" type="Node" parent="."]
 script = ExtResource("5_v861p")
-damage = 2.5
-structure_damage = 0.05
+damage = 13.0
+structure_damage = 0.35
 element = 6
-knockback_strength = 20.0
+knockback_strength = 80.0
 
 [node name="Shield" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_ngbet")

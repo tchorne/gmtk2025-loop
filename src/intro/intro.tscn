@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://7yfn1mbwx6po" path="res://src/mainscene/intro.gd" id="1_0tdaw"]
 [ext_resource type="AudioStream" uid="uid://86x7bdegit0a" path="res://assets/sound/projectorsound.wav" id="1_yenea"]
-[ext_resource type="AudioStream" uid="uid://coeyiv3fowd8p" path="res://assets/music/idk its silly v3.wav" id="2_11jar"]
+[ext_resource type="AudioStream" uid="uid://dtg38hpo7dvxo" path="res://assets/music/menutheme.wav" id="2_uuvs5"]
 [ext_resource type="Material" uid="uid://cbcg6npabqexc" path="res://src/mainscene/shader.tres" id="4_nqxh0"]
 [ext_resource type="Script" uid="uid://j1qkkpofmest" path="res://src/mainscene/blur.gd" id="5_yxki3"]
 [ext_resource type="Texture2D" uid="uid://ceu2mijiblwj3" path="res://assets/ui/Square_Short.png" id="6_bqxb2"]
@@ -20,7 +20,7 @@ autoplay = true
 bus = &"Sound"
 
 [node name="IdkItsSillyV3" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("2_11jar")
+stream = ExtResource("2_uuvs5")
 autoplay = true
 bus = &"Music"
 
@@ -87,14 +87,12 @@ layout_mode = 1
 visible = false
 
 [node name="Blur" parent="CanvasLayer/Intro/Settings/TextureRect" index="2"]
-layout_mode = 0
 offset_left = 22.5
 offset_top = 143.5
 offset_right = 144.5
 offset_bottom = 195.5
 
 [node name="Grain" parent="CanvasLayer/Intro/Settings/TextureRect" index="3"]
-layout_mode = 0
 offset_left = 152.5
 offset_top = 140.5
 offset_right = 282.5

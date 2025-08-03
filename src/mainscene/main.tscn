@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://bnxutd7t1861v"]
+[gd_scene load_steps=47 format=3 uid="uid://bnxutd7t1861v"]
 
 [ext_resource type="Script" uid="uid://diqe728hxkc61" path="res://src/mainscene/camera.gd" id="1_4lhpg"]
 [ext_resource type="Texture2D" uid="uid://dymnc6d5uy2jb" path="res://assets/environment/background.png" id="1_vldkb"]
@@ -28,6 +28,8 @@
 [ext_resource type="Texture2D" uid="uid://ceu2mijiblwj3" path="res://assets/ui/Square_Short.png" id="19_bq3sp"]
 [ext_resource type="Theme" uid="uid://b2ph8ikxoqmwf" path="res://src/default.theme" id="20_4emin"]
 [ext_resource type="Texture2D" uid="uid://bubpvwk3ayp4t" path="res://assets/effects/filmboder.png" id="20_56qbt"]
+[ext_resource type="Texture2D" uid="uid://dkko5p25ru0gq" path="res://assets/ui/clockoverlay1.png" id="21_8psv0"]
+[ext_resource type="Texture2D" uid="uid://db48bgr5c3tlw" path="res://assets/ui/clockoverlay2.png" id="22_ug5sx"]
 [ext_resource type="Script" uid="uid://bofieksebn0jm" path="res://src/mainscene/inventory_display.gd" id="24_r1e3j"]
 [ext_resource type="Texture2D" uid="uid://bho80euqy4w1y" path="res://assets/ui/Circle_No_outline.png" id="25_8uvsf"]
 [ext_resource type="Texture2D" uid="uid://jwcubcargkae" path="res://assets/ui/mouse_left.png" id="25_evxik"]
@@ -37,6 +39,22 @@
 [ext_resource type="Material" uid="uid://cbcg6npabqexc" path="res://src/mainscene/shader.tres" id="28_5reba"]
 [ext_resource type="Texture2D" uid="uid://b1e6ipprtsn5h" path="res://assets/ui/arrows/3.png" id="28_bnhfq"]
 [ext_resource type="Script" uid="uid://j1qkkpofmest" path="res://src/mainscene/blur.gd" id="29_5reba"]
+
+[sub_resource type="GDScript" id="GDScript_ue2y1"]
+resource_name = "spin"
+script/source = "extends TextureRect
+
+@onready var rewind: Rewind = $\"../../../Rewind\"
+
+@onready var speed = randf()+1
+@onready var rewind_clock: Control = $\"..\"
+
+
+func _process(delta: float) -> void:
+	rewind_clock.visible = rewind.rewinding
+	rotation -= delta * 10.0 * speed
+	
+"
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_vldkb"]
 normal = Vector2(0.000438182, -1)
@@ -291,6 +309,58 @@ rotation = 1.76521
 scale = Vector2(1.19681, 0.616886)
 pivot_offset = Vector2(20, 142)
 texture = ExtResource("19_4ephh")
+
+[node name="RewindClock" type="Control" parent="Background"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect2" type="TextureRect" parent="Background/RewindClock"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1238.0
+offset_top = -1160.0
+offset_right = 1238.0
+offset_bottom = 1160.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(49.27, 0)
+texture = ExtResource("21_8psv0")
+
+[node name="TextureRect3" type="TextureRect" parent="Background/RewindClock"]
+layout_mode = 0
+offset_left = -80.9842
+offset_top = -907.978
+offset_right = 55.0158
+offset_bottom = -64.9781
+scale = Vector2(0.756304, 0.568544)
+pivot_offset = Vector2(59.78, 1000)
+texture = ExtResource("22_ug5sx")
+script = SubResource("GDScript_ue2y1")
+
+[node name="TextureRect4" type="TextureRect" parent="Background/RewindClock"]
+layout_mode = 0
+offset_left = -74.6255
+offset_top = -742.651
+offset_right = 61.3745
+offset_bottom = 100.349
+pivot_offset = Vector2(49.27, 800)
+texture = ExtResource("22_ug5sx")
+script = SubResource("GDScript_ue2y1")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(-10, -1)

@@ -22,6 +22,7 @@ func hide_all():
 	$Perk/Sell.visible = false
 	$Perk/Buy.visible = false
 	texture_rect.self_modulate = Color.WHITE
+	$TextureRect.flip_h = false
 	
 func display_buy_menu(data: WeaponData, stock_price: float):
 	hide_all()
@@ -56,6 +57,7 @@ func display_category(data: WeaponData):
 
 func display_perk_menu(perk_: int, cost: int, owned := false):
 	hide_all()
+	$TextureRect.flip_h = true
 	perk.visible = true 
 	$Perk/Price.text = "$" + str(cost)
 	item_name.text = Perks.PERK_NAMES[perk_]

@@ -28,6 +28,7 @@ grow_vertical = 2
 mouse_filter = 2
 texture = ExtResource("2_3ii8i")
 expand_mode = 1
+flip_h = true
 
 [node name="Perk" type="Control" parent="."]
 visible = false
@@ -39,10 +40,10 @@ offset_bottom = 51.0
 
 [node name="Price" type="Label" parent="Perk"]
 layout_mode = 0
-offset_left = 46.0
-offset_top = 36.0
-offset_right = 161.0
-offset_bottom = 66.0
+offset_left = -1.0
+offset_top = 31.0
+offset_right = 114.0
+offset_bottom = 61.0
 theme = ExtResource("3_3ii8i")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 21
@@ -52,8 +53,10 @@ horizontal_alignment = 2
 [node name="Buy" type="Control" parent="Perk"]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = -47.0
+offset_top = -5.0
+offset_right = -7.0
+offset_bottom = 35.0
 mouse_filter = 2
 
 [node name="Label" type="Label" parent="Perk/Buy"]
@@ -79,8 +82,10 @@ expand_mode = 1
 [node name="Sell" type="Control" parent="Perk"]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = -47.0
+offset_top = -5.0
+offset_right = -7.0
+offset_bottom = 35.0
 mouse_filter = 2
 
 [node name="Label" type="Label" parent="Perk/Sell"]
@@ -105,9 +110,9 @@ expand_mode = 1
 
 [node name="Description" type="Label" parent="Perk"]
 layout_mode = 0
-offset_left = -109.0
+offset_left = -147.0
 offset_top = 31.0
-offset_right = 46.0
+offset_right = 8.0
 offset_bottom = 121.0
 theme = ExtResource("3_3ii8i")
 theme_override_font_sizes/font_size = 12

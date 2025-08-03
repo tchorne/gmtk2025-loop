@@ -14,7 +14,7 @@ var total_earnings := 0.0
 var money := 0.0
 var quota := 99.0
 var quota_mod := 1.2
-var eval_day := 5
+var eval_day := 6
 var playing := false
 var firsttime := true
 var income_mult := 1.0
@@ -36,14 +36,11 @@ func _ready():
 	
 	get_tree().process_frame.connect(func():
 		money = 45
-		#money = 10000
 		end_game()
 	, CONNECT_ONE_SHOT
 	)
 	
 func _process(delta: float) -> void:
-	if Input.is_key_pressed(KEY_F2):
-		get_tree().reload_current_scene()
 	if playing:
 		time += delta / DAY_LENGTH
 		inventory.update_rentals(time)
@@ -76,10 +73,6 @@ func begin_game():
 	%InventoryDisplay.visible = true
 	
 func end_game():
-	if not firsttime:
-		$GameMusic.stop()
-		$Dayend.play()
-		quota_mod = 1.2
 	money = money * income_mult
 	total_earnings += money
 	$MenuMusic.play()
@@ -90,6 +83,14 @@ func end_game():
 	
 	reload_perks.emit()
 	playing = false
+	
+	failed_quota = money < quota
+	
+	
+	if not firsttime:
+		$GameMusic.stop()
+		$Dayend.play()
+		quota_mod = 1.2
 	earnings_history.append(int(money))
 	inventory.total_money = int(money)
 	inventory.clear_rentals()
@@ -97,7 +98,6 @@ func end_game():
 	$"../World".process_mode = Node.PROCESS_MODE_DISABLED
 	%Player.process_mode = Node.PROCESS_MODE_DISABLED
 	$"../CanvasLayer/Menus/EndOfDay".visible = true
-	failed_quota = money < get_quota()
 	var performance = eval_day == day_number
 	$"../CanvasLayer/Menus/EndOfDay/Shop".setup(failed_quota, performance, firsttime)
 	%Money.visible = false

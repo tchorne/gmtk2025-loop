@@ -32,6 +32,8 @@ func add_eval_day():
 		game_state.eval_day += 1
 		
 func update():
+	$Label2.visible = false
+	visible = game_state.day_number >= 1
 	game_state.income_mult = LEVEL_INCOME_MULTS[level]
 	game_state.quota_mod = LEVEL_QUOTA_MULTS[level]
 	$"../Info2/Earnings".text = "$" + str(int(game_state.total_earnings))
@@ -43,10 +45,11 @@ func update():
 		if days_left >= 2:
 			var display_count = "[color=red]{0}[/color]".format([ days_left ])
 			if level == 4:
-				display_count = "[color=orangered][{0}][/color]".format([ days_left + 1 ])
+				display_count = "[color=orangered]{0}+1[/color]".format([ days_left ])
+				$Label2.visible = true
 			$"../Info2/Review".text = "[color=black]Performance Review in {0} loops".format([ display_count ])
 		else:
-			$"../Info2/Review".text = "Performance Review [color=red]next loop[/color]!"
+			$"../Info2/Review".text = "[color=black]Performance Review [color=red]next loop[/color]!"
 	$Review.text = "Income Multiplier: %0.2fx" % [game_state.income_mult]
 	$Review2.text = "Next Quota = Previous x %0.2fx" % [game_state.quota_mod]
 	

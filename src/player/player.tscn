@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://drfnne271u6gq"]
+[gd_scene load_steps=54 format=3 uid="uid://drfnne271u6gq"]
 
 [ext_resource type="Script" uid="uid://bia83w547m3pn" path="res://src/player/player.gd" id="1_mf2ua"]
 [ext_resource type="Texture2D" uid="uid://bw6xltcnqcctm" path="res://assets/misc/dropshadow.png" id="2_244u8"]
@@ -28,6 +28,7 @@
 [ext_resource type="AudioStream" uid="uid://cn7xldrj8j2qs" path="res://assets/sound/jump.wav" id="20_4uy46"]
 [ext_resource type="AudioStream" uid="uid://crtbpckvmjreb" path="res://assets/sound/land.wav" id="21_k60ra"]
 [ext_resource type="AudioStream" uid="uid://cwck0n1t4we8g" path="res://assets/sound/skid2.wav" id="22_5efpn"]
+[ext_resource type="Texture2D" uid="uid://ceodijcfl4m7a" path="res://assets/sprites/player/dustsheet.png" id="22_p6grl"]
 [ext_resource type="AudioStream" uid="uid://c83r5b4b73a0o" path="res://assets/sound/run.wav" id="23_vwi60"]
 [ext_resource type="AudioStream" uid="uid://d20pevrvaykrp" path="res://assets/sound/whomp.wav" id="24_4uy46"]
 [ext_resource type="AudioStream" uid="uid://bf1u1dnv5kfd7" path="res://assets/sound/ding.wav" id="28_o04tx"]
@@ -211,6 +212,16 @@ _data = {
 &"skid": SubResource("Animation_l271a")
 }
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_e7e1q"]
+particles_animation = true
+particles_anim_h_frames = 3
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_kd5mi"]
+_data = [Vector2(0, 0.895161), 0.0, 0.0, 0, 0, Vector2(0.846914, 0.531309), -1.39573, -1.39573, 0, 0, Vector2(0.99999, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_dpt0q"]
 atlas = ExtResource("16_j2873")
 region = Rect2(0, 0, 512, 512)
@@ -242,10 +253,6 @@ animations = [{
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lnvp7"]
 size = Vector2(41, 86)
-
-[sub_resource type="Curve" id="Curve_kd5mi"]
-_data = [Vector2(0, 0.895161), 0.0, 0.0, 0, 0, Vector2(0.846914, 0.531309), -1.39573, -1.39573, 0, 0, Vector2(0.99999, 0), 0.0, 0.0, 0, 0]
-point_count = 3
 
 [sub_resource type="Animation" id="Animation_jiejy"]
 resource_name = "MediumCombo"
@@ -373,6 +380,27 @@ libraries = {
 &"": SubResource("AnimationLibrary_vwsmr")
 }
 
+[node name="SkidParticles" type="CPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_e7e1q")
+position = Vector2(9.33333, 50.6667)
+emitting = false
+amount = 10
+texture = ExtResource("22_p6grl")
+lifetime = 0.84
+emission_shape = 1
+emission_sphere_radius = 19.12
+direction = Vector2(1, -0.2)
+spread = 27.25
+gravity = Vector2(0, 0)
+initial_velocity_min = 150.23
+initial_velocity_max = 150.23
+scale_amount_min = 0.05
+scale_amount_max = 0.12
+scale_amount_curve = SubResource("Curve_kd5mi")
+anim_speed_min = 1.0
+anim_speed_max = 3.0
+metadata/_edit_lock_ = true
+
 [node name="SpriteScale" type="Node2D" parent="."]
 position = Vector2(0, 47)
 scale = Vector2(0.1, 0.1)
@@ -433,22 +461,6 @@ position = Vector2(-0.5, 4)
 shape = SubResource("RectangleShape2D_lnvp7")
 metadata/_edit_lock_ = true
 
-[node name="SkidParticles" type="CPUParticles2D" parent="."]
-position = Vector2(9.33333, 50.6667)
-emitting = false
-amount = 10
-lifetime = 0.84
-emission_shape = 1
-emission_sphere_radius = 19.12
-direction = Vector2(1, -0.2)
-spread = 27.25
-gravity = Vector2(0, 0)
-initial_velocity_min = 150.23
-initial_velocity_max = 150.23
-scale_amount_max = 15.08
-scale_amount_curve = SubResource("Curve_kd5mi")
-metadata/_edit_lock_ = true
-
 [node name="Slash" type="Sprite2D" parent="."]
 visible = false
 position = Vector2(58, 16)
@@ -504,6 +516,7 @@ bus = &"Sound"
 
 [node name="Whomp" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource("24_4uy46")
+bus = &"Sound"
 
 [node name="Ding" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource("28_o04tx")

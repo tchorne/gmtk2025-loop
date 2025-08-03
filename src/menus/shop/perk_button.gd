@@ -28,13 +28,14 @@ func load_random_perk():
 	visible = true
 	my_perk = unowned_perks.pick_random()
 	$Label.text = str(my_perk+1)
+	display_perk(my_perk)
 
 func _on_gui_input(event: InputEvent) -> void:
 	if not (event is InputEventMouseButton): return
 	if not event.is_released(): return
 	var inventory := Inventory.get_inventory(self)
 	if not sold and event.button_index == MOUSE_BUTTON_LEFT:
-		if my_perk > 0 and inventory.spendable_money >= perk_price:
+		if my_perk >= 0 and inventory.spendable_money >= perk_price:
 			inventory.spendable_money -= perk_price
 			money_spent = perk_price
 			Perks.get_perk(my_perk)
@@ -59,3 +60,11 @@ func _process(delta: float) -> void:
 func _on_mouse_entered() -> void:
 	
 	hovered_or_updated.emit(self, my_perk)
+
+
+func display_perk(perk: int):
+	var i = Perks.PERK_ICONS[perk]
+	if ResourceLoader.exists("res://assets/perks/" + str(i) + ".png"):
+		$TextureRect.texture = load("res://assets/perks/" + str(i) + ".png")
+		$Label.visible = false
+		

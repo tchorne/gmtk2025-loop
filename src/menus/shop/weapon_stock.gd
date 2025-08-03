@@ -19,12 +19,12 @@ const TIME_CHUNKS = 50
 var modifier = 1.0
 
 var min_discount := 0.3
-var max_markup := 2.4
+var max_markup := 2.7
 
 static var num := 0
 var mynum = 0
 var previous_hover := -1
-var volatility := 1
+var volatility := 0.3
 
 var price_timeline : Array[float] = []
 var rental_blocks: Array[RentalBlock]
@@ -58,7 +58,7 @@ func generate_history(iseed=-1):
 	var gradient := Gradient.new()
 	gradient.interpolation_color_space = Gradient.GRADIENT_COLOR_SPACE_LINEAR_SRGB
 	gradient.remove_point(0)
-	
+	volatility = randf_range(0.5, 1.0)
 	for i in range(TIME_CHUNKS):
 		current_price += (randf()-0.5) * volatility
 		current_price = clamp(current_price, 0.3, 1.0)
@@ -73,7 +73,7 @@ func generate_history(iseed=-1):
 func set_modifier(base_price, money_earned): ## at it's cheapest, any weapon should be at least 5% of your spending money
 	
 	var s = min_discount * base_price / float(money_earned)
-	s /= 0.05
+	s /= 0.07
 	s = max(1.0/s, 1)
 	
 	modifier = s
