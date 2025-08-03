@@ -1,9 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://qyn6liw0mnc7"]
+[gd_scene load_steps=10 format=3 uid="uid://qyn6liw0mnc7"]
 
 [ext_resource type="Script" uid="uid://u2ef3wbucknr" path="res://src/menus/shop/weapon_stock.gd" id="1_8mnww"]
 [ext_resource type="Texture2D" uid="uid://dipdng1cgkbv7" path="res://assets/sprites/weapons/Minigun.png" id="1_xut4s"]
 [ext_resource type="Texture2D" uid="uid://d20uecugd115u" path="res://assets/ui/Circle.png" id="2_otfjf"]
+[ext_resource type="Texture2D" uid="uid://jwcubcargkae" path="res://assets/ui/mouse_left.png" id="4_mewe8"]
 [ext_resource type="Texture2D" uid="uid://dhqgx56eai1jp" path="res://assets/ui/Outline.png" id="4_otfjf"]
+[ext_resource type="Texture2D" uid="uid://bho80euqy4w1y" path="res://assets/ui/Circle_No_outline.png" id="5_0yv6g"]
+[ext_resource type="Texture2D" uid="uid://cw5u37ye6gmfs" path="res://assets/ui/mouse_right.png" id="5_kn2go"]
 
 [sub_resource type="Gradient" id="Gradient_8mnww"]
 interpolation_color_space = 1
@@ -63,6 +66,47 @@ offset_right = 20.0
 grow_horizontal = 2
 grow_vertical = 0
 text = "BUY"
+
+[node name="left" type="TextureRect" parent="Control"]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 7.0
+offset_right = 50.0
+offset_bottom = 42.0
+mouse_filter = 2
+texture = ExtResource("4_mewe8")
+expand_mode = 1
+
+[node name="TextureRect" type="TextureRect" parent="Control/left"]
+modulate = Color(1, 1, 1, 0.647059)
+show_behind_parent = true
+layout_mode = 0
+offset_left = 1.0
+offset_top = -1.0
+offset_right = 35.0
+offset_bottom = 39.0
+texture = ExtResource("5_0yv6g")
+expand_mode = 1
+
+[node name="right" type="TextureRect" parent="Control"]
+layout_mode = 0
+offset_left = 89.0
+offset_top = 8.0
+offset_right = 123.0
+offset_bottom = 42.0
+mouse_filter = 2
+texture = ExtResource("5_kn2go")
+expand_mode = 1
+
+[node name="TextureRect" type="TextureRect" parent="Control/right"]
+modulate = Color(1, 1, 1, 0.647059)
+show_behind_parent = true
+offset_left = 1.0
+offset_top = -1.0
+offset_right = 35.0
+offset_bottom = 39.0
+texture = ExtResource("5_0yv6g")
+expand_mode = 1
 
 [node name="ColorRect" type="TextureRect" parent="."]
 show_behind_parent = true

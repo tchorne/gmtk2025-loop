@@ -1,0 +1,24 @@
+label perks
+Perks provide a wide range of unique permenant upgrades. The more perks you own, the more expensive they'll become.
+The perk shop will refresh every loop, so check in often!
+[end_timeline]
+label catalogue
+This is the catalogue, where you can view all your available weapons.
+Weapons are assigned to a left or right slot. Only one weapon can be in a slot at a time, so if you're renting 2 weapons at the same time, make sure they're in different slots.
+[end_timeline]
+label rentals
+Click on a stock graph to rent out a weapon for that period of the day. You may also sell time slots if you'd like to change your schedule.
+Weapon prices vary throughout the day, so consider picking them up when they're cheap.
+[color=salmon]Keep in mind\: if a weapon rental begins and you already have a weapon in the same slot, the previous weapon will be discarded.[color=salmon]
+[end_timeline]
+label dial
+Turning up the dial will increase next loop's quota, but it will also give a slight multiplier to your earnings.
+At max level, the Performance Review will be delayed by one day. 
+Be careful, using this every day can rapidly increase the quota!
+[end_timeline]
+label performance
+Your goal is to make as much money as you can before the performance review.
+You can increase how much time you have and how much money you gain by turning up the [color=salmon]dial[/color].
+[end_timeline]
+label money
+The amount of money collected in the previous loop. The top displays the total amount, while the amount you have remaining to spend is shown below.

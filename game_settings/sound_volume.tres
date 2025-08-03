@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="settingAudioVolume" load_steps=2 format=3 uid="uid://xbciiwoop8s1"]
+
+[ext_resource type="Script" uid="uid://cnplumd1owe1y" path="res://addons/ggs/templates/audio/setting_audio_volume.gd" id="1_peuh3"]
+
+[resource]
+script = ExtResource("1_peuh3")
+audio_bus = "Sound"
+read_only_properties = PackedStringArray("value_type", "value_hint", "value_hint_string")
+default = 60.0
+section = "audio"
+key = ""
+value_type = 3
+value_hint = 1
+value_hint_string = "0,100"
+metadata/_custom_type_script = "uid://cnplumd1owe1y"

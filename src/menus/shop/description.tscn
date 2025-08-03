@@ -38,6 +38,7 @@ offset_right = 189.0
 offset_bottom = 51.0
 
 [node name="Price" type="Label" parent="Perk"]
+layout_mode = 0
 offset_left = 46.0
 offset_top = 36.0
 offset_right = 161.0
@@ -103,6 +104,7 @@ texture = ExtResource("5_3ii8i")
 expand_mode = 1
 
 [node name="Description" type="Label" parent="Perk"]
+layout_mode = 0
 offset_left = -109.0
 offset_top = 31.0
 offset_right = 46.0

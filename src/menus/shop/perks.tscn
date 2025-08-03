@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://f8b5bcm0k5c8"]
+[gd_scene load_steps=7 format=3 uid="uid://f8b5bcm0k5c8"]
 
 [ext_resource type="Texture2D" uid="uid://cg2ocfngenf8f" path="res://assets/ui/perksv2.png" id="1_bvb63"]
 [ext_resource type="Script" uid="uid://v033dfbpj3db" path="res://src/menus/menu_tab.gd" id="2_3l10o"]
 [ext_resource type="PackedScene" uid="uid://csasfmiwaete" path="res://src/menus/shop/perk_button.tscn" id="2_xm5ce"]
 [ext_resource type="Script" uid="uid://cycvi3nyhap8f" path="res://src/menus/shop/perks.gd" id="2_yxsxx"]
+[ext_resource type="PackedScene" uid="uid://vxdnwgixfq61" path="res://src/menus/help.tscn" id="5_yxsxx"]
 
 [sub_resource type="GDScript" id="GDScript_xm5ce"]
 resource_name = "reveal"
@@ -53,7 +54,6 @@ offset_right = 55.5
 offset_bottom = 344.0
 
 [node name="TextureRect" parent="Control/VBoxContainer" instance=ExtResource("2_xm5ce")]
-self_modulate = Color(0.657315, 0.803935, 0.322848, 1)
 layout_mode = 2
 
 [node name="Secret2" type="Control" parent="Control/VBoxContainer"]
@@ -62,7 +62,6 @@ layout_mode = 2
 script = SubResource("GDScript_xm5ce")
 
 [node name="TextureRect3" parent="Control/VBoxContainer/Secret2" instance=ExtResource("2_xm5ce")]
-self_modulate = Color(0.657315, 0.803935, 0.322848, 1)
 layout_mode = 2
 offset_left = 10.0
 offset_top = 3.99994
@@ -78,7 +77,6 @@ offset_bottom = 335.0
 rotation = 0.061378
 
 [node name="TextureRect2" parent="Control/VBoxContainer2" instance=ExtResource("2_xm5ce")]
-self_modulate = Color(0.657315, 0.803935, 0.322848, 1)
 layout_mode = 2
 
 [node name="Secret" type="Control" parent="Control/VBoxContainer2"]
@@ -87,7 +85,6 @@ layout_mode = 2
 script = SubResource("GDScript_xm5ce")
 
 [node name="TextureRect3" parent="Control/VBoxContainer2/Secret" instance=ExtResource("2_xm5ce")]
-self_modulate = Color(0.657315, 0.803935, 0.322848, 1)
 layout_mode = 2
 offset_left = 10.0
 offset_top = 3.99994
@@ -103,11 +100,18 @@ offset_bottom = 325.0
 rotation = -0.10248
 
 [node name="TextureRect3" parent="Control/VBoxContainer3" instance=ExtResource("2_xm5ce")]
-self_modulate = Color(0.657315, 0.803935, 0.322848, 1)
 layout_mode = 2
 
 [node name="MenuTab" type="Node" parent="." groups=["MenuTab"]]
 script = ExtResource("2_3l10o")
-base_height = 560.0
-hover_height = 550.0
-select_height = 305.0
+base_height = 490.0
+hover_height = 485.0
+select_height = 405.0
+
+[node name="Help" parent="." instance=ExtResource("5_yxsxx")]
+layout_mode = 0
+offset_left = 256.0
+offset_top = 136.0
+offset_right = 294.0
+offset_bottom = 174.0
+timeline_label = "perks"

@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://bnxutd7t1861v"]
+[gd_scene load_steps=44 format=3 uid="uid://bnxutd7t1861v"]
 
 [ext_resource type="Script" uid="uid://diqe728hxkc61" path="res://src/mainscene/camera.gd" id="1_4lhpg"]
 [ext_resource type="Texture2D" uid="uid://dymnc6d5uy2jb" path="res://assets/environment/background.png" id="1_vldkb"]
@@ -22,14 +22,20 @@
 [ext_resource type="Resource" uid="uid://c6rv6kxt4ap63" path="res://src/weapons/data/shield.tres" id="15_kkl8f"]
 [ext_resource type="AudioStream" uid="uid://mwjm6b318an1" path="res://assets/sound/coin4.wav" id="15_r1e3j"]
 [ext_resource type="Resource" uid="uid://8cknd3yir3qr" path="res://src/weapons/data/orbitallaser.tres" id="16_r1e3j"]
+[ext_resource type="AudioStream" uid="uid://c3xyq3wrup2u" path="res://assets/sound/bellbig.wav" id="17_uyqlf"]
+[ext_resource type="Script" uid="uid://bwsvvg7w5iqav" path="res://src/mainscene/clock.gd" id="18_dmthj"]
+[ext_resource type="Texture2D" uid="uid://ideiyn074wht" path="res://assets/environment/Clock_Hand.png" id="19_4ephh"]
 [ext_resource type="Texture2D" uid="uid://ceu2mijiblwj3" path="res://assets/ui/Square_Short.png" id="19_bq3sp"]
 [ext_resource type="Theme" uid="uid://b2ph8ikxoqmwf" path="res://src/default.theme" id="20_4emin"]
 [ext_resource type="Texture2D" uid="uid://bubpvwk3ayp4t" path="res://assets/effects/filmboder.png" id="20_56qbt"]
 [ext_resource type="Script" uid="uid://bofieksebn0jm" path="res://src/mainscene/inventory_display.gd" id="24_r1e3j"]
 [ext_resource type="Texture2D" uid="uid://bho80euqy4w1y" path="res://assets/ui/Circle_No_outline.png" id="25_8uvsf"]
 [ext_resource type="Texture2D" uid="uid://jwcubcargkae" path="res://assets/ui/mouse_left.png" id="25_evxik"]
+[ext_resource type="Texture2D" uid="uid://p1g8ig3wbm0h" path="res://assets/ui/arrows/1.png" id="26_jlq2c"]
 [ext_resource type="Texture2D" uid="uid://cw5u37ye6gmfs" path="res://assets/ui/mouse_right.png" id="26_rc02r"]
+[ext_resource type="Texture2D" uid="uid://dbf2lw3u3wf37" path="res://assets/ui/arrows/2.png" id="27_uyqlf"]
 [ext_resource type="Material" uid="uid://cbcg6npabqexc" path="res://src/mainscene/shader.tres" id="28_5reba"]
+[ext_resource type="Texture2D" uid="uid://b1e6ipprtsn5h" path="res://assets/ui/arrows/3.png" id="28_bnhfq"]
 [ext_resource type="Script" uid="uid://j1qkkpofmest" path="res://src/mainscene/blur.gd" id="29_5reba"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_vldkb"]
@@ -43,6 +49,23 @@ normal = Vector2(0, 1)
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_vlq03"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_6ynox"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8psv0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("26_jlq2c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_uyqlf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_bnhfq")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="Main" type="Node"]
 
@@ -86,6 +109,11 @@ volume_db = -10.631
 max_polyphony = 3
 bus = &"Sound"
 
+[node name="Bellbig" type="AudioStreamPlayer" parent="GameState"]
+stream = ExtResource("17_uyqlf")
+volume_db = -2.51
+bus = &"Sound"
+
 [node name="Background" type="TextureRect" parent="."]
 z_index = -10
 offset_left = -704.0
@@ -95,6 +123,174 @@ offset_bottom = 5016.0
 scale = Vector2(0.157264, 0.157264)
 texture = ExtResource("1_vldkb")
 metadata/_edit_lock_ = true
+
+[node name="Clock" type="Control" parent="Background"]
+anchors_preset = 0
+offset_left = 4896.23
+offset_top = 2352.73
+offset_right = 4936.23
+offset_bottom = 2392.73
+script = ExtResource("18_dmthj")
+
+[node name="TextureRect" type="TextureRect" parent="Background/Clock"]
+layout_mode = 0
+offset_left = -6.35913
+offset_top = -120.816
+offset_right = 33.6409
+offset_bottom = 21.1838
+pivot_offset = Vector2(20, 142)
+texture = ExtResource("19_4ephh")
+
+[node name="TextureRect2" type="TextureRect" parent="Background/Clock"]
+layout_mode = 0
+offset_left = -6.35913
+offset_top = -120.816
+offset_right = 33.6409
+offset_bottom = 21.1838
+rotation = 1.76521
+scale = Vector2(1.19681, 0.616886)
+pivot_offset = Vector2(20, 142)
+texture = ExtResource("19_4ephh")
+
+[node name="Clock2" type="Control" parent="Background"]
+anchors_preset = 0
+offset_left = 5373.13
+offset_top = 2333.66
+offset_right = 5413.13
+offset_bottom = 2373.66
+script = ExtResource("18_dmthj")
+
+[node name="TextureRect" type="TextureRect" parent="Background/Clock2"]
+layout_mode = 0
+offset_left = -6.35913
+offset_top = -120.816
+offset_right = 33.6409
+offset_bottom = 21.1838
+pivot_offset = Vector2(20, 142)
+texture = ExtResource("19_4ephh")
+
+[node name="TextureRect2" type="TextureRect" parent="Background/Clock2"]
+layout_mode = 0
+offset_left = -6.35913
+offset_top = -120.816
+offset_right = 33.6409
+offset_bottom = 21.1838
+rotation = 1.76521
+scale = Vector2(1.19681, 0.616886)
+pivot_offset = Vector2(20, 142)
+texture = ExtResource("19_4ephh")
+
+[node name="Clock3" type="Control" parent="Background"]
+anchors_preset = 0
+offset_left = 5913.62
+offset_top = 2352.73
+offset_right = 5953.62
+offset_bottom = 2392.73
+script = ExtResource("18_dmthj")
+
+[node name="TextureRect" type="TextureRect" parent="Background/Clock3"]
+layout_mode = 0
+offset_left = -6.35913
+offset_top = -120.816
+offset_right = 33.6409
+offset_bottom = 21.1838
+pivot_offset = Vector2(20, 142)
+texture = ExtResource("19_4ephh")
+
+[node name="TextureRect2" type="TextureRect" parent="Background/Clock3"]
+layout_mode = 0
+offset_left = -6.35913
+offset_top = -120.816
+offset_right = 33.6409
+offset_bottom = 21.1838
+rotation = 1.76521
+scale = Vector2(1.19681, 0.616886)
+pivot_offset = Vector2(20, 142)
+texture = ExtResource("19_4ephh")
+
+[node name="Clock4" type="Control" parent="Background"]
+anchors_preset = 0
+offset_left = 4889.87
+offset_top = 2899.58
+offset_right = 4929.87
+offset_bottom = 2939.58
+script = ExtResource("18_dmthj")
+
+[node name="TextureRect" type="TextureRect" parent="Background/Clock4"]
+layout_mode = 0
+offset_left = -6.35913
+offset_top = -120.816
+offset_right = 33.6409
+offset_bottom = 21.1838
+pivot_offset = Vector2(20, 142)
+texture = ExtResource("19_4ephh")
+
+[node name="TextureRect2" type="TextureRect" parent="Background/Clock4"]
+layout_mode = 0
+offset_left = -6.35913
+offset_top = -120.816
+offset_right = 33.6409
+offset_bottom = 21.1838
+rotation = 1.76521
+scale = Vector2(1.19681, 0.616886)
+pivot_offset = Vector2(20, 142)
+texture = ExtResource("19_4ephh")
+
+[node name="Clock5" type="Control" parent="Background"]
+anchors_preset = 0
+offset_left = 5347.7
+offset_top = 2925.02
+offset_right = 5387.7
+offset_bottom = 2965.02
+script = ExtResource("18_dmthj")
+
+[node name="TextureRect" type="TextureRect" parent="Background/Clock5"]
+layout_mode = 0
+offset_left = -6.35913
+offset_top = -120.816
+offset_right = 33.6409
+offset_bottom = 21.1838
+pivot_offset = Vector2(20, 142)
+texture = ExtResource("19_4ephh")
+
+[node name="TextureRect2" type="TextureRect" parent="Background/Clock5"]
+layout_mode = 0
+offset_left = -6.35913
+offset_top = -120.816
+offset_right = 33.6409
+offset_bottom = 21.1838
+rotation = 1.76521
+scale = Vector2(1.19681, 0.616886)
+pivot_offset = Vector2(20, 142)
+texture = ExtResource("19_4ephh")
+
+[node name="Clock6" type="Control" parent="Background"]
+anchors_preset = 0
+offset_left = 5900.91
+offset_top = 2925.02
+offset_right = 5940.91
+offset_bottom = 2965.02
+script = ExtResource("18_dmthj")
+
+[node name="TextureRect" type="TextureRect" parent="Background/Clock6"]
+layout_mode = 0
+offset_left = -6.35913
+offset_top = -120.816
+offset_right = 33.6409
+offset_bottom = 21.1838
+pivot_offset = Vector2(20, 142)
+texture = ExtResource("19_4ephh")
+
+[node name="TextureRect2" type="TextureRect" parent="Background/Clock6"]
+layout_mode = 0
+offset_left = -6.35913
+offset_top = -120.816
+offset_right = 33.6409
+offset_bottom = 21.1838
+rotation = 1.76521
+scale = Vector2(1.19681, 0.616886)
+pivot_offset = Vector2(20, 142)
+texture = ExtResource("19_4ephh")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(-10, -1)
@@ -213,17 +409,34 @@ offset_right = 206.0
 offset_bottom = 80.0
 theme = ExtResource("20_4emin")
 theme_override_font_sizes/font_size = 31
-text = "$232456"
-horizontal_alignment = 1
+text = "$23245"
+horizontal_alignment = 2
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CanvasLayer/Money/Backdrop/earned"]
+position = Vector2(15, 21)
+scale = Vector2(0.453125, 0.421875)
+sprite_frames = SubResource("SpriteFrames_8psv0")
+autoplay = "default"
+frame_progress = 0.862015
 
 [node name="quota" type="Label" parent="CanvasLayer/Money/Backdrop"]
 layout_mode = 0
-offset_left = 29.0
-offset_top = 20.0
-offset_right = 175.0
-offset_bottom = 43.0
+offset_left = 96.0
+offset_top = 21.0
+offset_right = 197.0
+offset_bottom = 44.0
 theme = ExtResource("20_4emin")
 text = "$99999"
+horizontal_alignment = 2
+
+[node name="quota2" type="Label" parent="CanvasLayer/Money/Backdrop"]
+layout_mode = 0
+offset_left = 33.0
+offset_top = 20.0
+offset_right = 101.0
+offset_bottom = 43.0
+theme = ExtResource("20_4emin")
+text = "Quota:"
 
 [node name="Filmboder" type="TextureRect" parent="CanvasLayer"]
 z_index = 1
@@ -237,8 +450,10 @@ offset_bottom = -111.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1.1859, 1.30767)
+mouse_filter = 2
 texture = ExtResource("20_56qbt")
 expand_mode = 1
+metadata/_edit_lock_ = true
 
 [node name="InventoryDisplay" type="Control" parent="CanvasLayer"]
 unique_name_in_owner = true
@@ -320,7 +535,7 @@ visible = false
 
 [node name="FullScreenShader" type="CanvasLayer" parent="."]
 
-[node name="Blur" type="ColorRect" parent="FullScreenShader"]
+[node name="Blur" type="ColorRect" parent="FullScreenShader" groups=["ScreenShader"]]
 material = ExtResource("28_5reba")
 anchors_preset = 15
 anchor_right = 1.0

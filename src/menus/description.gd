@@ -10,6 +10,9 @@ extends TextureRect
 @onready var price: Label = $BuyRental/Price
 @onready var perk: Control = $Perk
 
+@onready var inventory = Inventory.get_inventory(self)
+@onready var texture_rect: TextureRect = $TextureRect
+
 func hide_all():
 	buy_rental.visible = false
 	buy.visible = false
@@ -18,6 +21,7 @@ func hide_all():
 	perk.visible = false
 	$Perk/Sell.visible = false
 	$Perk/Buy.visible = false
+	texture_rect.self_modulate = Color.WHITE
 	
 func display_buy_menu(data: WeaponData, stock_price: float):
 	hide_all()
@@ -26,6 +30,8 @@ func display_buy_menu(data: WeaponData, stock_price: float):
 	
 	item_name.text = data.get_display_name()
 	price.text = "$" + str(int(data.base_price * stock_price))
+	if int(data.base_price * stock_price) > inventory.spendable_money:
+		texture_rect.self_modulate = Color(0.81, 0.81, 0.81)
 	
 	pass
 

@@ -39,13 +39,15 @@ func _ready():
 		perk.hovered_or_updated.connect(on_perk_hover)
 		
 		
-func setup(): ## Called at the end of each day
+func setup(failed: bool, performance: bool, first_time: bool): ## Called at the end of each day
 	inventory.spendable_money = inventory.total_money
 	$Money/Backdrop/total.text = "$" + str(inventory.total_money)
 	var i = 0
+	var seed_ = 0 if first_time else -1
 	for stock in weapon_stocks.get_children():
-		stock.generate_history()
+		stock.generate_history(seed_)
 		stock.load_weapon(inventory.all_weapons[i])
+		stock.set_modifier(inventory.all_weapons[i].base_price, inventory.total_money)
 		i += 1
 	
 	for j in 8:
@@ -53,19 +55,36 @@ func setup(): ## Called at the end of each day
 		inventory.all_weapons[j].weapon_index = j
 		var child = catalogue.get_node(str(j+1))
 		child.load_weapon(inventory.all_weapons[j])
+	
+	$"../Info/Control".update()
+	
+	if not first_time:
+		end_screen(failed, performance)
+
+func end_screen(failed: bool, performance: bool):
+	$"../Results".visible = false
+	$"../Results/Victory".visible = false
+	$"../Results/Loss".visible = false
+	if failed:
+		$"../Results".visible = true
+		$"../Results/Loss".visible = true
+		return
+	if performance:
+		$"../Results".visible = true
+		$"../Results/Victory".visible = true
+		var end_text = ""
+		var game_state := GameState.get_state(self)
 		
-	$"../Info/Quota".text = "$" + str(int(GameState.get_state(self).get_quota(true)))
+		var i = 1
+		for earning in game_state.earnings_history:
+			end_text += "Day {0} ........ ${1}\n".format([i, earning])
+			i += 1
+		end_text += "[font_size=36]Total Earnings: ${0}".format([game_state.total_earnings])
+		%IncomeData.text = end_text
+	
 	
 func on_weapon_equipped(item: Control, weapon: WeaponData, slot: int):
 	pass
-	#if slot == 1:
-		#weapon.equipped_slot_1 = true
-		#weapon.equipped_slot_2 = false
-		#item.catalogue_text.slot_2.set_pressed_no_signal(false)
-	#else:
-		#weapon.equipped_slot_1 = false
-		#weapon.equipped_slot_2 = true
-		#item.catalogue_text.slot_1.set_pressed_no_signal(false)
 		
 		
 func on_stock_price_hovered(_time: float, stock_value: float, weapon: WeaponData, stock: WeaponStock):

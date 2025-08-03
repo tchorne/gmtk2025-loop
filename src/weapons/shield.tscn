@@ -39,7 +39,7 @@ script = ExtResource("1_iu664")
 
 [node name="ContinuousDamage" type="Node" parent="." node_paths=PackedStringArray("area")]
 script = ExtResource("2_el2yi")
-tick_rate = 7.0
+tick_rate = 3.5
 area = NodePath("../Area2D")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
@@ -63,9 +63,10 @@ shape = SubResource("CircleShape2D_0dg4f")
 
 [node name="DamageInflictor" type="Node" parent="."]
 script = ExtResource("5_v861p")
-damage = 5.0
-structure_damage = 5.0
-knockback_strength = 40.0
+damage = 2.5
+structure_damage = 0.05
+element = 6
+knockback_strength = 20.0
 
 [node name="Shield" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_ngbet")

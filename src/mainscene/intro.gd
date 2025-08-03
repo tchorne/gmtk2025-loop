@@ -6,3 +6,8 @@ func _ready() -> void:
 
 func next():
 	get_tree().change_scene_to_file("res://src/mainscene/main.tscn")
+
+
+func _on_button_pressed() -> void:
+	Dialogic.end_timeline()
+	

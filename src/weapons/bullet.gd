@@ -1,6 +1,6 @@
 extends RigidBody2D
 
-@export_range(1, 1000, 1) var force := 1.0
+@export_range(-1000, 1000, 1) var force := 1.0
 @onready var inflicter: Node = $BulletInf
 @onready var sprite_2d: Sprite2D = $Sprite2D
 

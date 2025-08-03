@@ -4,7 +4,7 @@ extends Node2D
 const STATUE = preload("res://src/boss/statue.tscn")
 const COIN = preload("res://src/boss/Coin.tscn")
 const COIN_VALUES = [1,2,5,10,20,50,100]
-const SPLIT_TIME = 6.0
+const SPLIT_TIME = 10.0
 
 @onready var world: Node2D = $".."
 @onready var rigid_body: RigidBody2D = $Physics/RigidBody
@@ -45,6 +45,8 @@ func _physics_process(_delta: float) -> void:
 		rest_position = global_position
 		eraticness = 0
 	eraticness = max(eraticness, 0)
+	
+	rigid_body.gravity_scale = -0.05 if element_controller.has_element(Element.Element.ANTIGRAV) else 1
 	
 
 func lock_until_combo_ended():

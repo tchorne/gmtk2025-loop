@@ -11,6 +11,7 @@ static var perk_price : int :
 var money_spent = 0
 
 var sold := false
+@onready var inventory := Inventory.get_inventory(self)
 
 func _ready():
 	randomize()
@@ -46,6 +47,14 @@ func _on_gui_input(event: InputEvent) -> void:
 		sold = false
 		hovered_or_updated.emit(self, my_perk)
 
+func _process(delta: float) -> void:
+	if sold:
+		self_modulate = Color(0.862, 1.0, 0.819)
+	else:
+		if inventory.spendable_money > perk_price:
+			self_modulate = Color("a8cd52")
+		else:
+			self_modulate = Color(0.42, 0.48, 0.278)
 
 func _on_mouse_entered() -> void:
 	

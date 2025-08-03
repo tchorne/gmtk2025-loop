@@ -9,12 +9,17 @@ signal rental_hovered(rental: Inventory.Rental)
 const RENTAL_BLOCK = preload("res://src/menus/shop/rental_block.tscn")
 const TIME_CHUNKS = 50
 
+
 @onready var color_rect: TextureRect = $ColorRect
 @onready var line_2d: Line2D = $ColorRect/Line2D
 @onready var texture_rect: TextureRect = $Control/TextureRect
 @onready var line_2d_2: Line2D = $ColorRect/Line2D2
 
 @export var price_gradient : Gradient
+var modifier = 1.0
+
+var min_discount := 0.3
+var max_markup := 2.4
 
 static var num := 0
 var mynum = 0
@@ -24,10 +29,12 @@ var volatility := 1
 var price_timeline : Array[float] = []
 var rental_blocks: Array[RentalBlock]
 
+var my_data: WeaponData
 
 func load_weapon(data: WeaponData):
 	texture_rect.texture = data.image
 	visible = data.unlocked
+	my_data = data
 
 func _ready():
 	num += 1
@@ -36,7 +43,15 @@ func _ready():
 	$ColorRect/ColorRect.flip_h = num%2 == 0
 	generate_history()
 
-func generate_history():
+func set_hand():
+	$Control/left.visible = my_data.equipped_slot_1
+	$Control/right.visible = not $Control/left.visible
+
+func generate_history(iseed=-1):
+	if iseed == -1:
+		randomize()
+	else:
+		seed(iseed + my_data.weapon_index)
 	var current_price = randf_range(0.3, 1.0)
 	price_timeline.clear()
 	
@@ -54,7 +69,19 @@ func generate_history():
 	
 	line_2d.gradient = gradient
 	call_deferred("apply_to_line")
+
+func set_modifier(base_price, money_earned): ## at it's cheapest, any weapon should be at least 5% of your spending money
 	
+	var s = min_discount * base_price / float(money_earned)
+	s /= 0.05
+	s = max(1.0/s, 1)
+	
+	modifier = s
+	pass
+	
+func get_price(price_point): ## remaps 0.3 to 1.0 to something else
+	return remap(price_timeline[price_point], 0.3, 1.0, min_discount, max_markup) * modifier
+
 func apply_to_line():
 	var i := 0
 	var width = color_rect.get_global_rect().size.x
@@ -72,6 +99,7 @@ func apply_to_line():
 
 func _process(_delta: float) -> void:
 	apply_to_line()
+	set_hand()
 	pass
 
 
@@ -88,7 +116,7 @@ func _on_color_rect_gui_input(event: InputEvent) -> void:
 		$ColorRect/HoveredTime.position.x = snapped_t * stock_width
 		if snap_point != previous_hover:
 			previous_hover = snap_point
-			price_hovered.emit(snapped_t, price_timeline[snap_point])
+			price_hovered.emit(snapped_t, get_price(snap_point))
 		Cursor.clickable_hovered()
 		
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and not event.is_pressed():
@@ -98,7 +126,7 @@ func _on_color_rect_gui_input(event: InputEvent) -> void:
 		snap_point = clamp(snap_point, 0, TIME_CHUNKS-1)
 		var snapped_t = float(snap_point)/TIME_CHUNKS
 		#
-		price_clicked.emit(snapped_t, price_timeline[snap_point])
+		price_clicked.emit(snapped_t, get_price(snap_point))
 		
 func _on_color_rect_mouse_exited() -> void:
 	$ColorRect/HoveredTime.visible = false

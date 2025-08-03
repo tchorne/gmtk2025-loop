@@ -27,7 +27,6 @@ func set_weapon(weapon: WeaponData):
 
 
 func _on_texture_button_pressed() -> void:
-	print("AAAA")
 	var b = data.equipped_slot_1
 	if b:
 		data.equipped_slot_1 = false

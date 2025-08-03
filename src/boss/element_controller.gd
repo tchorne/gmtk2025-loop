@@ -13,7 +13,9 @@ func add_element(element: Element.Element, amount := 1.0):
 	if element == Element.Element.NONE: return
 	element_amounts[element] += amount
 
-
+func has_element(element: Element.Element) -> bool:
+	if element == Element.Element.NONE: return false
+	return element_amounts[element] >= 10
 
 func _ready():
 	for element in Element.Element.size():
@@ -34,5 +36,5 @@ func _process(delta: float) -> void:
 		)
 		element_amounts[element] = clamp(amount, 0, 20)
 		if element < Element.Element.HOOKED:
-			element_icons[element].visible = amount > 0
+			element_icons[element].visible = amount > 10
 			element_icons[element].get_node("Sprite2D").frame = element-1

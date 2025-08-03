@@ -52,6 +52,7 @@ knockback_towards_mouse = false
 [node name="Global" type="Node" parent="."]
 
 [node name="Pivot" type="Node2D" parent="Global" groups=["Hook"]]
+visible = false
 script = ExtResource("5_gabrh")
 distance_curve = SubResource("Curve_gabrh")
 knocktowards = 60.0
@@ -75,6 +76,7 @@ shape = SubResource("CircleShape2D_gabrh")
 position = Vector2(-160, 20)
 
 [node name="Line2D" type="Line2D" parent="Global" node_paths=PackedStringArray("node_1", "node_2")]
+visible = false
 z_index = -2
 points = PackedVector2Array(0, 0, 0, 0, 40, -33, 82, 15, 76, 49)
 width = 4.0

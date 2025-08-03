@@ -2,17 +2,29 @@ class_name GameState
 extends Node
 
 signal reload_perks
+signal begin_day
+signal freeplay_started
 
 const STATUE = preload("res://src/boss/statue.tscn")
 const DAY_LENGTH = 40.5
-const QUOTAS = [100, 200, 600, 1500, 3000, 10000]
 
 var day_number := -1
 var time := 0.0
+var total_earnings := 0.0
 var money := 0.0
-var quota := 1000.0
+var quota := 99.0
+var quota_mod := 1.2
+var eval_day := 5
 var playing := false
 var firsttime := true
+var income_mult := 1.0
+var freeplay := false :
+	set(new):
+		freeplay = new
+		if new:
+			freeplay_started.emit()
+var failed_quota := false
+var earnings_history = []
 
 @onready var player_position: Vector2 = $"../World/Player".global_position
 @onready var statue_spawn: Marker2D = %StatueSpawn
@@ -42,8 +54,9 @@ static func get_state(node: Node) -> GameState:
 	return node.get_tree().get_first_node_in_group("GameState") as GameState
 
 func begin_game():
+	begin_day.emit()
+	
 	day_number+=1
-	quota = get_quota(false)
 		
 	$MenuMusic.stop()
 	$GameMusic.play()
@@ -66,6 +79,9 @@ func end_game():
 	if not firsttime:
 		$GameMusic.stop()
 		$Dayend.play()
+		quota_mod = 1.2
+	money = money * income_mult
+	total_earnings += money
 	$MenuMusic.play()
 	for projectile in get_tree().get_nodes_in_group("Projectile"):
 		projectile.queue_free()
@@ -74,18 +90,22 @@ func end_game():
 	
 	reload_perks.emit()
 	playing = false
+	earnings_history.append(int(money))
 	inventory.total_money = int(money)
 	inventory.clear_rentals()
 	inventory.unlock_weapons(money)
 	$"../World".process_mode = Node.PROCESS_MODE_DISABLED
 	%Player.process_mode = Node.PROCESS_MODE_DISABLED
 	$"../CanvasLayer/Menus/EndOfDay".visible = true
-	$"../CanvasLayer/Menus/EndOfDay/Shop".setup()
+	failed_quota = money < get_quota()
+	var performance = eval_day == day_number
+	$"../CanvasLayer/Menus/EndOfDay/Shop".setup(failed_quota, performance, firsttime)
 	%Money.visible = false
 	%InventoryDisplay.visible = false
 	
 func reset_game():
-	
+	if not failed_quota:
+		quota = quota * quota_mod
 	for statue in get_tree().get_nodes_in_group("Statue"):
 		statue.queue_free()
 	$"../World".process_mode = Node.PROCESS_MODE_INHERIT
@@ -95,22 +115,31 @@ func reset_game():
 		rewind.begin_rewind()
 		rewind.rewind_finished.connect(begin_game, CONNECT_ONE_SHOT)
 		%Player.visible = false
+		$Bellbig.play()
 	else:
 		firsttime = false
 		begin_game()
+	$"../CanvasLayer/ScheduleDisplay".set_rentals()
 
-func get_quota(next):
-	
-	if day_number < QUOTAS.size():
-		return QUOTAS[day_number + (1 if next else 0)]
-	else:
-		return 10000 * pow(1.2, day_number-5 + (1 if next else 0))
+func get_quota():
+	return quota * quota_mod
 
 func add_money(new):
+	
 	money += new
-	%Money/Backdrop/earned.text = "$" + str(int(money))
+	%Money/Backdrop/earned.text = "$" + str(int(money * income_mult))
+	var c = Color(0.0, 0.494, 0.048) if (money * income_mult >= quota) else Color(0.582, 0.184, 0.148)
+	%Money/Backdrop/earned.add_theme_color_override("font_color", c)
+	
+	%Money/Backdrop/earned/AnimatedSprite2D.modulate = c
+	%Money/Backdrop/earned/AnimatedSprite2D.visible = (money * income_mult  < quota)
+	
 	if new > 0:
 		money_sounds.get_children().pick_random().play()
 
 func _on_end_of_day_finished() -> void:
 	reset_game()
+
+func reset_all():
+	Perks.owned_perks.clear()
+	get_tree().reload_current_scene()

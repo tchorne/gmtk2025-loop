@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://vxdnwgixfq61"]
+
+[ext_resource type="Texture2D" uid="uid://bquige4swfveh" path="res://assets/ui/info.png" id="1_xi50l"]
+[ext_resource type="Script" uid="uid://l5gy04gd1be5" path="res://src/menus/help.gd" id="2_al7a3"]
+
+[node name="Help" type="TextureButton"]
+offset_right = 56.0
+offset_bottom = 56.0
+texture_normal = ExtResource("1_xi50l")
+ignore_texture_size = true
+stretch_mode = 0
+script = ExtResource("2_al7a3")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]
