@@ -27,11 +27,11 @@ script = ExtResource("3_s6s2l")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_j3c6t")
 
-[node name="Inflicter" type="Node" parent="."]
+[node name="BulletInf" type="Node" parent="."]
 script = ExtResource("4_fkhtb")
 damage = 10.0
 structure_damage = 10.0
-element = 5
+element = 4
 element_amount = 0.5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -42,5 +42,5 @@ rb = NodePath("..")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="hit_statue" from="Area2D" to="." method="on_hit"]
-[connection signal="hit_statue" from="Area2D" to="Inflicter" method="_on_statue_hit"]
+[connection signal="hit_statue" from="Area2D" to="BulletInf" method="_on_statue_hit"]
 [connection signal="bounced" from="BounceDetector" to="." method="_on_bounce_detector_bounced"]

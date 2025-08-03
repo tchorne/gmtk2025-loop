@@ -6,10 +6,10 @@
 [resource]
 script = ExtResource("1_tehoy")
 base_price = 1000.0
-unlock_price = 4000.0
+unlock_price = 3000.0
 name = "OrbitalLaser"
 display_name = "Orbital Laser"
-description = ""
+description = "State of the art orbital laser made to disintegrate any communist spies that infiltrate your office. Capitalism shall thrive within these four walls!"
 equipped_slot_1 = false
 equipped_slot_2 = true
 unlocked = false

@@ -78,6 +78,7 @@ wait_time = 0.4
 [node name="Inflicter" parent="." index="6"]
 damage = 4.0
 structure_damage = 5.0
+element = 0
 element_amount = 0.0
 knockback_strength = 75.0
 

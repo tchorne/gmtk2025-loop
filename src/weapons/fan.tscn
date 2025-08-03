@@ -53,7 +53,7 @@ area = NodePath("../Area2D")
 [node name="Inflictor" type="Node" parent="."]
 script = ExtResource("4_v6w8r")
 damage = 5.0
-element = 4
+element = 5
 knockback_towards_mouse = false
 
 [node name="Node" type="Node" parent="."]

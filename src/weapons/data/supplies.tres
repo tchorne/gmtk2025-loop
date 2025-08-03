@@ -6,10 +6,10 @@
 [resource]
 script = ExtResource("1_jx1w1")
 base_price = 30.0
-unlock_price = 10.0
+unlock_price = 50.0
 name = "OfficeSupplies"
 display_name = "Office Supplies"
-description = "Thrown items can get stuck inside statues"
+description = "Various office supplies, piercing injury may occur. Fun fact: Today, a single office pen can take as much as 500 tons of S7 steel to manufacture!"
 equipped_slot_1 = false
 equipped_slot_2 = true
 unlocked = false

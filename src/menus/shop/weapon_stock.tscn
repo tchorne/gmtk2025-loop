@@ -87,6 +87,12 @@ mouse_default_cursor_shape = 2
 texture = ExtResource("4_otfjf")
 expand_mode = 1
 
+[node name="Line2D2" type="Line2D" parent="ColorRect"]
+position = Vector2(4, 2)
+points = PackedVector2Array(0, 0, 0, 0, 48, 44, 127, 58, 180, 14, 309, 39, 387, 57, 495, 31, 529, 14, 619, 46, 697, 57, 737, 20, 775, 48, 816, 61, 851, 24, 883, 50)
+width = 3.48
+default_color = Color(0, 0, 0, 0.780392)
+
 [node name="Line2D" type="Line2D" parent="ColorRect"]
 points = PackedVector2Array(0, 0, 0, 0, 48, 44, 127, 58, 180, 14, 309, 39, 387, 57, 495, 31, 529, 14, 619, 46, 697, 57, 737, 20, 775, 48, 816, 61, 851, 24, 883, 50)
 width = 3.48

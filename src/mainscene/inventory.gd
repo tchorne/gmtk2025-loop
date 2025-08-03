@@ -87,6 +87,12 @@ func unlock_weapons(money):
 		if wp.unlock_price <= money:
 			wp.unlocked = true
 
+func clear_rentals():
+	for rental in rentals:
+		rental.deleted.emit()
+	rentals.clear()
+	current_rentals.clear()
+
 static func get_inventory(node: Node) -> Inventory:
 	return node.get_tree().get_first_node_in_group("Inventory") as Inventory
 

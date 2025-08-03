@@ -1,0 +1,38 @@
+[background arg="res://assets/intro/1.png" fade="1.0"]
+[wait_input]
+[background arg="res://assets/intro/black.png" fade="0.0"]
+[sound path="res://assets/sound/projector.wav" volume="0.0"]
+[wait time="0.3"]
+[background arg="res://assets/intro/2.png" fade="0.0"]
+Eureka! At the most recent World's Fair, the world's greatest scientific minds have revealed that they've cracked the enigma of time travel!
+[background arg="res://assets/intro/black.png" fade="0.0"]
+[sound path="res://assets/sound/projector.wav" volume="0.0"]
+[wait time="0.3"]
+[background arg="res://assets/intro/3.png" fade="0.0"]
+"Listen up! We're going to use that to go back in time and make sure our investment strategies are as efficient and effective as possible! "
+"We'll know the future, make sure they're PERFECT!!"
+[background arg="res://assets/intro/black.png" fade="0.0"]
+[sound path="res://assets/sound/projector.wav" volume="0.0"]
+[wait time="0.3"]
+[background arg="res://assets/intro/4.png" fade="0.0"]
+"But sir, out company singularly manufactures the tiny metal balls on the tips of ballpoint pens, how are we possibly going to beat every other company in a SINGLE DAY?"
+[sound path="res://assets/sound/projector.wav" volume="0.0"]
+[background arg="res://assets/intro/black.png" fade="0.0"]
+[wait time="0.3"]
+[background arg="res://assets/intro/5.png" fade="0.0"]
+"I DON'T CARE! FIGURE SOMETHING OUT!"
+[sound path="res://assets/sound/projector.wav" volume="0.0"]
+[background arg="res://assets/intro/black.png" fade="0.0"]
+[wait time="0.3"]
+[background arg="res://assets/intro/6.png" fade="0.0"]
+[wait time="2.0"]
+[wait time="1.0"]
+[background arg="res://assets/intro/71.png" fade="1.0"]
+"Man, how am I going to pull this off? It's not like we have piles of gold just laying around the office!"
+[background arg="res://assets/intro/72.png" fade="1.0"]
+[wait time="2.0"]
+[background arg="res://assets/intro/725.png" fade="1.0"]
+[wait time="2.0"]
+[background arg="res://assets/intro/73.png" fade="1.0"]
+[wait time="2.5"]
+[end_timeline]

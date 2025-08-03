@@ -18,7 +18,9 @@ func _process(delta: float):
 	if active:
 		time_to_fire -= delta * Hitstun.deltamod()
 		while (time_to_fire < 0.0):
-			time_to_fire += 1.0 / rate
+			time_to_fire += (1.0 / rate
+					* (1.2 if (get_parent().name=="OfficeSupplies" and Perks.has_perk(Perks.RESUPPLY)) else 1)
+			)
 			fire()
 
 func fire():

@@ -1,0 +1,113 @@
+[gd_scene load_steps=6 format=3 uid="uid://f8b5bcm0k5c8"]
+
+[ext_resource type="Texture2D" uid="uid://cg2ocfngenf8f" path="res://assets/ui/perksv2.png" id="1_bvb63"]
+[ext_resource type="Script" uid="uid://v033dfbpj3db" path="res://src/menus/menu_tab.gd" id="2_3l10o"]
+[ext_resource type="PackedScene" uid="uid://csasfmiwaete" path="res://src/menus/shop/perk_button.tscn" id="2_xm5ce"]
+[ext_resource type="Script" uid="uid://cycvi3nyhap8f" path="res://src/menus/shop/perks.gd" id="2_yxsxx"]
+
+[sub_resource type="GDScript" id="GDScript_xm5ce"]
+resource_name = "reveal"
+script/source = "extends Control
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	Perks.perk_acquired.connect(func(x):
+		if x == Perks.MORE_OPTIONS:
+			visible = true
+		
+		)
+"
+
+[node name="Perks" type="TextureRect"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -361.0
+offset_top = -90.0
+offset_right = -6.0
+offset_bottom = 288.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource("1_bvb63")
+expand_mode = 1
+script = ExtResource("2_yxsxx")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 40.0
+grow_horizontal = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
+layout_mode = 0
+offset_left = -15.5
+offset_top = 78.0
+offset_right = 55.5
+offset_bottom = 344.0
+
+[node name="TextureRect" parent="Control/VBoxContainer" instance=ExtResource("2_xm5ce")]
+self_modulate = Color(0.657315, 0.803935, 0.322848, 1)
+layout_mode = 2
+
+[node name="Secret2" type="Control" parent="Control/VBoxContainer"]
+visible = false
+layout_mode = 2
+script = SubResource("GDScript_xm5ce")
+
+[node name="TextureRect3" parent="Control/VBoxContainer/Secret2" instance=ExtResource("2_xm5ce")]
+self_modulate = Color(0.657315, 0.803935, 0.322848, 1)
+layout_mode = 2
+offset_left = 10.0
+offset_top = 3.99994
+offset_right = 60.0
+offset_bottom = 53.9999
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Control"]
+layout_mode = 0
+offset_left = -111.5
+offset_top = 73.0
+offset_right = -40.5
+offset_bottom = 335.0
+rotation = 0.061378
+
+[node name="TextureRect2" parent="Control/VBoxContainer2" instance=ExtResource("2_xm5ce")]
+self_modulate = Color(0.657315, 0.803935, 0.322848, 1)
+layout_mode = 2
+
+[node name="Secret" type="Control" parent="Control/VBoxContainer2"]
+visible = false
+layout_mode = 2
+script = SubResource("GDScript_xm5ce")
+
+[node name="TextureRect3" parent="Control/VBoxContainer2/Secret" instance=ExtResource("2_xm5ce")]
+self_modulate = Color(0.657315, 0.803935, 0.322848, 1)
+layout_mode = 2
+offset_left = 10.0
+offset_top = 3.99994
+offset_right = 60.0
+offset_bottom = 53.9999
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="Control"]
+layout_mode = 0
+offset_left = 71.5
+offset_top = 63.0
+offset_right = 142.5
+offset_bottom = 325.0
+rotation = -0.10248
+
+[node name="TextureRect3" parent="Control/VBoxContainer3" instance=ExtResource("2_xm5ce")]
+self_modulate = Color(0.657315, 0.803935, 0.322848, 1)
+layout_mode = 2
+
+[node name="MenuTab" type="Node" parent="." groups=["MenuTab"]]
+script = ExtResource("2_3l10o")
+base_height = 560.0
+hover_height = 550.0
+select_height = 305.0

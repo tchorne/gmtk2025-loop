@@ -37,10 +37,10 @@ shape = SubResource("CircleShape2D_j3c6t")
 
 [node name="Inflicter" type="Node" parent="."]
 script = ExtResource("4_nol4h")
-damage = 10.0
+damage = 13.0
 structure_damage = 10.0
-element = 5
-element_amount = 0.5
+element = 8
+element_amount = 2.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_j3c6t")

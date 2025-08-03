@@ -34,6 +34,10 @@ func _ready():
 	
 	for tab in get_tree().get_nodes_in_group("MenuTab"):
 		tab.selected.connect(on_tab_selected)
+	
+	for perk in $Perks.get_perks():
+		perk.hovered_or_updated.connect(on_perk_hover)
+		
 		
 func setup(): ## Called at the end of each day
 	inventory.spendable_money = inventory.total_money
@@ -49,6 +53,8 @@ func setup(): ## Called at the end of each day
 		inventory.all_weapons[j].weapon_index = j
 		var child = catalogue.get_node(str(j+1))
 		child.load_weapon(inventory.all_weapons[j])
+		
+	$"../Info/Quota".text = "$" + str(int(GameState.get_state(self).get_quota(true)))
 	
 func on_weapon_equipped(item: Control, weapon: WeaponData, slot: int):
 	pass
@@ -67,6 +73,8 @@ func on_stock_price_hovered(_time: float, stock_value: float, weapon: WeaponData
 	
 	var rect = stock.get_global_rect()
 	move_description(Vector2(rect.position.x + rect.size.x + 25, rect.position.y))
+	$Catalogue/MenuTab.deselect()
+	$Perks.get_node("MenuTab").deselect()
 	
 func on_stock_price_clicked(time: float, stock_value: float, weapon: WeaponData, stock: WeaponStock):
 	## Check you have enough money
@@ -108,6 +116,10 @@ func on_catalogue_weapon_hovered(control: Control, weapon: WeaponData):
 	description.display_category(weapon)
 	move_description(control.global_position + Vector2(200, 0))
 
+func on_perk_hover(control: Control, perk: int):
+	description.display_perk_menu(perk, control.perk_price, Perks.has_perk(perk))
+	move_description(control.global_position - Vector2(350, 50))
+	
 func _on_dimming_1_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and not event.is_pressed():
 		move_description(OFF_SCREEN_MIDDLE)

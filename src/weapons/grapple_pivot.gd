@@ -25,7 +25,9 @@ func _process(delta: float) -> void:
 				global_position = lerp(launch_pos, target_pos, distance_curve.sample_baked(time_since_launch))
 				rotation = (target_pos - launch_pos).angle()
 				
-		time_since_launch += delta * Hitstun.deltamod()
+		time_since_launch += (delta * Hitstun.deltamod()
+			/ (1.5 if Perks.has_perk(Perks.BARBED_HOOKS) else 1.0)
+		)
 		if time_since_launch > distance_curve.max_domain:
 			taser.extended = false
 			latched = null

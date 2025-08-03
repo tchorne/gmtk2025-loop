@@ -22,17 +22,19 @@ func set_active(a):
 		active = true
 		base.visible = true
 		
-		if calldown_time < 3.0:
+		if calldown_time < 3.5:
 			var mouse_pos = get_viewport().get_camera_2d().get_global_mouse_position()
 			base.global_position = Vector2(
-				clamp(mouse_pos.x, 100, 1000),
+				clamp(mouse_pos.x, -500, 500),
 				250
 			)
 
 
 func _process(delta: float):
 	if active:
-		calldown_time += delta * Hitstun.deltamod()
+		calldown_time += (delta * Hitstun.deltamod() * 2.0
+			* (1.5 if (calldown_time < 3.5 and Perks.has_perk(Perks.ON_DEMAND)) else 1.0)
+		) 
 		flare.modulate = lerp(calldown_begin, calldown_end, calldown_color.sample(calldown_time))
 		beam.modulate = lerp(calldown_begin, calldown_end, beam_color.sample(calldown_time))
 	

@@ -12,6 +12,7 @@ const TIME_CHUNKS = 50
 @onready var color_rect: TextureRect = $ColorRect
 @onready var line_2d: Line2D = $ColorRect/Line2D
 @onready var texture_rect: TextureRect = $Control/TextureRect
+@onready var line_2d_2: Line2D = $ColorRect/Line2D2
 
 @export var price_gradient : Gradient
 
@@ -67,6 +68,7 @@ func apply_to_line():
 		points2[i] = Vector2(x,y)
 		i += 1
 	line_2d.points = points2
+	line_2d_2.points = points2
 
 func _process(_delta: float) -> void:
 	apply_to_line()
@@ -118,7 +120,10 @@ func add_rental(r: Inventory.Rental):
 	var block := RentalBlock.new()
 	block.display = rect
 	block.rental = r
+	block.rental
+	
 	rental_blocks.append(block)
+	block.rental.deleted.connect(sell_rental.bind(block.rental))
 	
 	block.display.gui_input.connect(handle_rental_block_input.bind(block))
 	
@@ -129,7 +134,6 @@ func sell_rental(r: Inventory.Rental):
 			rental_blocks[i].display.queue_free()
 			rental_blocks.remove_at(i)
 			break
-			
 
 func handle_rental_block_input(event: InputEvent, block: RentalBlock):
 	if event is InputEventMouseMotion:

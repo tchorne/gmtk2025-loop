@@ -10,5 +10,5 @@ shader_parameter/grain_size = 1.0
 shader_parameter/animate = true
 shader_parameter/abberation = 0.001
 shader_parameter/blur = true
-shader_parameter/grain = false
+shader_parameter/grain = true
 shader_parameter/chromatic_abberation = true

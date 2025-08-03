@@ -1,0 +1,55 @@
+[gd_scene load_steps=6 format=3 uid="uid://87xxfqet1ycq"]
+
+[ext_resource type="Script" uid="uid://7yfn1mbwx6po" path="res://src/mainscene/intro.gd" id="1_0tdaw"]
+[ext_resource type="AudioStream" uid="uid://86x7bdegit0a" path="res://assets/sound/projectorsound.wav" id="1_yenea"]
+[ext_resource type="AudioStream" uid="uid://coeyiv3fowd8p" path="res://assets/music/idk its silly v3.wav" id="2_11jar"]
+[ext_resource type="Material" uid="uid://cbcg6npabqexc" path="res://src/mainscene/shader.tres" id="4_nqxh0"]
+[ext_resource type="Script" uid="uid://j1qkkpofmest" path="res://src/mainscene/blur.gd" id="5_yxki3"]
+
+[node name="Intro" type="Node"]
+
+[node name="Projectorsound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_yenea")
+volume_db = -20.441
+pitch_scale = 0.9
+autoplay = true
+bus = &"Sound"
+
+[node name="IdkItsSillyV3" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_11jar")
+volume_db = -7.89
+autoplay = true
+bus = &"Music"
+
+[node name="Intro" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_0tdaw")
+
+[node name="ColorRect" type="ColorRect" parent="Intro"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.530034, 0.461634, 0.384978, 1)
+
+[node name="FullScreenShader" type="CanvasLayer" parent="."]
+layer = 10
+
+[node name="Blur" type="ColorRect" parent="FullScreenShader"]
+material = ExtResource("4_nqxh0")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("5_yxki3")
+metadata/_edit_lock_ = true

@@ -76,7 +76,9 @@ func take_damage(amount: float = 1):
 	hitflash.start()
 	total_damage_recieved += amount
 	
-	var damage_remaining := int(amount)
+	var damage_remaining := int(amount
+		* (1.05 if Perks.has_perk(Perks.STRENGTH) else 1)
+	)
 	while damage_remaining > 0:
 		var value = COIN_VALUES.pick_random()
 		if value > damage_remaining: continue

@@ -1,9 +1,13 @@
 class_name GameState
 extends Node
 
+signal reload_perks
+
 const STATUE = preload("res://src/boss/statue.tscn")
 const DAY_LENGTH = 40.5
+const QUOTAS = [100, 200, 600, 1500, 3000, 10000]
 
+var day_number := -1
 var time := 0.0
 var money := 0.0
 var quota := 1000.0
@@ -19,8 +23,8 @@ func _ready():
 	#begin_game()
 	
 	get_tree().process_frame.connect(func():
-		#money = 25
-		money = 10000
+		money = 45
+		#money = 10000
 		end_game()
 	, CONNECT_ONE_SHOT
 	)
@@ -38,6 +42,9 @@ static func get_state(node: Node) -> GameState:
 	return node.get_tree().get_first_node_in_group("GameState") as GameState
 
 func begin_game():
+	day_number+=1
+	quota = get_quota(false)
+		
 	$MenuMusic.stop()
 	$GameMusic.play()
 	playing = true
@@ -64,10 +71,11 @@ func end_game():
 		projectile.queue_free()
 	for coin in get_tree().get_nodes_in_group("Money"):
 		coin.queue_free()
-		
+	
+	reload_perks.emit()
 	playing = false
 	inventory.total_money = int(money)
-	inventory.rentals.clear()
+	inventory.clear_rentals()
 	inventory.unlock_weapons(money)
 	$"../World".process_mode = Node.PROCESS_MODE_DISABLED
 	%Player.process_mode = Node.PROCESS_MODE_DISABLED
@@ -90,14 +98,19 @@ func reset_game():
 	else:
 		firsttime = false
 		begin_game()
+
+func get_quota(next):
 	
-	
+	if day_number < QUOTAS.size():
+		return QUOTAS[day_number + (1 if next else 0)]
+	else:
+		return 10000 * pow(1.2, day_number-5 + (1 if next else 0))
 
 func add_money(new):
 	money += new
 	%Money/Backdrop/earned.text = "$" + str(int(money))
 	if new > 0:
 		money_sounds.get_children().pick_random().play()
-	
+
 func _on_end_of_day_finished() -> void:
 	reset_game()

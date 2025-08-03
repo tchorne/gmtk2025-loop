@@ -17,7 +17,7 @@ point_count = 4
 [sub_resource type="CircleShape2D" id="CircleShape2D_gabrh"]
 radius = 9.01388
 
-[node name="taser" type="Node2D"]
+[node name="Taser" type="Node2D"]
 script = ExtResource("1_2jy14")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -34,7 +34,7 @@ my_area = NodePath("../Global/Pivot/Hook/Area2D")
 
 [node name="ElectricInflictor" type="Node" parent="."]
 script = ExtResource("4_2jy14")
-damage = 2.0
+damage = 5.0
 structure_damage = 0.5
 element = 2
 element_amount = 0.5
@@ -91,10 +91,10 @@ autostart = true
 
 [node name="ContinuousDamage" type="Node" parent="." node_paths=PackedStringArray("area")]
 script = ExtResource("8_gabrh")
-tick_rate = 10.0
+tick_rate = 7.0
 area = NodePath("../Global/Pivot/Hook/Area2D")
 
 [connection signal="hit_statue" from="InstantDamage" to="HitInflictor" method="_on_statue_hit"]
 [connection signal="timeout" from="Global/Line2D/Timer" to="Global/Line2D" method="_on_timer_timeout"]
-[connection signal="hit_statue" from="ContinuousDamage" to="Global/Pivot" method="_on_continuous_damage_hit_statue"]
 [connection signal="hit_statue" from="ContinuousDamage" to="ElectricInflictor" method="_on_statue_hit"]
+[connection signal="hit_statue" from="ContinuousDamage" to="Global/Pivot" method="_on_continuous_damage_hit_statue"]

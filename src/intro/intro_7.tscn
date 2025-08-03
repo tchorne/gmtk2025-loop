@@ -1,0 +1,75 @@
+[gd_scene load_steps=4 format=3 uid="uid://jpyqygdyvpbl"]
+
+[ext_resource type="Texture2D" uid="uid://bipdfsngkiq3s" path="res://assets/intro/7.png" id="1_b6gul"]
+[ext_resource type="Texture2D" uid="uid://dlcgti7piimpk" path="res://assets/intro/Border.png" id="2_udcbg"]
+
+[sub_resource type="GDScript" id="GDScript_o46wm"]
+resource_name = "slide_left"
+script/source = "extends TextureRect
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	var tween = create_tween()
+	tween.tween_property($\"../TextureRect\", \"position:x\", -505, 6)
+"
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -245.0
+offset_bottom = -138.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -365.0
+offset_top = 50.0
+offset_right = -136.0
+offset_bottom = 179.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_b6gul")
+expand_mode = 1
+stretch_mode = 4
+script = SubResource("GDScript_o46wm")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -17.0
+offset_right = -756.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -224.0
+grow_horizontal = 0
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_udcbg")
+expand_mode = 1
+stretch_mode = 5
+metadata/_edit_lock_ = true

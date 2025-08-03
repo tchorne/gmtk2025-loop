@@ -29,8 +29,10 @@ func _process(delta: float) -> void:
 	for element in Element.Element.size():
 		if element == Element.Element.NONE: continue
 		var amount = element_amounts[element]
-		amount -= delta * Hitstun.deltamod()
-		element_amounts[element] = clamp(amount, 0, 15)
+		amount -= (delta * Hitstun.deltamod() *
+			(0.8 if Perks.has_perk(Perks.STATUS_DURATION) else 1)
+		)
+		element_amounts[element] = clamp(amount, 0, 20)
 		if element < Element.Element.HOOKED:
 			element_icons[element].visible = amount > 0
 			element_icons[element].get_node("Sprite2D").frame = element-1

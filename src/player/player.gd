@@ -28,7 +28,15 @@ var prev_ground := false
 var stunned := 0
 var stun_duration := 0.0
 
+var has_double := true
+
 @onready var skid_particles: CPUParticles2D = $SkidParticles
+
+func _ready():
+	Perks.perk_acquired.connect(func(x):
+		if x == Perks.PURPLE:
+			$SpriteScale.modulate = Color.MAGENTA
+		)
 
 func _physics_process(delta: float) -> void:
 	var direction := Input.get_axis("left", "right")
@@ -43,7 +51,9 @@ func _physics_process(delta: float) -> void:
 		process_movement(delta * Hitstun.deltamod())
 	elif stunned > 0:
 		move_and_slide()
-		stun_duration -= delta * Hitstun.deltamod()
+		stun_duration -= (delta * Hitstun.deltamod()
+			* (2 if Perks.has_perk(Perks.RECOVERY_SPEED) else 1)
+		)
 		if stun_duration <= 0.0:
 			stunned = 0
 			stunned_1.visible = false
@@ -58,13 +68,17 @@ func process_movement(delta: float) -> void:
 		if Input.is_action_pressed("down"):
 			velocity += get_gravity() * delta
 	# Handle jump.
-	if Input.is_action_just_pressed("up") and is_on_floor():
+	if Input.is_action_just_pressed("up") and (is_on_floor() or (
+		has_double and Perks.has_perk(Perks.DOUBLE_JUMP)
+	)):
+		has_double = false
 		velocity.y = JUMP_VELOCITY
 		sounds.jump.play()
 	
 	if is_on_floor() and not prev_ground:
 		# Landed
 		sounds.land.play()
+		has_double = true
 		
 	var prev_skidding = skidding
 	skidding = false
@@ -79,8 +93,15 @@ func process_movement(delta: float) -> void:
 	else:
 		move_time = 0.0
 	
+	var topspeed = (SPEED
+		* (1.3 if Perks.has_perk(Perks.MOVEMENT_SPEED) else 1.0)
+	)
+	var airaccel = (AIR_ACCEL
+		* (2.5 if Perks.has_perk(Perks.AIR_CONTROL) else 1)
+	)
+	
 	if direction and not crouching:
-		var increase_topspeed = (abs(velocity.x) > SPEED and sign(velocity.x) == sign(direction))
+		var increase_topspeed = (abs(velocity.x) > topspeed and sign(velocity.x) == sign(direction))
 		if (!increase_topspeed):
 			if (sign(velocity.x) * sign(direction) < 0):
 				if (is_on_floor()):
@@ -88,7 +109,7 @@ func process_movement(delta: float) -> void:
 					if not prev_skidding:
 						sounds.skid.play()
 				velocity.x += direction * FRICTION * delta
-			velocity.x += direction * (ACCELERATION if is_on_floor() else AIR_ACCEL)  * delta
+			velocity.x += direction * (ACCELERATION if is_on_floor() else airaccel)  * delta
 	else:
 		velocity.x = move_toward(velocity.x, 0, FRICTION * delta)
 	

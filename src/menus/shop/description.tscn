@@ -29,18 +29,102 @@ mouse_filter = 2
 texture = ExtResource("2_3ii8i")
 expand_mode = 1
 
+[node name="Perk" type="Control" parent="."]
+visible = false
+anchors_preset = 0
+offset_left = 149.0
+offset_top = 11.0
+offset_right = 189.0
+offset_bottom = 51.0
+
+[node name="Price" type="Label" parent="Perk"]
+offset_left = 46.0
+offset_top = 36.0
+offset_right = 161.0
+offset_bottom = 66.0
+theme = ExtResource("3_3ii8i")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 21
+text = "$11037"
+horizontal_alignment = 2
+
+[node name="Buy" type="Control" parent="Perk"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="Perk/Buy"]
+layout_mode = 0
+offset_left = 99.0
+offset_top = 75.0
+offset_right = 163.0
+offset_bottom = 114.0
+theme = ExtResource("3_3ii8i")
+theme_override_font_sizes/font_size = 31
+text = "Buy"
+
+[node name="TextureRect" type="TextureRect" parent="Perk/Buy"]
+layout_mode = 0
+offset_left = 37.0
+offset_top = 65.0
+offset_right = 101.0
+offset_bottom = 129.0
+mouse_filter = 2
+texture = ExtResource("4_7ywdu")
+expand_mode = 1
+
+[node name="Sell" type="Control" parent="Perk"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="Perk/Sell"]
+layout_mode = 0
+offset_left = 99.0
+offset_top = 75.0
+offset_right = 163.0
+offset_bottom = 114.0
+theme = ExtResource("3_3ii8i")
+theme_override_font_sizes/font_size = 31
+text = "Sell"
+
+[node name="TextureRect" type="TextureRect" parent="Perk/Sell"]
+layout_mode = 0
+offset_left = 37.0
+offset_top = 65.0
+offset_right = 101.0
+offset_bottom = 129.0
+mouse_filter = 2
+texture = ExtResource("5_3ii8i")
+expand_mode = 1
+
+[node name="Description" type="Label" parent="Perk"]
+offset_left = -109.0
+offset_top = 31.0
+offset_right = 46.0
+offset_bottom = 121.0
+theme = ExtResource("3_3ii8i")
+theme_override_font_sizes/font_size = 12
+text = "asdasdadasdasda"
+autowrap_mode = 3
+
 [node name="ItemName" type="Label" parent="."]
 layout_mode = 0
-offset_left = 36.0
-offset_top = 22.0
-offset_right = 151.0
-offset_bottom = 52.0
+offset_left = 41.0
+offset_top = 18.0
+offset_right = 163.0
+offset_bottom = 48.0
 theme = ExtResource("3_3ii8i")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 21
 text = "Item Name"
 
 [node name="BuyRental" type="Control" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -50,6 +134,7 @@ offset_right = -4.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+metadata/_edit_lock_ = true
 
 [node name="RentalText" type="Label" parent="BuyRental"]
 visible = false
@@ -140,12 +225,11 @@ metadata/_edit_lock_ = true
 
 [node name="Description" type="Label" parent="Catalogue"]
 layout_mode = 0
-offset_left = 38.0
-offset_top = 51.0
-offset_right = 322.0
-offset_bottom = 131.0
+offset_left = 42.0
+offset_top = 43.0
+offset_right = 295.0
+offset_bottom = 148.0
 theme = ExtResource("3_3ii8i")
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "Lorem Ipsum episgf sif xpokxcvpko popoposf sdfl;xvc;l sdf;osdf ;okddv;oksdf sdf s"
+theme_override_font_sizes/font_size = 12
+text = "asdasdadasdasda"
 autowrap_mode = 3
-metadata/_edit_lock_ = true
