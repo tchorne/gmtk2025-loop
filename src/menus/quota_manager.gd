@@ -39,10 +39,11 @@ func update():
 	$"../Info2/Earnings".text = "$" + str(int(game_state.total_earnings))
 	$Quota.text = "$" + str(int(game_state.get_quota()))
 	var days_left = game_state.eval_day - game_state.day_number
+	var effective_days_left = days_left + (1 if level == 4 else 0)
 	if game_state.freeplay:
 		$"../Info2/Review".text = "[color=black]Freeplay Mode"
 	else:
-		if days_left >= 2:
+		if effective_days_left >= 2:
 			var display_count = "[color=red]{0}[/color]".format([ days_left ])
 			if level == 4:
 				display_count = "[color=orangered]{0}+1[/color]".format([ days_left ])
