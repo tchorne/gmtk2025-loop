@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="4D Accounting: Eternal Overtime"
-run/main_scene="uid://87xxfqet1ycq"
+run/main_scene="uid://bnxutd7t1861v"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -80,6 +80,8 @@ Projectile=""
 Money=""
 Hook=""
 ScreenShader=""
+OfficeItem=""
+WindAffectable=""
 
 [input]
 

@@ -9,7 +9,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_j3c6t"]
 radius = 5.0
 
-[node name="Bullet" type="RigidBody2D" groups=["Projectile"]]
+[node name="Bullet" type="RigidBody2D" groups=["Projectile", "WindAffectable"]]
 collision_layer = 0
 mass = 0.01
 gravity_scale = 0.0

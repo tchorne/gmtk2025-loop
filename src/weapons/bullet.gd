@@ -18,3 +18,6 @@ func _on_bounce_detector_bounced() -> void:
 	if not dead:
 		dead = true
 		gravity_scale = 1.0
+
+func apply_wind(force: Vector2):
+	pass

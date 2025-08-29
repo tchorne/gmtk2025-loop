@@ -2,9 +2,9 @@ extends Node
 
 enum Element {
 	NONE,
-	FIRE,
+	FIRE, # Flamethrower,
 	ELETRIC,
-	BROKEN,
+	BROKEN, # Chair
 	HEAVY,
 	WIND,
 	ANTIGRAV,

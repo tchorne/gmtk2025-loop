@@ -7,6 +7,8 @@ signal freeplay_started
 
 const STATUE = preload("res://src/boss/statue.tscn")
 const DAY_LENGTH = 40.5
+const DEBUG_MONEY = true
+
 
 var day_number := -1
 var time := 0.0
@@ -36,6 +38,8 @@ func _ready():
 	
 	get_tree().process_frame.connect(func():
 		money = 45
+		if DEBUG_MONEY:
+			money = 9000
 		end_game()
 	, CONNECT_ONE_SHOT
 	)

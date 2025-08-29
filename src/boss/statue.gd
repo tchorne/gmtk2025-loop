@@ -156,6 +156,7 @@ func _on_hitflash_timeout() -> void:
 
 
 func _on_bounce_detector_bounced() -> void:
+	# TODO apply damage if has "light" element
 	if rigid_body.global_position.y < 100:
 		rigid_body.linear_velocity *= 1.3
 		rotate_speed = rigid_body.linear_velocity.length() / 300 * (1 if (randf() > 0.5) else -1) * (7 - size)
@@ -170,3 +171,10 @@ func _on_damaging_reset_timeout() -> void:
 
 func _on_recombine_timer_timeout() -> void:
 	recombine = true
+
+
+func _on_element_controller_element_triggered(element: int) -> void:
+	if element == Element.Element.BROKEN:
+		for office_item in get_tree().get_nodes_in_group("OfficeItem"):
+			if office_item.stuck_in_statue == self:
+				office_item.call_deferred("release")
