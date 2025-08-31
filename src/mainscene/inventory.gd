@@ -1,7 +1,7 @@
 extends Node
 class_name Inventory
 
-signal begin_rental(weapon: String, slot: int)
+signal begin_rental(weapon: String)
 signal end_rental(slot: int)
 signal spendable_money_updated(amount: int)
 
@@ -20,11 +20,16 @@ var unlocked_weapons: Array[String]
 
 var current_rentals: Array[Rental] = []
 
+func get_rentals_by_time() -> Array[Rental]:
+	var copy = rentals.duplicate()
+	copy.sort_custom(func (x,y): return x.start_time < y.start_time)
+	return copy
+	
 func update_rentals(time: float) -> void:
 	for i in len(current_rentals):
 		var rental := current_rentals[i]
 		if time > rental.end_time:
-			end_rental.emit(1 if get_weapon_by_string(rental.weapon).equipped_slot_1 else 2)
+			end_rental.emit(1) # TODO if some rentals last longer then others then this needs to be fixed by checking the player to find what slot the weapon is in
 			current_rentals.remove_at(i)
 			i -= 1
 			break
@@ -32,15 +37,19 @@ func update_rentals(time: float) -> void:
 	for rental in rentals:
 		if rental in current_rentals: continue
 		if time > rental.start_time and rental.end_time > time:
-			begin_rental.emit(rental.weapon, 1 if get_weapon_by_string(rental.weapon).equipped_slot_1 else 2)
-			var replaced = false
-			for i in len(current_rentals):
-				var r2 := current_rentals[i]
-				if get_weapon_by_string(rental.weapon).equipped_slot_1 == get_weapon_by_string(r2.weapon).equipped_slot_1:
-					current_rentals[i] = rental
-					replaced = true
-			if not replaced:
-				current_rentals.append(rental)
+			activate_rental(rental)
+			
+func activate_rental(rental: Rental):
+	begin_rental.emit(rental.weapon)
+	var replaced = false
+	for i in len(current_rentals):
+		var r2 := current_rentals[i]
+		if get_weapon_by_string(rental.weapon).equipped_slot_1 == get_weapon_by_string(r2.weapon).equipped_slot_1:
+			current_rentals[i] = rental
+			replaced = true
+	if not replaced:
+		current_rentals.append(rental)
+	
 
 func unlock_weapon(weapon: String):
 	unlocked_weapons.push_back(weapon)

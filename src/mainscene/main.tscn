@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://bnxutd7t1861v"]
+[gd_scene load_steps=48 format=3 uid="uid://bnxutd7t1861v"]
 
 [ext_resource type="Script" uid="uid://diqe728hxkc61" path="res://src/mainscene/camera.gd" id="1_4lhpg"]
 [ext_resource type="Texture2D" uid="uid://dymnc6d5uy2jb" path="res://assets/environment/background.png" id="1_vldkb"]
@@ -39,6 +39,7 @@
 [ext_resource type="Material" uid="uid://cbcg6npabqexc" path="res://src/mainscene/shader.tres" id="28_5reba"]
 [ext_resource type="Texture2D" uid="uid://b1e6ipprtsn5h" path="res://assets/ui/arrows/3.png" id="28_bnhfq"]
 [ext_resource type="Script" uid="uid://j1qkkpofmest" path="res://src/mainscene/blur.gd" id="29_5reba"]
+[ext_resource type="PackedScene" uid="uid://e1iaa0n63ygx" path="res://src/schedule/inventory_display_weapon.tscn" id="36_ug5sx"]
 
 [sub_resource type="GDScript" id="GDScript_ue2y1"]
 resource_name = "spin"
@@ -525,26 +526,44 @@ texture = ExtResource("20_56qbt")
 expand_mode = 1
 metadata/_edit_lock_ = true
 
-[node name="InventoryDisplay" type="Control" parent="CanvasLayer"]
+[node name="InventoryDisplay" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("player")]
 unique_name_in_owner = true
 z_index = 2
 layout_mode = 3
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -155.0
-offset_top = 56.0
-offset_right = -115.0
-offset_bottom = 96.0
-grow_horizontal = 0
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
 script = ExtResource("24_r1e3j")
+player = NodePath("../../World/Player")
+
+[node name="Weapon" parent="CanvasLayer/InventoryDisplay" instance=ExtResource("36_ug5sx")]
+visible = false
+layout_mode = 0
+offset_left = -111.0
+offset_top = -35.0
+offset_right = -42.0
+offset_bottom = 11.0
 
 [node name="Slot1" type="TextureRect" parent="CanvasLayer/InventoryDisplay"]
-layout_mode = 0
-offset_left = -571.0
-offset_top = 537.0
-offset_right = -438.0
-offset_bottom = 610.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -144.0
+offset_top = -67.0
+offset_right = -11.0
+offset_bottom = 6.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("25_8uvsf")
 expand_mode = 1
 stretch_mode = 4
@@ -559,22 +578,30 @@ texture = ExtResource("25_evxik")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Weapon" type="TextureRect" parent="CanvasLayer/InventoryDisplay/Slot1"]
+[node name="Weapon2" type="TextureRect" parent="CanvasLayer/InventoryDisplay"]
+visible = false
 layout_mode = 0
-offset_left = 13.0
-offset_top = 12.0
-offset_right = 82.0
-offset_bottom = 58.0
+offset_left = 64.0
+offset_top = -34.0
+offset_right = 133.0
+offset_bottom = 12.0
 expand_mode = 1
 stretch_mode = 5
 metadata/_edit_lock_ = true
 
 [node name="Slot2" type="TextureRect" parent="CanvasLayer/InventoryDisplay"]
-layout_mode = 0
-offset_left = -432.0
-offset_top = 537.0
-offset_right = -299.0
-offset_bottom = 610.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -4.0
+offset_top = -66.0
+offset_right = 129.0
+offset_bottom = 7.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("25_8uvsf")
 expand_mode = 1
 stretch_mode = 4
@@ -586,15 +613,6 @@ offset_top = 12.0
 offset_right = 49.0
 offset_bottom = 58.0
 texture = ExtResource("26_rc02r")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="Weapon" type="TextureRect" parent="CanvasLayer/InventoryDisplay/Slot2"]
-layout_mode = 0
-offset_left = 48.0
-offset_top = 12.0
-offset_right = 117.0
-offset_bottom = 58.0
 expand_mode = 1
 stretch_mode = 5
 
@@ -618,4 +636,5 @@ metadata/_edit_lock_ = true
 
 [connection signal="begin_rental" from="Inventory" to="CanvasLayer/InventoryDisplay" method="_on_inventory_begin_rental"]
 [connection signal="end_rental" from="Inventory" to="CanvasLayer/InventoryDisplay" method="_on_inventory_end_rental"]
+[connection signal="begin_day" from="GameState" to="CanvasLayer/InventoryDisplay" method="_on_game_state_begin_day"]
 [connection signal="finished" from="CanvasLayer/Menus/EndOfDay" to="GameState" method="_on_end_of_day_finished"]

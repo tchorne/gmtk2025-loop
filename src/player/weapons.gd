@@ -15,10 +15,12 @@ extends Node2D
 @onready var melee: Node2D = $Pivot/Melee
 
 const NUM_WEAPONS = 9
+const MELEE = NUM_WEAPONS-1
+
 var weapons : Array[Node2D] = []
 
-var slot_1 := NUM_WEAPONS-1
-var slot_2 := NUM_WEAPONS-1
+var slot_1 := MELEE
+var slot_2 := MELEE
 
 var cooldown := 0.0
 
@@ -29,21 +31,23 @@ func _ready():
 	inventory.begin_rental.connect(on_rental_begin)
 	inventory.end_rental.connect(on_rental_end)
 
-func on_rental_begin(weapon: String, slot: int):
+func on_rental_begin(weapon: String):
 	var weapon_index = weapons.find_custom(func(x): 
 		return (x.name == weapon)
 	)
 	assert(weapon_index != -1, "NO WEAPON FOUND")
-	if slot == 1:
+	if slot_1 == MELEE:
 		slot_1 = weapon_index
-	else:
+	elif slot_2 == MELEE:
+		slot_2 = weapon_index
+	else: # both full
+		slot_1 = slot_2
 		slot_2 = weapon_index
 
 func on_rental_end(slot: int):
 	if slot == 1:
-		slot_1 = weapons.size()-1
-	else:
-		slot_2 = weapons.size()-1
+		slot_1 = slot_2
+	slot_2 = MELEE
 
 func _process(delta: float) -> void:
 	handle_debug_equips()
